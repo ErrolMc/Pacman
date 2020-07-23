@@ -1385,7 +1385,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381f1ca9b3e11a54fb25879ae8ce931e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  neighbours: []
+  neighbours:
+  - {fileID: 219958597}
+  - {fileID: 1650513831}
+  - {fileID: 2146681900}
   directions: []
   pos: {x: 0, y: 0}
 --- !u!1 &135539355 stripped
