@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Json;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -15,7 +16,8 @@ public class Pacman : MonoBehaviour
 
     // caches
     Transform trans;
-    Node currentNode, targetNode;
+    public Node currentNode;
+    public Node targetNode;
 
     // directions
     Vector2 currentDirection;
@@ -59,10 +61,10 @@ public class Pacman : MonoBehaviour
             // if we have reached the target node, try to keep moving
             if (progress01 == 1) 
             {
+                currentState = State.idle;
+
                 currentNode = targetNode;
-                bool canMove = MoveFromNode();
-                if (!canMove)
-                    currentState = State.idle;
+                bool canMove = Move();
             }
         }
     }
@@ -78,11 +80,10 @@ public class Pacman : MonoBehaviour
 
         distanceToTarget = Vector2.Distance(currentNode.pos, targetNode.pos);
         distanceFromCurrent = currentDist;
-        progress01 = 0;
-        currentState = State.moving;
+        progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);
     }
 
-    bool MoveFromNode()
+    bool Move()
     {
         Node nextNode = CanMove(nextDirection);
         if (nextNode != null)
@@ -102,37 +103,52 @@ public class Pacman : MonoBehaviour
 
         return false;
     }
-    
-    void TryMoveInput()
-    {
-        if (currentState == State.idle)
-        {
-            currentDirection = nextDirection;
-            MoveFromNode();
-        }
-    }
 
+    bool MoveInput()
+    {
+        if (currentState == State.moving)
+        {
+            // we are going in the opposite direction
+            if (Vector2.Dot(nextDirection, currentDirection) == -1)
+            {
+                StartMove(targetNode, currentNode, nextDirection, distanceToTarget - distanceFromCurrent);
+                return true;
+            }
+            return false;
+        }
+
+        Node nextNode = CanMove(nextDirection);
+        if (nextNode != null)
+        {
+            StartMove(currentNode, nextNode, nextDirection);
+            return true;
+        }
+
+        return false;
+        
+    }
+    
     void HandleInput()
     {
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             nextDirection = Vector2.up;
-            TryMoveInput();
+            MoveInput();
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             nextDirection = Vector2.down;
-            TryMoveInput();
+            MoveInput();
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             nextDirection = Vector2.left;
-            TryMoveInput();
+            MoveInput();
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             nextDirection = Vector2.right;
-            TryMoveInput();
+            MoveInput();
         }
     }
 
