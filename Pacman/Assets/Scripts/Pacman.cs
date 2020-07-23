@@ -42,7 +42,8 @@ public class Pacman : MonoBehaviour
 
         currentNode = startingNode;
         currentPos = currentNode.pos;
-        trans.position = currentPos;
+
+        trans.position = new Vector3(currentPos.x, currentPos.y, -1);
 
         currentState = State.idle;
         currentDirection = Vector2.zero;
@@ -58,7 +59,8 @@ public class Pacman : MonoBehaviour
             distanceFromCurrent += moveSpeed * Time.deltaTime;                                  // move based on the movespeed
             float progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);     // calculate the normalised progress to the next node
             currentPos = Vector2.Lerp(currentNode.pos, targetNode.pos, progress01);             // get the current position
-            trans.position = currentPos;                                                        // set the current position
+
+            trans.position = new Vector3(currentPos.x, currentPos.y, -1);                       // set the current position                                                     
 
             // if we have reached the target node, try to keep moving
             if (progress01 == 1) 
