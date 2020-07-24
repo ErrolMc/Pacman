@@ -17,6 +17,7 @@ public class Pacman : MonoBehaviour
 
     // caches
     Transform trans;
+    Rigidbody2D rb;
     public Node currentNode;
     public Node targetNode;
 
@@ -39,11 +40,12 @@ public class Pacman : MonoBehaviour
     public void Init(Node startingNode)
     {
         trans = transform;
+        rb = GetComponent<Rigidbody2D>();
 
         currentNode = startingNode;
         currentPos = currentNode.pos;
 
-        trans.position = new Vector3(currentPos.x, currentPos.y, -1);
+        rb.MovePosition(currentPos);
 
         currentState = State.idle;
         currentDirection = Vector2.zero;
@@ -52,7 +54,18 @@ public class Pacman : MonoBehaviour
     void Update()
     {
         HandleInput();
+    }
 
+    void FixedUpdate()
+    {
+        HandleMovement();
+    }
+
+    /// <summary>
+    /// The movement update loop, called every fixed time interval
+    /// </summary>
+    void HandleMovement()
+    {
         // if we are moving, do the move stuff
         if (currentState == State.moving)
         {
@@ -60,14 +73,11 @@ public class Pacman : MonoBehaviour
             float progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);     // calculate the normalised progress to the next node
             currentPos = Vector2.Lerp(currentNode.pos, targetNode.pos, progress01);             // get the current position
 
-            trans.position = new Vector3(currentPos.x, currentPos.y, -1);                       // set the current position                                                     
+            rb.MovePosition(currentPos);
 
             // if we have reached the target node, try to keep moving
-            if (progress01 == 1) 
+            if (progress01 == 1)
             {
-
-                // TODO: collect any pellets/powerups/whatever
-
                 currentNode = targetNode;
                 bool canMove = MoveFromNode();
                 if (!canMove)
@@ -75,7 +85,7 @@ public class Pacman : MonoBehaviour
             }
         }
     }
-    
+
     /// <summary>
     /// Sets up and starts pacman moving from 1 node to another
     /// </summary>
@@ -171,6 +181,15 @@ public class Pacman : MonoBehaviour
         {
             nextDirection = Vector2.right;
             MoveInput();
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        string tag = collision.collider.tag;
+        if (tag == "Pellet")
+        {
+            collision.gameObject.SetActive(false);
         }
     }
 

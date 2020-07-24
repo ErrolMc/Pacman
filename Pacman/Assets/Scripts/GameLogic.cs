@@ -21,7 +21,7 @@ public class GameLogic : MonoBehaviour
 
     void SpawnPacman()
     {
-        Pacman pacman = Instantiate(pacmanPrefab);
+        Pacman pacman = Instantiate(pacmanPrefab, startingNode.pos, Quaternion.identity);
         pacman.Init(startingNode);
     }
 
