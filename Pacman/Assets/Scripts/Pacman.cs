@@ -189,6 +189,9 @@ public class Pacman : MonoBehaviour
         string tag = collision.collider.tag;
         if (tag == "Pellet")
         {
+            GameLogic.instance.AddScore();
+
+            collision.collider.enabled = false;
             collision.gameObject.SetActive(false);
         }
     }

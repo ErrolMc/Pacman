@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51eafa0a1ac8795418dc7579e0eba322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreDisplay: {fileID: 0}
   pacmanPrefab: {fileID: 9002930222478637912, guid: 8570c32377e357847a659b624edfd31b,
     type: 3}
   startingNode: {fileID: 0}
