@@ -10,13 +10,18 @@ public class GameLogic : MonoBehaviour
     [SerializeField] TextMeshProUGUI scoreDisplay;
 
     [SerializeField] Pacman pacmanPrefab;
+    [SerializeField] Ghost ghostPrefab;
+
     [SerializeField] Node startingNode;
+    [SerializeField] Node ghostHouse;
 
     [SerializeField] GameObject pelletParent;
     [SerializeField] GameObject nodeParent;
 
     int score;
     Node[] nodes;
+
+    public Pacman pacman;
 
     void Awake()
     {
@@ -27,11 +32,19 @@ public class GameLogic : MonoBehaviour
     {
         SetupNodes();
         SpawnPacman();
+
+        SpawnGhost();
+    }
+
+    void SpawnGhost()
+    {
+        Ghost ghost = Instantiate(ghostPrefab, ghostHouse.pos, Quaternion.identity);
+        ghost.Init(ghostHouse);
     }
 
     void SpawnPacman()
     {
-        Pacman pacman = Instantiate(pacmanPrefab, startingNode.pos, Quaternion.identity);
+        pacman = Instantiate(pacmanPrefab, startingNode.pos, Quaternion.identity);
         pacman.Init(startingNode);
     }
 
