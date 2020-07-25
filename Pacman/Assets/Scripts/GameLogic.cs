@@ -7,23 +7,32 @@ public class GameLogic : MonoBehaviour
 {
     public static GameLogic instance;
 
+    [Header("UI")]
     [SerializeField] TextMeshProUGUI scoreDisplay;
 
+    [Header("Prefabs")]
     [SerializeField] Pacman pacmanPrefab;
     [SerializeField] Ghost ghostPrefab;
 
+    [Header("Nodes")]
     [SerializeField] Node startingNode;
     [SerializeField] Node ghostHouse;
+    [SerializeField] Node blinkyHomeNode;
+    [SerializeField] Node clydeHomeNode;
+    [SerializeField] Node pinkyHomeNode;
+    [SerializeField] Node inkyHomeNode;
 
+    [Header("Board parents")]
     [SerializeField] GameObject pelletParent;
     [SerializeField] GameObject nodeParent;
+
+    [Header("Timings")]
+    [SerializeField] GhostStateTiming[] ghostTimings;
 
     int score;
     Node[] nodes;
 
-    public Pacman pacman;
-
-    [SerializeField] GhostStateTiming[] ghostTimings;
+    [HideInInspector] public Pacman pacman;
 
     void Awake()
     {
@@ -35,13 +44,18 @@ public class GameLogic : MonoBehaviour
         SetupNodes();
         SpawnPacman();
 
-        SpawnGhost();
+        SpawnGhost(Ghost.Type.blinky);
     }
 
-    void SpawnGhost()
+    void SpawnGhost(Ghost.Type type)
     {
-        Ghost ghost = Instantiate(ghostPrefab, ghostHouse.pos, Quaternion.identity);
-        ghost.Init(ghostHouse, ghostTimings);
+        switch (type)
+        {
+            case Ghost.Type.blinky:
+                Ghost ghost = Instantiate(ghostPrefab, ghostHouse.pos, Quaternion.identity);
+                ghost.Init(ghostHouse, blinkyHomeNode, ghostTimings);
+                break;
+        }
     }
 
     void SpawnPacman()

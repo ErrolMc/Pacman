@@ -23,21 +23,26 @@ public class Ghost : MonoBehaviour
     }
 
     [SerializeField] float moveSpeed = 3;
+    [SerializeField] float frightenedMoveSpeed = 1.5f; 
+    [SerializeField] float frightenedModeDuration = 20;
 
     // caches
     Transform trans;
     Rigidbody2D rb;
     [HideInInspector] public Node currentNode;
     [HideInInspector] public Node targetNode;
+    [HideInInspector] public Node homeNode;
     [HideInInspector] public Vector2 currentDirection;
 
     // state
-    [HideInInspector] public State currentState;
+    public State currentState;
     [HideInInspector] public Vector2 currentPos;
+    float currentMoveSpeed;
 
     // mode change timings
     GhostStateTiming[] timings;
     float stateChangeTimer;
+    float frightenedTimer;
     int stateChangeIndex;
     bool stateChangeSequenceComplete;
 
@@ -49,11 +54,12 @@ public class Ghost : MonoBehaviour
     /// Sets up the ghost at the node specified
     /// </summary>
     /// <param name="startingnode">The node to start at</param>
-    public void Init(Node startingnode, GhostStateTiming[] timings)
+    public void Init(Node startingnode, Node homeNode, GhostStateTiming[] timings)
     {
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
 
+        this.homeNode = homeNode;
         currentNode = startingnode;
         currentPos = currentNode.pos;
         currentDirection = Vector2.zero;
@@ -72,20 +78,30 @@ public class Ghost : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (currentState == State.chase)
+        switch (currentState)
         {
-            distanceFromCurrent += moveSpeed * Time.deltaTime;                                  // move based on the movespeed
-            float progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);     // calculate the normalised progress to the next node
-            currentPos = Vector2.Lerp(currentNode.pos, targetNode.pos, progress01);             // get the current position
+            case State.chase:
+            case State.scatter:
+                {
+                    distanceFromCurrent += moveSpeed * Time.deltaTime;                                  // move based on the movespeed
+                    float progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);     // calculate the normalised progress to the next node
+                    currentPos = Vector2.Lerp(currentNode.pos, targetNode.pos, progress01);             // get the current position
 
-            rb.MovePosition(currentPos);
+                    rb.MovePosition(currentPos);
 
-            // if we have reached the target node, pick a new one
-            if (progress01 == 1)
-            {
-                currentNode = targetNode;
-                MoveToNextNode();
-            }
+                    // if we have reached the target node, pick a new one
+                    if (progress01 == 1)
+                    {
+                        currentNode = targetNode;
+                        MoveToNextNode();
+                    }
+                }
+                break;
+            case State.frightened:
+                {
+
+                }
+                break;
         }
     }
 
@@ -110,6 +126,8 @@ public class Ghost : MonoBehaviour
     /// <returns>The position to target</returns>
     Vector2 GetTargetTile()
     {
+        if (currentState == State.scatter)
+            return homeNode.pos;
         return GameLogic.instance.pacman.currentPos;
     }
 
@@ -178,37 +196,52 @@ public class Ghost : MonoBehaviour
 
     void StateUpdate()
     {
-        if (stateChangeSequenceComplete == false)
+        // dont go through the normal mode sequence when they are frightened
+        if (currentState == State.frightened)
         {
-            // we have reached the end of the current state
-            if (stateChangeTimer >= timings[stateChangeIndex].seconds)
-            {
-                stateChangeIndex++;
-                stateChangeTimer = 0;
+            // if we have gone through the frightened timer, go back to where we were
+            if (frightenedTimer >= frightenedModeDuration)
                 ChangeState(timings[stateChangeIndex].state);
-
-                // we are on the last timing
-                if (stateChangeIndex == timings.Length - 1)
-                    stateChangeSequenceComplete = true;
-            }
-            else
+        }
+        else
+        {
+            if (stateChangeSequenceComplete == false)
             {
-                stateChangeTimer += Time.deltaTime;
+                // we have reached the end of the current state
+                if (stateChangeTimer >= timings[stateChangeIndex].seconds)
+                {
+                    stateChangeIndex++;
+                    stateChangeTimer = 0;
+                    ChangeState(timings[stateChangeIndex].state);
+
+                    // we are on the last timing
+                    if (stateChangeIndex == timings.Length - 1)
+                        stateChangeSequenceComplete = true;
+                }
+                else
+                {
+                    stateChangeTimer += Time.deltaTime;
+                }
             }
         }
     }
 
     void ChangeState(State newState)
     {
-        Debug.Log(newState + ": " + Time.time);
-
         switch (newState)
         {
             case State.chase:
+                currentMoveSpeed = moveSpeed;
                 break;
             case State.frightened:
+                frightenedTimer = 0;
+                currentMoveSpeed = frightenedMoveSpeed;
+                
+                // change sprite etc
+
                 break;
             case State.scatter:
+                currentMoveSpeed = moveSpeed;
                 break;
             case State.inHouse:
                 break;
