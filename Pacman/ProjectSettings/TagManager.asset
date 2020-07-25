@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Pellet
   - Pacman
+  - SuperPellet
   layers:
   - Default
   - TransparentFX

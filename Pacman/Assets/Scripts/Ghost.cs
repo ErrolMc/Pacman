@@ -78,30 +78,20 @@ public class Ghost : MonoBehaviour
 
     void FixedUpdate()
     {
-        switch (currentState)
+        if (currentState != State.inHouse)
         {
-            case State.chase:
-            case State.scatter:
-                {
-                    distanceFromCurrent += moveSpeed * Time.deltaTime;                                  // move based on the movespeed
-                    float progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);     // calculate the normalised progress to the next node
-                    currentPos = Vector2.Lerp(currentNode.pos, targetNode.pos, progress01);             // get the current position
+            distanceFromCurrent += currentMoveSpeed * Time.deltaTime;                                  // move based on the movespeed
+            float progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);     // calculate the normalised progress to the next node
+            currentPos = Vector2.Lerp(currentNode.pos, targetNode.pos, progress01);             // get the current position
 
-                    rb.MovePosition(currentPos);
+            rb.MovePosition(currentPos);
 
-                    // if we have reached the target node, pick a new one
-                    if (progress01 == 1)
-                    {
-                        currentNode = targetNode;
-                        MoveToNextNode();
-                    }
-                }
-                break;
-            case State.frightened:
-                {
-
-                }
-                break;
+            // if we have reached the target node, pick a new one
+            if (progress01 == 1)
+            {
+                currentNode = targetNode;
+                MoveToNextNode();
+            }
         }
     }
 
@@ -121,11 +111,25 @@ public class Ghost : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets a random tile position
+    /// </summary>
+    /// <returns>A random tile position on the board</returns>
+    Vector2 GetRandomTile()
+    {
+        int x = UnityEngine.Random.Range(0, 28);
+        int y = UnityEngine.Random.Range(0, 36);
+
+        return new Vector2(x, y);
+    }
+
+    /// <summary>
     /// Gets the position this ghost wants to move to, this is different depending on the ghost type
     /// </summary>
     /// <returns>The position to target</returns>
     Vector2 GetTargetTile()
     {
+        if (currentState == State.frightened)
+            return GetRandomTile();
         if (currentState == State.scatter)
             return homeNode.pos;
         return GameLogic.instance.pacman.currentPos;
@@ -202,6 +206,8 @@ public class Ghost : MonoBehaviour
             // if we have gone through the frightened timer, go back to where we were
             if (frightenedTimer >= frightenedModeDuration)
                 ChangeState(timings[stateChangeIndex].state);
+            else
+                frightenedTimer += Time.deltaTime;
         }
         else
         {
@@ -226,7 +232,7 @@ public class Ghost : MonoBehaviour
         }
     }
 
-    void ChangeState(State newState)
+    public void ChangeState(State newState)
     {
         switch (newState)
         {

@@ -12560,10 +12560,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1221428653}
     m_Modifications:
+    - target: {fileID: 423500990870121093, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 07ce339bd1d880a4c80fa558ba65dc17,
+        type: 3}
     - target: {fileID: 5795047730405152833, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
         type: 3}
       propertyPath: m_Name
       value: pellet (238)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795047730405152833, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SuperPellet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392939970252368628, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392939970252368628, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8664275196113604034, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
         type: 3}
@@ -14636,10 +14657,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1221428653}
     m_Modifications:
+    - target: {fileID: 423500990870121093, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 07ce339bd1d880a4c80fa558ba65dc17,
+        type: 3}
     - target: {fileID: 5795047730405152833, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
         type: 3}
       propertyPath: m_Name
       value: pellet (163)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795047730405152833, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SuperPellet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392939970252368628, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392939970252368628, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8664275196113604034, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
         type: 3}
@@ -14884,10 +14926,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1760924012}
     m_Modifications:
+    - target: {fileID: 423500990870121093, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 07ce339bd1d880a4c80fa558ba65dc17,
+        type: 3}
     - target: {fileID: 5795047730405152833, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
         type: 3}
       propertyPath: m_Name
       value: pellet (48)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795047730405152833, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SuperPellet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392939970252368628, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392939970252368628, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8664275196113604034, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
         type: 3}
@@ -17422,10 +17485,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1760924012}
     m_Modifications:
+    - target: {fileID: 423500990870121093, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 07ce339bd1d880a4c80fa558ba65dc17,
+        type: 3}
     - target: {fileID: 5795047730405152833, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
         type: 3}
       propertyPath: m_Name
       value: pellet (102)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5795047730405152833, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_TagString
+      value: SuperPellet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392939970252368628, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6392939970252368628, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 8664275196113604034, guid: cf382dc3f5dd1d141b4b1309ac525b1a,
         type: 3}

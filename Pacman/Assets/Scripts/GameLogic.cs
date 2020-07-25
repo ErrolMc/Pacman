@@ -31,6 +31,7 @@ public class GameLogic : MonoBehaviour
 
     int score;
     Node[] nodes;
+    List<Ghost> ghosts;
 
     [HideInInspector] public Pacman pacman;
 
@@ -44,6 +45,7 @@ public class GameLogic : MonoBehaviour
         SetupNodes();
         SpawnPacman();
 
+        ghosts = new List<Ghost>();
         SpawnGhost(Ghost.Type.blinky);
     }
 
@@ -54,6 +56,7 @@ public class GameLogic : MonoBehaviour
             case Ghost.Type.blinky:
                 Ghost ghost = Instantiate(ghostPrefab, ghostHouse.pos, Quaternion.identity);
                 ghost.Init(ghostHouse, blinkyHomeNode, ghostTimings);
+                ghosts.Add(ghost);
                 break;
         }
     }
@@ -73,7 +76,18 @@ public class GameLogic : MonoBehaviour
 
     public void AddScore()
     {
+        // TODO: play sound
+
         score++;
         scoreDisplay.text = score.ToString();
+    }
+
+    public void CollectSuperPellet()
+    {
+        // TODO: play sound
+
+        score += 5;
+        for (int i = 0; i < ghosts.Count; i++)
+            ghosts[i].ChangeState(Ghost.State.frightened);
     }
 }

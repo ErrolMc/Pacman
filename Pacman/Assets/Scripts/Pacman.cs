@@ -187,12 +187,17 @@ public class Pacman : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         string tag = collision.collider.tag;
-        if (tag == "Pellet")
-        {
-            GameLogic.instance.AddScore();
 
-            collision.collider.enabled = false;
-            collision.gameObject.SetActive(false);
+        switch (tag)
+        {
+            case "Pellet":
+                GameLogic.instance.AddScore();
+                collision.gameObject.SetActive(false);
+                break;
+            case "SuperPellet":
+                GameLogic.instance.CollectSuperPellet();
+                collision.gameObject.SetActive(false);
+                break;
         }
     }
 
