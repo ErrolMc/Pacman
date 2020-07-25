@@ -23,6 +23,8 @@ public class GameLogic : MonoBehaviour
 
     public Pacman pacman;
 
+    [SerializeField] GhostStateTiming[] ghostTimings;
+
     void Awake()
     {
         instance = this;
@@ -39,7 +41,7 @@ public class GameLogic : MonoBehaviour
     void SpawnGhost()
     {
         Ghost ghost = Instantiate(ghostPrefab, ghostHouse.pos, Quaternion.identity);
-        ghost.Init(ghostHouse);
+        ghost.Init(ghostHouse, ghostTimings);
     }
 
     void SpawnPacman()

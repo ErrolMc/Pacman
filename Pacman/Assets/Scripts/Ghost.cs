@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,8 +8,10 @@ public class Ghost : MonoBehaviour
     public enum State
     {
         inHouse,
-        chase,
-        scatter
+        
+        chase,          // actively chasing pacman
+        scatter,        // give pacman a short break
+        frightened,     // when pacman consumes super pellet
     }
 
     public enum Type
@@ -32,6 +35,12 @@ public class Ghost : MonoBehaviour
     [HideInInspector] public State currentState;
     [HideInInspector] public Vector2 currentPos;
 
+    // mode change timings
+    GhostStateTiming[] timings;
+    float stateChangeTimer;
+    int stateChangeIndex;
+    bool stateChangeSequenceComplete;
+
     // values to keep track of the movement from the current to the target node
     float distanceFromCurrent = 0;
     float distanceToTarget = 0;
@@ -40,7 +49,7 @@ public class Ghost : MonoBehaviour
     /// Sets up the ghost at the node specified
     /// </summary>
     /// <param name="startingnode">The node to start at</param>
-    public void Init(Node startingnode)
+    public void Init(Node startingnode, GhostStateTiming[] timings)
     {
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
@@ -51,9 +60,14 @@ public class Ghost : MonoBehaviour
 
         rb.MovePosition(currentPos);
 
-        currentState = State.chase;
+        StateInit(timings);
 
         MoveToNextNode();
+    }
+
+    void Update()
+    {
+        StateUpdate();
     }
 
     void FixedUpdate()
@@ -150,4 +164,57 @@ public class Ghost : MonoBehaviour
         nextDir = nextDirection;    // "return" the next direction
         return nextNode;            // return the next node
     }
+
+    #region state stuff
+    void StateInit(GhostStateTiming[] timings)
+    {
+        this.timings = timings;
+        stateChangeIndex = 0;
+        stateChangeTimer = 0;
+        stateChangeSequenceComplete = false;
+
+        ChangeState(timings[stateChangeIndex].state);
+    }
+
+    void StateUpdate()
+    {
+        if (stateChangeSequenceComplete == false)
+        {
+            // we have reached the end of the current state
+            if (stateChangeTimer >= timings[stateChangeIndex].seconds)
+            {
+                stateChangeIndex++;
+                stateChangeTimer = 0;
+                ChangeState(timings[stateChangeIndex].state);
+
+                // we are on the last timing
+                if (stateChangeIndex == timings.Length - 1)
+                    stateChangeSequenceComplete = true;
+            }
+            else
+            {
+                stateChangeTimer += Time.deltaTime;
+            }
+        }
+    }
+
+    void ChangeState(State newState)
+    {
+        Debug.Log(newState + ": " + Time.time);
+
+        switch (newState)
+        {
+            case State.chase:
+                break;
+            case State.frightened:
+                break;
+            case State.scatter:
+                break;
+            case State.inHouse:
+                break;
+        }
+
+        currentState = newState;
+    }
+    #endregion
 }

@@ -60757,6 +60757,11 @@ PrefabInstance:
       objectReference: {fileID: 1305053626}
     - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
         type: 3}
+      propertyPath: ghostHouse
+      value: 
+      objectReference: {fileID: 1676864986}
+    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
+        type: 3}
       propertyPath: pelletParent
       value: 
       objectReference: {fileID: 1221428652}
@@ -60765,17 +60770,6 @@ PrefabInstance:
       propertyPath: nodeParent
       value: 
       objectReference: {fileID: 1760924011}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: ghostHouse
-      value: 
-      objectReference: {fileID: 1676864986}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: ghostPrefab
-      value: 
-      objectReference: {fileID: 8268908313659367578, guid: 95248cefa2856e54bb270f3d0ba9995e,
-        type: 3}
     - target: {fileID: 8471738574790805911, guid: 0265475c0ef0bba43b3e6365b907c5e3,
         type: 3}
       propertyPath: m_LocalPosition.x

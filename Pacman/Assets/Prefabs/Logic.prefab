@@ -46,6 +46,27 @@ MonoBehaviour:
   scoreDisplay: {fileID: 0}
   pacmanPrefab: {fileID: 9002930222478637912, guid: 8570c32377e357847a659b624edfd31b,
     type: 3}
+  ghostPrefab: {fileID: 8268908313659367578, guid: 95248cefa2856e54bb270f3d0ba9995e,
+    type: 3}
   startingNode: {fileID: 0}
+  ghostHouse: {fileID: 0}
   pelletParent: {fileID: 0}
   nodeParent: {fileID: 0}
+  pacman: {fileID: 0}
+  ghostTimings:
+  - state: 2
+    seconds: 7
+  - state: 1
+    seconds: 20
+  - state: 2
+    seconds: 7
+  - state: 1
+    seconds: 20
+  - state: 2
+    seconds: 5
+  - state: 1
+    seconds: 20
+  - state: 2
+    seconds: 5
+  - state: 1
+    seconds: -1
