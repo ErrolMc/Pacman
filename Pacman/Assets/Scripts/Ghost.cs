@@ -34,10 +34,17 @@ public class Ghost : MonoBehaviour
     [SerializeField] string leftAnim;
     [SerializeField] string rightAnim;
 
+    [Header("Eye sprites")]
+    [SerializeField] Sprite eyesUp;
+    [SerializeField] Sprite eyesDown;
+    [SerializeField] Sprite eyesLeft;
+    [SerializeField] Sprite eyesRight;
+
     // caches
     Transform trans;
     Rigidbody2D rb;
     Animator anim;
+    SpriteRenderer spriteRenderer;
     [HideInInspector] public Node currentNode;
     [HideInInspector] public Node targetNode;
     [HideInInspector] public Node homeNode;
@@ -69,6 +76,7 @@ public class Ghost : MonoBehaviour
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
         this.homeNode = homeNode;
         this.ghostHouse = ghostHouse;
@@ -232,7 +240,7 @@ public class Ghost : MonoBehaviour
     /// </summary>
     void StateUpdate()
     {
-        if (currentState == State.consumed)
+        if (currentState == State.consumed || currentState == State.inHouse)
             return;
 
         // dont go through the normal mode sequence when they are frightened
@@ -273,6 +281,9 @@ public class Ghost : MonoBehaviour
     /// <param name="newState">The new state to transition to</param>
     public void ChangeState(State newState)
     {
+        if (currentState == State.consumed)
+            anim.enabled = true;
+
         switch (newState)
         {
             case State.chase:
@@ -290,8 +301,11 @@ public class Ghost : MonoBehaviour
                 Debug.LogError("In house");
                 break;
             case State.consumed:
-                Debug.LogError("Consumed");
+                anim.enabled = false;
                 currentMoveSpeed = consumedMoveSpeed;
+
+                currentState = State.consumed; // hack
+                Rotate(currentDirection);
                 break;
         }
 
@@ -304,21 +318,43 @@ public class Ghost : MonoBehaviour
     /// <param name="direction">The direction to face</param>
     void Rotate(Vector2 direction)
     {
-        if (direction == Vector2.left)
+        if (currentState == State.consumed)
         {
-            anim.Play(leftAnim);
+            if (direction == Vector2.left)
+            {
+                spriteRenderer.sprite = eyesLeft;
+            }
+            else if (direction == Vector2.right)
+            {
+                spriteRenderer.sprite = eyesRight;
+            }
+            else if (direction == Vector2.down)
+            {
+                spriteRenderer.sprite = eyesDown;
+            }
+            else if (direction == Vector2.up)
+            {
+                spriteRenderer.sprite = eyesUp;
+            }
         }
-        else if (direction == Vector2.right)
+        else
         {
-            anim.Play(rightAnim);
-        }
-        else if (direction == Vector2.down)
-        {
-            anim.Play(downAnim);
-        }
-        else if (direction == Vector2.up)
-        {
-            anim.Play(upAnim);
+            if (direction == Vector2.left)
+            {
+                anim.Play(leftAnim);
+            }
+            else if (direction == Vector2.right)
+            {
+                anim.Play(rightAnim);
+            }
+            else if (direction == Vector2.down)
+            {
+                anim.Play(downAnim);
+            }
+            else if (direction == Vector2.up)
+            {
+                anim.Play(upAnim);
+            }
         }
     }
     #endregion

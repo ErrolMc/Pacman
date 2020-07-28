@@ -99,14 +99,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   frightenedMoveSpeed: 1.5
+  consumedMoveSpeed: 5
   frightenedModeDuration: 15
   upAnim: Blinky_Up
   downAnim: Blinky_Down
   leftAnim: Blinky_Left
   rightAnim: Blinky_Right
+  eyesUp: {fileID: 1860293865367652549, guid: a56ed00e7d467e34281d2e74f195d4aa, type: 3}
+  eyesDown: {fileID: 796869803670154791, guid: a56ed00e7d467e34281d2e74f195d4aa, type: 3}
+  eyesLeft: {fileID: 7783685448983512277, guid: a56ed00e7d467e34281d2e74f195d4aa,
+    type: 3}
+  eyesRight: {fileID: -8286604542853739841, guid: a56ed00e7d467e34281d2e74f195d4aa,
+    type: 3}
   currentNode: {fileID: 0}
   targetNode: {fileID: 0}
   homeNode: {fileID: 0}
+  ghostHouse: {fileID: 0}
   currentDirection: {x: 0, y: 0}
   currentState: 1
   currentPos: {x: 0, y: 0}

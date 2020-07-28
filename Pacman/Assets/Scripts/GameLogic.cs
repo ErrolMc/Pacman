@@ -90,6 +90,10 @@ public class GameLogic : MonoBehaviour
         scoreDisplay.text = score.ToString();
 
         for (int i = 0; i < ghosts.Count; i++)
-            ghosts[i].ChangeState(Ghost.State.frightened);
+        {
+            if (ghosts[i].currentState != Ghost.State.consumed && ghosts[i].currentState != Ghost.State.inHouse)
+                ghosts[i].ChangeState(Ghost.State.frightened);
+        }
+
     }
 }

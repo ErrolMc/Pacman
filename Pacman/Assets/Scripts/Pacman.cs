@@ -273,7 +273,7 @@ public class Pacman : MonoBehaviour
                 {
                     ghost.ChangeState(Ghost.State.consumed);
                 }
-                else
+                else if (ghost.currentState != Ghost.State.consumed)
                 {
                     ChangeState(State.dead);
                 }
