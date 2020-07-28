@@ -55,7 +55,7 @@ public class GameLogic : MonoBehaviour
         {
             case Ghost.Type.blinky:
                 Ghost ghost = Instantiate(ghostPrefab, ghostHouse.pos, Quaternion.identity);
-                ghost.Init(ghostHouse, blinkyHomeNode, ghostTimings);
+                ghost.Init(ghostHouse, blinkyHomeNode, ghostHouse, ghostTimings);
                 ghosts.Add(ghost);
                 break;
         }

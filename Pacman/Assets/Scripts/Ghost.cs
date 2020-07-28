@@ -12,6 +12,7 @@ public class Ghost : MonoBehaviour
         chase,          // actively chasing pacman
         scatter,        // give pacman a short break
         frightened,     // when pacman consumes super pellet
+        consumed,       // when pacman consumes the ghost and turns it into eyes
     }
 
     public enum Type
@@ -23,7 +24,8 @@ public class Ghost : MonoBehaviour
     }
 
     [SerializeField] float moveSpeed = 3;
-    [SerializeField] float frightenedMoveSpeed = 1.5f; 
+    [SerializeField] float frightenedMoveSpeed = 1.5f;
+    [SerializeField] float consumedMoveSpeed = 5;
     [SerializeField] float frightenedModeDuration = 20;
 
     [Header("Animation Names")]
@@ -39,6 +41,7 @@ public class Ghost : MonoBehaviour
     [HideInInspector] public Node currentNode;
     [HideInInspector] public Node targetNode;
     [HideInInspector] public Node homeNode;
+    [HideInInspector] public Node ghostHouse;
     [HideInInspector] public Vector2 currentDirection;
 
     // state
@@ -61,13 +64,14 @@ public class Ghost : MonoBehaviour
     /// Sets up the ghost at the node specified
     /// </summary>
     /// <param name="startingnode">The node to start at</param>
-    public void Init(Node startingnode, Node homeNode, GhostStateTiming[] timings)
+    public void Init(Node startingnode, Node homeNode, Node ghostHouse, GhostStateTiming[] timings)
     {
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
         this.homeNode = homeNode;
+        this.ghostHouse = ghostHouse;
         currentNode = startingnode;
         currentPos = currentNode.pos;
         currentDirection = Vector2.zero;
@@ -98,7 +102,15 @@ public class Ghost : MonoBehaviour
             if (progress01 == 1)
             {
                 currentNode = targetNode;
-                MoveToNextNode();
+
+                if (currentState == State.consumed && currentNode == ghostHouse)
+                {
+                    ChangeState(State.inHouse);
+                }
+                else
+                {
+                    MoveToNextNode();
+                }
             }
         }
     }
@@ -139,6 +151,8 @@ public class Ghost : MonoBehaviour
     /// <returns>The position to target</returns>
     Vector2 GetTargetTile()
     {
+        if (currentState == State.consumed)
+            return ghostHouse.pos;
         if (currentState == State.frightened)
             return GetRandomTile();
         if (currentState == State.scatter)
@@ -218,6 +232,9 @@ public class Ghost : MonoBehaviour
     /// </summary>
     void StateUpdate()
     {
+        if (currentState == State.consumed)
+            return;
+
         // dont go through the normal mode sequence when they are frightened
         if (currentState == State.frightened)
         {
@@ -270,6 +287,11 @@ public class Ghost : MonoBehaviour
                 anim.Play("Ghost_Blue");
                 break;
             case State.inHouse:
+                Debug.LogError("In house");
+                break;
+            case State.consumed:
+                Debug.LogError("Consumed");
+                currentMoveSpeed = consumedMoveSpeed;
                 break;
         }
 

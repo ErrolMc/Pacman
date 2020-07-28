@@ -57,9 +57,8 @@ public class Pacman : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-            ChangeState(State.dead);
-        HandleInput();
+        if (currentState != State.dead)
+            HandleInput();
     }
 
     void FixedUpdate()
@@ -267,6 +266,17 @@ public class Pacman : MonoBehaviour
             case "SuperPellet":
                 GameLogic.instance.CollectSuperPellet();
                 collision.gameObject.SetActive(false);
+                break;
+            case "Ghost":
+                Ghost ghost = collision.gameObject.GetComponent<Ghost>();
+                if (ghost.currentState == Ghost.State.frightened)
+                {
+                    ghost.ChangeState(Ghost.State.consumed);
+                }
+                else
+                {
+                    ChangeState(State.dead);
+                }
                 break;
         }
     }

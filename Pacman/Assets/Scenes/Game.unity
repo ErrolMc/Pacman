@@ -9673,6 +9673,7 @@ MonoBehaviour:
   - {fileID: 1562494045}
   - {fileID: 1237905627}
   - {fileID: 204070871}
+  - {fileID: 1995705427}
   directions: []
   pos: {x: 0, y: 0}
 --- !u!4 &1024870860
@@ -11532,6 +11533,7 @@ MonoBehaviour:
   - {fileID: 1397100905}
   - {fileID: 1676864986}
   - {fileID: 1024870859}
+  - {fileID: 2041730363}
   directions: []
   pos: {x: 0, y: 0}
 --- !u!4 &1237905628
@@ -16725,6 +16727,8 @@ Transform:
   - {fileID: 997465912}
   - {fileID: 1359724222}
   - {fileID: 1383434646}
+  - {fileID: 1995705426}
+  - {fileID: 2041730362}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -19226,6 +19230,53 @@ MonoBehaviour:
   - {fileID: 545685749}
   directions: []
   pos: {x: 0, y: 0}
+--- !u!1 &1995705425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1995705426}
+  - component: {fileID: 1995705427}
+  m_Layer: 0
+  m_Name: ghostHouse_Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1995705426
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995705425}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 12, y: 16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1760924012}
+  m_RootOrder: 70
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1995705427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995705425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381f1ca9b3e11a54fb25879ae8ce931e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbours:
+  - {fileID: 1024870859}
+  directions: []
+  pos: {x: 0, y: 0}
 --- !u!1001 &1999253529
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19595,6 +19646,53 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2039689053}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2041730361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2041730362}
+  - component: {fileID: 2041730363}
+  m_Layer: 0
+  m_Name: ghostHouse_Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2041730362
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041730361}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 15, y: 16, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1760924012}
+  m_RootOrder: 71
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2041730363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2041730361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 381f1ca9b3e11a54fb25879ae8ce931e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  neighbours:
+  - {fileID: 1237905627}
+  directions: []
+  pos: {x: 0, y: 0}
 --- !u!1001 &2054653477
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61031,7 +61129,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ghostHouse
       value: 
-      objectReference: {fileID: 1676864986}
+      objectReference: {fileID: 1995705427}
     - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
         type: 3}
       propertyPath: blinkyHomeNode
