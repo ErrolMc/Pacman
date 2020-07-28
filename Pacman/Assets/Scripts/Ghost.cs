@@ -26,9 +26,16 @@ public class Ghost : MonoBehaviour
     [SerializeField] float frightenedMoveSpeed = 1.5f; 
     [SerializeField] float frightenedModeDuration = 20;
 
+    [Header("Animation Names")]
+    [SerializeField] string upAnim;
+    [SerializeField] string downAnim;
+    [SerializeField] string leftAnim;
+    [SerializeField] string rightAnim;
+
     // caches
     Transform trans;
     Rigidbody2D rb;
+    Animator anim;
     [HideInInspector] public Node currentNode;
     [HideInInspector] public Node targetNode;
     [HideInInspector] public Node homeNode;
@@ -58,6 +65,7 @@ public class Ghost : MonoBehaviour
     {
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
         this.homeNode = homeNode;
         currentNode = startingnode;
@@ -80,7 +88,7 @@ public class Ghost : MonoBehaviour
     {
         if (currentState != State.inHouse)
         {
-            distanceFromCurrent += currentMoveSpeed * Time.deltaTime;                                  // move based on the movespeed
+            distanceFromCurrent += currentMoveSpeed * Time.deltaTime;                           // move based on the movespeed
             float progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);     // calculate the normalised progress to the next node
             currentPos = Vector2.Lerp(currentNode.pos, targetNode.pos, progress01);             // get the current position
 
@@ -105,6 +113,9 @@ public class Ghost : MonoBehaviour
 
         targetNode = next;
         currentDirection = nextDirection;
+
+        if (currentState != State.frightened)
+            Rotate(currentDirection);
 
         distanceToTarget = Vector2.Distance(currentNode.pos, targetNode.pos);       // first calculate the distance required
         distanceFromCurrent = 0;
@@ -188,6 +199,10 @@ public class Ghost : MonoBehaviour
     }
 
     #region state stuff
+    /// <summary>
+    /// Initialises the state timings
+    /// </summary>
+    /// <param name="timings">The timings of when to change the states</param>
     void StateInit(GhostStateTiming[] timings)
     {
         this.timings = timings;
@@ -198,6 +213,9 @@ public class Ghost : MonoBehaviour
         ChangeState(timings[stateChangeIndex].state);
     }
 
+    /// <summary>
+    /// Update loop to determine the current state of the ghost based on the timings
+    /// </summary>
     void StateUpdate()
     {
         // dont go through the normal mode sequence when they are frightened
@@ -232,28 +250,54 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Changes the state of the ghost, executing any state transition logic
+    /// </summary>
+    /// <param name="newState">The new state to transition to</param>
     public void ChangeState(State newState)
     {
         switch (newState)
         {
             case State.chase:
+            case State.scatter:
+                if (currentState == State.frightened)
+                    Rotate(currentDirection);
                 currentMoveSpeed = moveSpeed;
                 break;
             case State.frightened:
                 frightenedTimer = 0;
                 currentMoveSpeed = frightenedMoveSpeed;
-                
-                // change sprite etc
-
-                break;
-            case State.scatter:
-                currentMoveSpeed = moveSpeed;
+                anim.Play("Ghost_Blue");
                 break;
             case State.inHouse:
                 break;
         }
 
         currentState = newState;
+    }
+
+    /// <summary>
+    /// Rotates the ghost in a given direction by changing the animations
+    /// </summary>
+    /// <param name="direction">The direction to face</param>
+    void Rotate(Vector2 direction)
+    {
+        if (direction == Vector2.left)
+        {
+            anim.Play(leftAnim);
+        }
+        else if (direction == Vector2.right)
+        {
+            anim.Play(rightAnim);
+        }
+        else if (direction == Vector2.down)
+        {
+            anim.Play(downAnim);
+        }
+        else if (direction == Vector2.up)
+        {
+            anim.Play(upAnim);
+        }
     }
     #endregion
 }
