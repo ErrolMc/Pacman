@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro.EditorUtilities;
 using UnityEngine;
 
 /// <summary>
@@ -10,7 +11,8 @@ public class Pacman : MonoBehaviour
     public enum State
     {
         idle,
-        moving
+        moving,
+        dead
     }
 
     [SerializeField] float moveSpeed = 5;
@@ -18,6 +20,7 @@ public class Pacman : MonoBehaviour
     // caches
     Transform trans;
     Rigidbody2D rb;
+    Animator anim;
     public Node currentNode;
     public Node targetNode;
 
@@ -41,18 +44,21 @@ public class Pacman : MonoBehaviour
     {
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
         currentNode = startingNode;
         currentPos = currentNode.pos;
 
         rb.MovePosition(currentPos);
 
-        currentState = State.idle;
+        ChangeState(State.idle);
         currentDirection = Vector2.zero;
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+            ChangeState(State.dead);
         HandleInput();
     }
 
@@ -81,7 +87,7 @@ public class Pacman : MonoBehaviour
                 currentNode = targetNode;
                 bool canMove = MoveFromNode();
                 if (!canMove)
-                    currentState = State.idle;
+                    ChangeState(State.idle);
             }
         }
     }
@@ -97,9 +103,11 @@ public class Pacman : MonoBehaviour
     {
         // TODO: animation triggers
 
-        currentState = State.moving;
+        ChangeState(State.moving);
 
         currentDirection = direction;
+
+        Rotate(currentDirection);
 
         currentNode = a;
         targetNode = b;
@@ -184,20 +192,49 @@ public class Pacman : MonoBehaviour
         }
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    /// <summary>
+    /// Changes pacman to a new state, executing any code that needs to be ran on a state change
+    /// </summary>
+    /// <param name="newState">Pacmans new state</param>
+    void ChangeState(State newState)
     {
-        string tag = collision.collider.tag;
-
-        switch (tag)
+        switch (newState)
         {
-            case "Pellet":
-                GameLogic.instance.AddScore();
-                collision.gameObject.SetActive(false);
+            case State.idle:
+                anim.StartPlayback();
                 break;
-            case "SuperPellet":
-                GameLogic.instance.CollectSuperPellet();
-                collision.gameObject.SetActive(false);
+            case State.moving:
+                anim.StopPlayback();
                 break;
+            case State.dead:
+                anim.StopPlayback();
+                anim.Play("Pacman_Death");
+                break;
+        }
+
+        currentState = newState;
+    }
+
+    /// <summary>
+    /// Rotates pacman to a direction
+    /// </summary>
+    void Rotate(Vector2 direction)
+    {
+        if (direction == Vector2.right)
+        {
+            trans.localRotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (direction == Vector2.up)
+        {
+            trans.localRotation = Quaternion.Euler(0, 0, 90);
+        }
+        else if (direction == Vector2.left)
+        {
+            trans.localRotation = Quaternion.Euler(0, 0, 180);
+        }
+        else if (direction == Vector2.down)
+        {
+            trans.localRotation = Quaternion.Euler(0, 0, 270);
         }
     }
 
@@ -215,5 +252,22 @@ public class Pacman : MonoBehaviour
                 return currentNode.neighbours[i];
         }
         return null;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        string tag = collision.collider.tag;
+
+        switch (tag)
+        {
+            case "Pellet":
+                GameLogic.instance.AddScore();
+                collision.gameObject.SetActive(false);
+                break;
+            case "SuperPellet":
+                GameLogic.instance.CollectSuperPellet();
+                collision.gameObject.SetActive(false);
+                break;
+        }
     }
 }

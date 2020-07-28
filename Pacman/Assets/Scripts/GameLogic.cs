@@ -87,6 +87,8 @@ public class GameLogic : MonoBehaviour
         // TODO: play sound
 
         score += 5;
+        scoreDisplay.text = score.ToString();
+
         for (int i = 0; i < ghosts.Count; i++)
             ghosts[i].ChangeState(Ghost.State.frightened);
     }
