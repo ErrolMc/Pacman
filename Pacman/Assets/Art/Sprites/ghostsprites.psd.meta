@@ -94,10 +94,10 @@ TextureImporter:
     second: pinky_up_2
   - first:
       213: -2052557111319640361
-    second: ghostsprites_30
+    second: pinky_left_1
   - first:
       213: -3743017790030086971
-    second: ghostsprites_31
+    second: pinky_left_2
   - first:
       213: -3789464855888437124
     second: ghost_blue_1
@@ -897,7 +897,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ghostsprites_30
+      name: pinky_left_1
       rect:
         serializedVersion: 2
         x: 84
@@ -918,7 +918,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ghostsprites_31
+      name: pinky_left_2
       rect:
         serializedVersion: 2
         x: 98
@@ -1031,7 +1031,7 @@ TextureImporter:
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1052,7 +1052,7 @@ TextureImporter:
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1073,7 +1073,7 @@ TextureImporter:
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1094,7 +1094,7 @@ TextureImporter:
         width: 14
         height: 14
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
