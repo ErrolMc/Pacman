@@ -45,16 +45,16 @@ public class Ghost : MonoBehaviour
     Rigidbody2D rb;
     Animator anim;
     SpriteRenderer spriteRenderer;
-    [HideInInspector] public Node currentNode;
-    [HideInInspector] public Node targetNode;
-    [HideInInspector] public Node homeNode;
-    [HideInInspector] public Node ghostHouse;
-    [HideInInspector] public Vector2 currentDirection;
+    Node currentNode;
+    Node targetNode;
+    Node homeNode;
+    Node ghostHouse;
 
     // state
-    public State currentState;
-    [HideInInspector] public Vector2 currentPos;
-    float currentMoveSpeed;
+    protected State currentState;
+    protected Vector2 currentPos;
+    protected Vector2 currentDirection;
+    protected float currentMoveSpeed;
 
     // mode change timings
     GhostStateTiming[] timings;
@@ -66,6 +66,11 @@ public class Ghost : MonoBehaviour
     // values to keep track of the movement from the current to the target node
     float distanceFromCurrent = 0;
     float distanceToTarget = 0;
+
+    // public getters
+    public State CurrentState { get { return currentState; } }
+    public Vector2 CurrentDirection { get { return currentDirection; } }
+    public Vector2 CurrentPosition { get { return new Vector2(Mathf.RoundToInt(currentPos.x), Mathf.RoundToInt(currentPos.y)); } }
 
     /// <summary>
     /// Sets up the ghost at the node specified
@@ -154,10 +159,10 @@ public class Ghost : MonoBehaviour
     }
 
     /// <summary>
-    /// Gets the position this ghost wants to move to, this is different depending on the ghost type
+    /// Gets the position the ghost should be moving towards at any given time
     /// </summary>
     /// <returns>The position to target</returns>
-    Vector2 GetTargetTile()
+    protected virtual Vector2 GetTargetTile()
     {
         if (currentState == State.consumed)
             return ghostHouse.pos;
@@ -165,7 +170,8 @@ public class Ghost : MonoBehaviour
             return GetRandomTile();
         if (currentState == State.scatter)
             return homeNode.pos;
-        return GameLogic.instance.pacman.currentPos;
+
+        return GameLogic.instance.pacman.CurrentPosition;
     }
 
     /// <summary>

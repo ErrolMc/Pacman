@@ -21,8 +21,8 @@ public class Pacman : MonoBehaviour
     Transform trans;
     Rigidbody2D rb;
     Animator anim;
-    public Node currentNode;
-    public Node targetNode;
+    Node currentNode;
+    Node targetNode;
 
     // directions
     Vector2 currentDirection;
@@ -33,8 +33,12 @@ public class Pacman : MonoBehaviour
     float distanceToTarget = 0;
 
     // state
-    public State currentState;
-    public Vector2 currentPos;
+    State currentState;
+    Vector2 currentPos;
+
+    // public getters
+    public Vector2 CurrentDirection { get { return currentDirection; } }
+    public Vector2 CurrentPosition { get { return new Vector2(Mathf.RoundToInt(currentPos.x), Mathf.RoundToInt(currentPos.y)); } }
 
     /// <summary>
     /// Sets up pacman
@@ -269,11 +273,11 @@ public class Pacman : MonoBehaviour
                 break;
             case "Ghost":
                 Ghost ghost = collision.gameObject.GetComponent<Ghost>();
-                if (ghost.currentState == Ghost.State.frightened)
+                if (ghost.CurrentState == Ghost.State.frightened)
                 {
                     ghost.ChangeState(Ghost.State.consumed);
                 }
-                else if (ghost.currentState != Ghost.State.consumed)
+                else if (ghost.CurrentState != Ghost.State.consumed)
                 {
                     ChangeState(State.dead);
                 }

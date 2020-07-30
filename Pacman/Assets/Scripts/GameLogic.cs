@@ -91,7 +91,8 @@ public class GameLogic : MonoBehaviour
 
         for (int i = 0; i < ghosts.Count; i++)
         {
-            if (ghosts[i].currentState != Ghost.State.consumed && ghosts[i].currentState != Ghost.State.inHouse)
+            Ghost.State ghostState = ghosts[i].CurrentState;
+            if (ghostState != Ghost.State.consumed && ghostState != Ghost.State.inHouse)
                 ghosts[i].ChangeState(Ghost.State.frightened);
         }
 
