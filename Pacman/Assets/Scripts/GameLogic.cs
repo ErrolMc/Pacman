@@ -54,6 +54,7 @@ public class GameLogic : MonoBehaviour
         SpawnGhost(Ghost.Type.blinky);
         SpawnGhost(Ghost.Type.pinky);
         SpawnGhost(Ghost.Type.inky);
+        SpawnGhost(Ghost.Type.clyde);
     }
 
     void SpawnGhost(Ghost.Type type)
@@ -74,6 +75,11 @@ public class GameLogic : MonoBehaviour
                 Ghost inky = Instantiate(inkyPrefab);
                 inky.Init(ghostHouseRight, inkyHomeNode, ghostTimings);
                 ghosts.Add(inky);
+                break;
+            case Ghost.Type.clyde:
+                Ghost clyde = Instantiate(clydePrefab);
+                clyde.Init(ghostHouseLeft, clydeHomeNode, ghostTimings);
+                ghosts.Add(clyde);
                 break;
         }
     }

@@ -61260,6 +61260,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8099268453350303897, guid: c48035332bd37674cac62db2810dda6f,
         type: 3}
+    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
+        type: 3}
+      propertyPath: clydePrefab
+      value: 
+      objectReference: {fileID: -8369994348324957916, guid: cb9474f4da9d662499f69a24a0d96c7c,
+        type: 3}
     - target: {fileID: 8471738574790805911, guid: 0265475c0ef0bba43b3e6365b907c5e3,
         type: 3}
       propertyPath: m_LocalPosition.x

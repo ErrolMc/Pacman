@@ -45,14 +45,14 @@ public class Ghost : MonoBehaviour
     [SerializeField] Sprite eyesRight;
 
     // caches
-    Transform trans;
-    Rigidbody2D rb;
-    Animator anim;
-    SpriteRenderer spriteRenderer;
-    Node currentNode;
-    Node targetNode;
-    Node homeNode;
-    Node ghostHouse;
+    protected Transform trans;
+    protected Rigidbody2D rb;
+    protected Animator anim;
+    protected SpriteRenderer spriteRenderer;
+    protected Node currentNode;
+    protected Node targetNode;
+    protected Node homeNode;
+    protected Node ghostHouse;
 
     // state
     protected State currentState;
