@@ -99,6 +99,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ghostType: 1
+  startReleaseTimer: 5
+  consumedReleaseTimer: 3
   moveSpeed: 3
   frightenedMoveSpeed: 1.5
   consumedMoveSpeed: 5

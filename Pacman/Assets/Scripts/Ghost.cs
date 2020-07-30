@@ -25,6 +25,8 @@ public class Ghost : MonoBehaviour
 
     [Header("Type")]
     [SerializeField] Type ghostType;
+    [SerializeField] float startReleaseTimer = 0;
+    [SerializeField] float consumedReleaseTimer = 0;
 
     [Header("Movement settings")]
     [SerializeField] float moveSpeed = 3;
@@ -64,6 +66,7 @@ public class Ghost : MonoBehaviour
     GhostStateTiming[] timings;
     float stateChangeTimer;
     float frightenedTimer;
+    float releaseTimer;
     int stateChangeIndex;
     bool stateChangeSequenceComplete;
 
@@ -97,8 +100,6 @@ public class Ghost : MonoBehaviour
         rb.MovePosition(currentPos);
 
         StateInit(timings);
-
-        MoveToNextNode();
     }
 
     void Update()
@@ -123,6 +124,7 @@ public class Ghost : MonoBehaviour
 
                 if (currentState == State.consumed && currentNode == ghostHouse)
                 {
+                    releaseTimer = consumedReleaseTimer;
                     ChangeState(State.inHouse);
                 }
                 else
@@ -136,10 +138,10 @@ public class Ghost : MonoBehaviour
     /// <summary>
     /// Picks and then instructs the ghost to move to a new node
     /// </summary>
-    void MoveToNextNode()
+    void MoveToNextNode(bool ignoreOppositeCheck = false)
     {
         Vector2 nextDirection = Vector2.zero;
-        Node next = ChooseNextNode(ref nextDirection);
+        Node next = ChooseNextNode(ref nextDirection, ignoreOppositeCheck);
 
         targetNode = next;
         currentDirection = nextDirection;
@@ -185,7 +187,7 @@ public class Ghost : MonoBehaviour
     /// </summary>
     /// <param name="nextDir">A reference to the next direction that the ghost going to move</param>
     /// <returns>The next node that the ghost is moving to</returns>
-    Node ChooseNextNode(ref Vector2 nextDir)
+    Node ChooseNextNode(ref Vector2 nextDir, bool ignoreOppositeCheck = false)
     {
         Vector2 targetTile = GetTargetTile();
 
@@ -195,7 +197,7 @@ public class Ghost : MonoBehaviour
         List<Vector2> validDirections = new List<Vector2>();
         for (int i = 0; i < currentNode.neighbours.Length; i++)
         {
-            if (currentNode.directions[i] != currentDirection * -1)
+            if (currentNode.directions[i] != currentDirection * -1 || ignoreOppositeCheck)
             {
                 // dont navigate to the ghost house if not in the consumed state
                 if (currentState != State.consumed && currentNode.neighbours[i].nodeType == Node.NodeType.ghostHouse)
@@ -245,9 +247,10 @@ public class Ghost : MonoBehaviour
         this.timings = timings;
         stateChangeIndex = 0;
         stateChangeTimer = 0;
+        releaseTimer = startReleaseTimer;
         stateChangeSequenceComplete = false;
 
-        ChangeState(timings[stateChangeIndex].state);
+        ChangeState(State.inHouse);
     }
 
     /// <summary>
@@ -255,11 +258,20 @@ public class Ghost : MonoBehaviour
     /// </summary>
     void StateUpdate()
     {
-        if (currentState == State.consumed || currentState == State.inHouse)
+        if (currentState == State.consumed)
             return;
-
-        // dont go through the normal mode sequence when they are frightened
-        if (currentState == State.frightened)
+        else if (currentState == State.inHouse)
+        {
+            if (stateChangeTimer >= releaseTimer)
+            {
+                ChangeState(timings[stateChangeIndex].state);
+                MoveToNextNode(true);
+                stateChangeTimer = 0;
+            }
+            else
+                stateChangeTimer += Time.deltaTime;
+        }
+        else if (currentState == State.frightened) // dont go through the normal mode sequence when they are frightened
         {
             // if we have gone through the frightened timer, go back to where we were
             if (frightenedTimer >= frightenedModeDuration)
@@ -313,7 +325,9 @@ public class Ghost : MonoBehaviour
                 anim.Play("Ghost_Blue");
                 break;
             case State.inHouse:
-                Debug.LogError("In house");
+                currentState = State.inHouse; // force the anim and not the eyes
+                Rotate(Vector2.up);
+                stateChangeTimer = 0;
                 break;
             case State.consumed:
                 anim.enabled = false;
