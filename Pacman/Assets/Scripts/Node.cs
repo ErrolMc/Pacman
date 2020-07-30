@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
-    public Node[] neighbours;
-    public Vector2[] directions;
+    public enum NodeType
+    {
+        regular,
+        ghostHouse,
+        portal
+    }
 
-    public Vector2 pos;
+    public Node[] neighbours;
+    public NodeType nodeType = NodeType.regular;
+
+    [HideInInspector] public Vector2[] directions;
+    [HideInInspector] public Vector2 pos;
 
     public void Setup()
     {

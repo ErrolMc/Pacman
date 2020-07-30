@@ -12,11 +12,15 @@ public class GameLogic : MonoBehaviour
 
     [Header("Prefabs")]
     [SerializeField] Pacman pacmanPrefab;
-    [SerializeField] Ghost ghostPrefab;
+    [SerializeField] Ghost blinkyPrefab;
+    [SerializeField] Ghost pinkyPrefab;
+    [SerializeField] Ghost inkyPrefab;
+    [SerializeField] Ghost clydePrefab;
 
     [Header("Nodes")]
     [SerializeField] Node startingNode;
-    [SerializeField] Node ghostHouse;
+    [SerializeField] Node ghostHouseLeft;
+    [SerializeField] Node ghostHouseRight;
     [SerializeField] Node blinkyHomeNode;
     [SerializeField] Node clydeHomeNode;
     [SerializeField] Node pinkyHomeNode;
@@ -45,8 +49,11 @@ public class GameLogic : MonoBehaviour
         SetupNodes();
         SpawnPacman();
 
+        // spawn the ghosts
         ghosts = new List<Ghost>();
         SpawnGhost(Ghost.Type.blinky);
+        SpawnGhost(Ghost.Type.pinky);
+        SpawnGhost(Ghost.Type.inky);
     }
 
     void SpawnGhost(Ghost.Type type)
@@ -54,9 +61,19 @@ public class GameLogic : MonoBehaviour
         switch (type)
         {
             case Ghost.Type.blinky:
-                Ghost ghost = Instantiate(ghostPrefab, ghostHouse.pos, Quaternion.identity);
-                ghost.Init(ghostHouse, blinkyHomeNode, ghostHouse, ghostTimings);
-                ghosts.Add(ghost);
+                Ghost blinky = Instantiate(blinkyPrefab);
+                blinky.Init(ghostHouseLeft, blinkyHomeNode, ghostTimings);
+                ghosts.Add(blinky);
+                break;
+            case Ghost.Type.pinky:
+                Ghost pinky = Instantiate(pinkyPrefab);
+                pinky.Init(ghostHouseRight, pinkyHomeNode, ghostTimings);
+                ghosts.Add(pinky);
+                break;
+            case Ghost.Type.inky:
+                Ghost inky = Instantiate(inkyPrefab);
+                inky.Init(ghostHouseRight, inkyHomeNode, ghostTimings);
+                ghosts.Add(inky);
                 break;
         }
     }
@@ -96,5 +113,20 @@ public class GameLogic : MonoBehaviour
                 ghosts[i].ChangeState(Ghost.State.frightened);
         }
 
+    }
+
+    /// <summary>
+    /// Gets a ghost given the type
+    /// </summary>
+    /// <param name="type">The type of the ghost to get</param>
+    /// <returns>The ghost of the given type (or null if it doesnt exist)</returns>
+    public Ghost GetGhost(Ghost.Type type)
+    {
+        for (int i = 0; i < ghosts.Count; i++)
+        {
+            if (ghosts[i].GhostType == type)
+                return ghosts[i];
+        }
+        return null;
     }
 }

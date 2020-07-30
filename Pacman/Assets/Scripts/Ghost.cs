@@ -81,7 +81,7 @@ public class Ghost : MonoBehaviour
     /// Sets up the ghost at the node specified
     /// </summary>
     /// <param name="startingnode">The node to start at</param>
-    public void Init(Node startingnode, Node homeNode, Node ghostHouse, GhostStateTiming[] timings)
+    public void Init(Node ghostHouse, Node homeNode, GhostStateTiming[] timings)
     {
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
@@ -90,7 +90,7 @@ public class Ghost : MonoBehaviour
 
         this.homeNode = homeNode;
         this.ghostHouse = ghostHouse;
-        currentNode = startingnode;
+        currentNode = ghostHouse;
         currentPos = currentNode.pos;
         currentDirection = Vector2.zero;
 
@@ -197,6 +197,10 @@ public class Ghost : MonoBehaviour
         {
             if (currentNode.directions[i] != currentDirection * -1)
             {
+                // dont navigate to the ghost house if not in the consumed state
+                if (currentState != State.consumed && currentNode.neighbours[i].nodeType == Node.NodeType.ghostHouse)
+                    continue;
+
                 validNodes.Add(currentNode.neighbours[i]);
                 validDirections.Add(currentNode.directions[i]);
             }
