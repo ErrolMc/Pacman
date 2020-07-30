@@ -23,6 +23,10 @@ public class Ghost : MonoBehaviour
         inky
     }
 
+    [Header("Type")]
+    [SerializeField] Type ghostType;
+
+    [Header("Movement settings")]
     [SerializeField] float moveSpeed = 3;
     [SerializeField] float frightenedMoveSpeed = 1.5f;
     [SerializeField] float consumedMoveSpeed = 5;
@@ -68,6 +72,7 @@ public class Ghost : MonoBehaviour
     float distanceToTarget = 0;
 
     // public getters
+    public Type GhostType { get { return ghostType; } }
     public State CurrentState { get { return currentState; } }
     public Vector2 CurrentDirection { get { return currentDirection; } }
     public Vector2 CurrentPosition { get { return new Vector2(Mathf.RoundToInt(currentPos.x), Mathf.RoundToInt(currentPos.y)); } }

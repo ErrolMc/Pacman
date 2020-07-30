@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8468974902d9c84f8be29691b6382be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ghostType: 0
   moveSpeed: 3
   frightenedMoveSpeed: 1.5
   consumedMoveSpeed: 5
@@ -111,13 +112,6 @@ MonoBehaviour:
     type: 3}
   eyesRight: {fileID: -8286604542853739841, guid: a56ed00e7d467e34281d2e74f195d4aa,
     type: 3}
-  currentNode: {fileID: 0}
-  targetNode: {fileID: 0}
-  homeNode: {fileID: 0}
-  ghostHouse: {fileID: 0}
-  currentDirection: {x: 0, y: 0}
-  currentState: 1
-  currentPos: {x: 0, y: 0}
 --- !u!50 &6134952954227371669
 Rigidbody2D:
   serializedVersion: 4
