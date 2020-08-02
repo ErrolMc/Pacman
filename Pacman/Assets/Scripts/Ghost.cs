@@ -129,6 +129,13 @@ public class Ghost : MonoBehaviour
                 }
                 else
                 {
+                    // go through any portals
+                    if (currentNode.nodeType == Node.NodeType.portal)
+                    {
+                        trans.position = currentNode.neighbours[0].pos;
+                        currentNode = currentNode.neighbours[0];
+                    }
+
                     MoveToNextNode();
                 }
             }
