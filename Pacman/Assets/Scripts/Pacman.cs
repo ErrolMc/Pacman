@@ -88,6 +88,14 @@ public class Pacman : MonoBehaviour
             if (progress01 == 1)
             {
                 currentNode = targetNode;
+
+                // if the current node is a portal, teleport through it
+                if (currentNode.nodeType == Node.NodeType.portal)
+                {
+                    trans.position = currentNode.neighbours[0].pos;
+                    currentNode = currentNode.neighbours[0];
+                }
+
                 bool canMove = MoveFromNode();
                 if (!canMove)
                     ChangeState(State.idle);

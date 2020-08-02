@@ -24,6 +24,11 @@ public class Node : MonoBehaviour
         {
             Node neighbour = neighbours[i];
             Vector2 dir = neighbour.transform.position - transform.position;
+
+            // if the other node is a portal flip the direction
+            if (neighbour.nodeType == NodeType.portal && nodeType == NodeType.portal)
+                dir = -dir;
+
             directions[i] = dir.normalized;
         }
 
