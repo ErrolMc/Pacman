@@ -272,11 +272,23 @@ public class Pacman : MonoBehaviour
         switch (tag)
         {
             case "Pellet":
-                GameLogic.instance.AddScore();
+                // TODO: play sound
+                GameLogic.instance.AddScore(1);
                 collision.gameObject.SetActive(false);
                 break;
             case "SuperPellet":
-                GameLogic.instance.CollectSuperPellet();
+                // TODO: play sound
+                GameLogic.instance.AddScore(5);
+
+                // Set all the ghosts to frightened
+                List<Ghost> ghosts = GameLogic.instance.GetAllGhosts();
+                for (int i = 0; i < ghosts.Count; i++)
+                {
+                    Ghost.State ghostState = ghosts[i].CurrentState;
+                    if (ghostState != Ghost.State.consumed && ghostState != Ghost.State.inHouse)
+                        ghosts[i].ChangeState(Ghost.State.frightened);
+                }
+
                 collision.gameObject.SetActive(false);
                 break;
             case "Ghost":

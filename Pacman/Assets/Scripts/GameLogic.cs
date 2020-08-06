@@ -46,6 +46,14 @@ public class GameLogic : MonoBehaviour
 
     void Start()
     {
+        Setup();
+    }
+
+    /// <summary>
+    /// Sets up the game
+    /// </summary>
+    void Setup()
+    {
         SetupNodes();
         SpawnPacman();
 
@@ -57,6 +65,10 @@ public class GameLogic : MonoBehaviour
         SpawnGhost(Ghost.Type.clyde);
     }
 
+    /// <summary>
+    /// Spawns a ghost given the type
+    /// </summary>
+    /// <param name="type">The type of ghost to spawn</param>
     void SpawnGhost(Ghost.Type type)
     {
         switch (type)
@@ -84,12 +96,18 @@ public class GameLogic : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Spawns pacman
+    /// </summary>
     void SpawnPacman()
     {
         pacman = Instantiate(pacmanPrefab, startingNode.pos, Quaternion.identity);
         pacman.Init(startingNode);
     }
 
+    /// <summary>
+    /// Sets up all the nodes so pacman/ghosts can path between them
+    /// </summary>
     void SetupNodes()
     {
         nodes = nodeParent.GetComponentsInChildren<Node>();
@@ -97,28 +115,14 @@ public class GameLogic : MonoBehaviour
             nodes[i].Setup();
     }
 
-    public void AddScore()
+    /// <summary>
+    /// Adds score to the score counter
+    /// </summary>
+    /// <param name="value">The amount of score to add</param>
+    public void AddScore(int value)
     {
-        // TODO: play sound
-
-        score++;
+        score += value;
         scoreDisplay.text = score.ToString();
-    }
-
-    public void CollectSuperPellet()
-    {
-        // TODO: play sound
-
-        score += 5;
-        scoreDisplay.text = score.ToString();
-
-        for (int i = 0; i < ghosts.Count; i++)
-        {
-            Ghost.State ghostState = ghosts[i].CurrentState;
-            if (ghostState != Ghost.State.consumed && ghostState != Ghost.State.inHouse)
-                ghosts[i].ChangeState(Ghost.State.frightened);
-        }
-
     }
 
     /// <summary>
@@ -134,5 +138,10 @@ public class GameLogic : MonoBehaviour
                 return ghosts[i];
         }
         return null;
+    }
+
+    public List<Ghost> GetAllGhosts()
+    {
+        return ghosts;
     }
 }
