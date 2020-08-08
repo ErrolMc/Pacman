@@ -37,6 +37,7 @@ public class Pacman : MonoBehaviour
     Vector2 currentPos;
 
     // public getters
+    public State CurrentState {  get { return currentState; } }
     public Vector2 CurrentDirection { get { return currentDirection; } }
     public Vector2 CurrentPosition { get { return new Vector2(Mathf.RoundToInt(currentPos.x), Mathf.RoundToInt(currentPos.y)); } }
 
@@ -218,8 +219,10 @@ public class Pacman : MonoBehaviour
                 anim.StopPlayback();
                 break;
             case State.dead:
+                trans.rotation = Quaternion.identity;
                 anim.StopPlayback();
                 anim.Play("Pacman_Death");
+                GameLogic.instance.ResetGame(3);
                 break;
         }
 
@@ -273,8 +276,8 @@ public class Pacman : MonoBehaviour
         {
             case "Pellet":
                 // TODO: play sound
-                GameLogic.instance.AddScore(1);
                 collision.gameObject.SetActive(false);
+                GameLogic.instance.AddScore(1);
                 break;
             case "SuperPellet":
                 // TODO: play sound
@@ -292,14 +295,19 @@ public class Pacman : MonoBehaviour
                 collision.gameObject.SetActive(false);
                 break;
             case "Ghost":
-                Ghost ghost = collision.gameObject.GetComponent<Ghost>();
-                if (ghost.CurrentState == Ghost.State.frightened)
+                if (currentState != State.dead)
                 {
-                    ghost.ChangeState(Ghost.State.consumed);
-                }
-                else if (ghost.CurrentState != Ghost.State.consumed)
-                {
-                    ChangeState(State.dead);
+                    GameLogic.instance.AddScore(25);
+
+                    Ghost ghost = collision.gameObject.GetComponent<Ghost>();
+                    if (ghost.CurrentState == Ghost.State.frightened)
+                    {
+                        ghost.ChangeState(Ghost.State.consumed);
+                    }
+                    else if (ghost.CurrentState != Ghost.State.consumed)
+                    {
+                        ChangeState(State.dead);
+                    }
                 }
                 break;
         }
