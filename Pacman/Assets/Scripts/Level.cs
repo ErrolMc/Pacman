@@ -25,6 +25,10 @@ public class Level : MonoBehaviour
     public Node GhostHouseLeft { get { return ghostHouseLeft; } }
     public Node GhostHouseRight { get { return ghostHouseRight; } }
     public Node StartingNode { get { return startingNode; } }
+    public Node BlinkyHomeNode { get { return blinkyHomeNode; } }
+    public Node PinkyHomeNode { get { return pinkyHomeNode; } }
+    public Node ClydeHomeNode { get { return clydeHomeNode; } }
+    public Node InkyHomeNode { get { return inkyHomeNode; } }
 
     public void SetupNodes()
     {
