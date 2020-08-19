@@ -80,15 +80,18 @@ Inheritance diagram for GameLogic:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9f056d52e63a480664eb4cf1066769bc"><td class="memItemLeft" align="right" valign="top"><a id="a9f056d52e63a480664eb4cf1066769bc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>AddScore</b> ()</td></tr>
-<tr class="separator:a9f056d52e63a480664eb4cf1066769bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac9eb5e44f2eb935c9f8e54aff2869c53"><td class="memItemLeft" align="right" valign="top"><a id="ac9eb5e44f2eb935c9f8e54aff2869c53"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>CollectSuperPellet</b> ()</td></tr>
-<tr class="separator:ac9eb5e44f2eb935c9f8e54aff2869c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fdc1e744ef0bbb17d426e54ec1c68fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#a1fdc1e744ef0bbb17d426e54ec1c68fb">AddScore</a> (int value)</td></tr>
+<tr class="memdesc:a1fdc1e744ef0bbb17d426e54ec1c68fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds score to the score counter  <a href="class_game_logic.html#a1fdc1e744ef0bbb17d426e54ec1c68fb">More...</a><br /></td></tr>
+<tr class="separator:a1fdc1e744ef0bbb17d426e54ec1c68fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a64f95a8308d353c6a02fd1bcfc2353f3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_ghost.html">Ghost</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#a64f95a8308d353c6a02fd1bcfc2353f3">GetGhost</a> (Ghost.Type type)</td></tr>
 <tr class="memdesc:a64f95a8308d353c6a02fd1bcfc2353f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets a ghost given the type  <a href="class_game_logic.html#a64f95a8308d353c6a02fd1bcfc2353f3">More...</a><br /></td></tr>
 <tr class="separator:a64f95a8308d353c6a02fd1bcfc2353f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af2a2a4ef6d2fd4077ad3ef1dd62cc7ff"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_ghost.html">Ghost</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#af2a2a4ef6d2fd4077ad3ef1dd62cc7ff">GetAllGhosts</a> ()</td></tr>
+<tr class="memdesc:af2a2a4ef6d2fd4077ad3ef1dd62cc7ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Public getter for ghost list  <a href="class_game_logic.html#af2a2a4ef6d2fd4077ad3ef1dd62cc7ff">More...</a><br /></td></tr>
+<tr class="separator:af2a2a4ef6d2fd4077ad3ef1dd62cc7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad4a9122dad9d0bec94a397e243db7024"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#ad4a9122dad9d0bec94a397e243db7024">ResetGame</a> (float delay=0)</td></tr>
+<tr class="memdesc:ad4a9122dad9d0bec94a397e243db7024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the game  <a href="class_game_logic.html#ad4a9122dad9d0bec94a397e243db7024">More...</a><br /></td></tr>
+<tr class="separator:ad4a9122dad9d0bec94a397e243db7024"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -103,6 +106,52 @@ static <a class="el" href="class_game_logic.html">GameLogic</a>&#160;</td><td cl
 <tr class="separator:a96f4021dff11e0f67601a58893aafdff"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a1fdc1e744ef0bbb17d426e54ec1c68fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fdc1e744ef0bbb17d426e54ec1c68fb">&#9670;&nbsp;</a></span>AddScore()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameLogic.AddScore </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Adds score to the score counter </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">value</td><td>The amount of score to add</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af2a2a4ef6d2fd4077ad3ef1dd62cc7ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2a2a4ef6d2fd4077ad3ef1dd62cc7ff">&#9670;&nbsp;</a></span>GetAllGhosts()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt;<a class="el" href="class_ghost.html">Ghost</a>&gt; GameLogic.GetAllGhosts </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Public getter for ghost list </p>
+<dl class="section return"><dt>Returns</dt><dd>The list of ghostys</dd></dl>
+
+</div>
+</div>
 <a id="a64f95a8308d353c6a02fd1bcfc2353f3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a64f95a8308d353c6a02fd1bcfc2353f3">&#9670;&nbsp;</a></span>GetGhost()</h2>
 
@@ -127,6 +176,32 @@ static <a class="el" href="class_game_logic.html">GameLogic</a>&#160;</td><td cl
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The ghost of the given type (or null if it doesnt exist)</dd></dl>
+
+</div>
+</div>
+<a id="ad4a9122dad9d0bec94a397e243db7024"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad4a9122dad9d0bec94a397e243db7024">&#9670;&nbsp;</a></span>ResetGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameLogic.ResetGame </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delay</em> = <code>0</code></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resets the game </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay</td><td>A delay before resetting the board</td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

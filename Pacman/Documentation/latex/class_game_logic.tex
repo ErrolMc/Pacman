@@ -9,14 +9,14 @@ Inheritance diagram for Game\+Logic\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_game_logic_a9f056d52e63a480664eb4cf1066769bc}\label{class_game_logic_a9f056d52e63a480664eb4cf1066769bc}} 
-void {\bfseries Add\+Score} ()
-\item 
-\mbox{\Hypertarget{class_game_logic_ac9eb5e44f2eb935c9f8e54aff2869c53}\label{class_game_logic_ac9eb5e44f2eb935c9f8e54aff2869c53}} 
-void {\bfseries Collect\+Super\+Pellet} ()
-\item 
+void \mbox{\hyperlink{class_game_logic_a1fdc1e744ef0bbb17d426e54ec1c68fb}{Add\+Score}} (int value)
+\begin{DoxyCompactList}\small\item\em Adds score to the score counter \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_ghost}{Ghost}} \mbox{\hyperlink{class_game_logic_a64f95a8308d353c6a02fd1bcfc2353f3}{Get\+Ghost}} (Ghost.\+Type type)
-\begin{DoxyCompactList}\small\item\em Gets a ghost given the type \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Gets a ghost given the type \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{class_ghost}{Ghost}} $>$ \mbox{\hyperlink{class_game_logic_af2a2a4ef6d2fd4077ad3ef1dd62cc7ff}{Get\+All\+Ghosts}} ()
+\begin{DoxyCompactList}\small\item\em Public getter for ghost list \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_game_logic_ad4a9122dad9d0bec94a397e243db7024}{Reset\+Game}} (float delay=0)
+\begin{DoxyCompactList}\small\item\em Resets the game \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -32,6 +32,34 @@ static \mbox{\hyperlink{class_game_logic}{Game\+Logic}} {\bfseries instance}
 
 
 \doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_logic_a1fdc1e744ef0bbb17d426e54ec1c68fb}\label{class_game_logic_a1fdc1e744ef0bbb17d426e54ec1c68fb}} 
+\index{GameLogic@{GameLogic}!AddScore@{AddScore}}
+\index{AddScore@{AddScore}!GameLogic@{GameLogic}}
+\doxysubsubsection{\texorpdfstring{AddScore()}{AddScore()}}
+{\footnotesize\ttfamily void Game\+Logic.\+Add\+Score (\begin{DoxyParamCaption}\item[{int}]{value }\end{DoxyParamCaption})}
+
+
+
+Adds score to the score counter 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The amount of score to add\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_logic_af2a2a4ef6d2fd4077ad3ef1dd62cc7ff}\label{class_game_logic_af2a2a4ef6d2fd4077ad3ef1dd62cc7ff}} 
+\index{GameLogic@{GameLogic}!GetAllGhosts@{GetAllGhosts}}
+\index{GetAllGhosts@{GetAllGhosts}!GameLogic@{GameLogic}}
+\doxysubsubsection{\texorpdfstring{GetAllGhosts()}{GetAllGhosts()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_ghost}{Ghost}}$>$ Game\+Logic.\+Get\+All\+Ghosts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Public getter for ghost list 
+
+\begin{DoxyReturn}{Returns}
+The list of ghostys
+\end{DoxyReturn}
 \mbox{\Hypertarget{class_game_logic_a64f95a8308d353c6a02fd1bcfc2353f3}\label{class_game_logic_a64f95a8308d353c6a02fd1bcfc2353f3}} 
 \index{GameLogic@{GameLogic}!GetGhost@{GetGhost}}
 \index{GetGhost@{GetGhost}!GameLogic@{GameLogic}}
@@ -50,6 +78,21 @@ Gets a ghost given the type
 \begin{DoxyReturn}{Returns}
 The ghost of the given type (or null if it doesnt exist)
 \end{DoxyReturn}
+\mbox{\Hypertarget{class_game_logic_ad4a9122dad9d0bec94a397e243db7024}\label{class_game_logic_ad4a9122dad9d0bec94a397e243db7024}} 
+\index{GameLogic@{GameLogic}!ResetGame@{ResetGame}}
+\index{ResetGame@{ResetGame}!GameLogic@{GameLogic}}
+\doxysubsubsection{\texorpdfstring{ResetGame()}{ResetGame()}}
+{\footnotesize\ttfamily void Game\+Logic.\+Reset\+Game (\begin{DoxyParamCaption}\item[{float}]{delay = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Resets the game 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delay} & A delay before resetting the board\\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
