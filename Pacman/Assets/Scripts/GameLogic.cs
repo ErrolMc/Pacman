@@ -17,14 +17,12 @@ public class GameLogic : MonoBehaviour
     [SerializeField] Ghost inkyPrefab;
     [SerializeField] Ghost clydePrefab;
 
-    [Header("Level")]
-    [SerializeField] Level level;
-
     [Header("Timings")]
     [SerializeField] GhostStateTiming[] ghostTimings;
 
     int score;
     List<Ghost> ghosts;
+    Level currentLevel;
 
     [HideInInspector] public Pacman pacman;
 
@@ -33,17 +31,14 @@ public class GameLogic : MonoBehaviour
         instance = this;
     }
 
-    void Start()
+    public void StartLevel(int levelNumber)
     {
-        Setup();
-    }
+        // spawn the level
+        Level level = Instantiate(Resources.Load<Level>("Levels/Level_" + levelNumber));
+        level.transform.position = Vector3.zero;
+        currentLevel = level;
 
-    /// <summary>
-    /// Sets up the game
-    /// </summary>
-    void Setup()
-    {
-        level.SetupNodes();
+        // spawn pacman
         SpawnPacman();
 
         // spawn the ghosts
@@ -60,29 +55,29 @@ public class GameLogic : MonoBehaviour
     /// <param name="type">The type of ghost to spawn</param>
     void SpawnGhost(Ghost.Type type)
     {
-        Node ghostHouseLeft = level.GhostHouseLeft;
-        Node ghostHouseRight = level.GhostHouseRight;
+        Node ghostHouseLeft = currentLevel.GhostHouseLeft;
+        Node ghostHouseRight = currentLevel.GhostHouseRight;
 
         switch (type)
         {
             case Ghost.Type.blinky:
                 Ghost blinky = Instantiate(blinkyPrefab);
-                blinky.Init(ghostHouseLeft, level.BlinkyHomeNode, ghostTimings);
+                blinky.Init(ghostHouseLeft, currentLevel.BlinkyHomeNode, ghostTimings);
                 ghosts.Add(blinky);
                 break;
             case Ghost.Type.pinky:
                 Ghost pinky = Instantiate(pinkyPrefab);
-                pinky.Init(ghostHouseRight, level.PinkyHomeNode, ghostTimings);
+                pinky.Init(ghostHouseRight, currentLevel.PinkyHomeNode, ghostTimings);
                 ghosts.Add(pinky);
                 break;
             case Ghost.Type.inky:
                 Ghost inky = Instantiate(inkyPrefab);
-                inky.Init(ghostHouseRight, level.InkyHomeNode, ghostTimings);
+                inky.Init(ghostHouseRight, currentLevel.InkyHomeNode, ghostTimings);
                 ghosts.Add(inky);
                 break;
             case Ghost.Type.clyde:
                 Ghost clyde = Instantiate(clydePrefab);
-                clyde.Init(ghostHouseLeft, level.ClydeHomeNode, ghostTimings);
+                clyde.Init(ghostHouseLeft, currentLevel.ClydeHomeNode, ghostTimings);
                 ghosts.Add(clyde);
                 break;
         }
@@ -93,7 +88,7 @@ public class GameLogic : MonoBehaviour
     /// </summary>
     void SpawnPacman()
     {
-        Node startingNode = level.StartingNode;
+        Node startingNode = currentLevel.StartingNode;
         pacman = Instantiate(pacmanPrefab, startingNode.pos, Quaternion.identity);
         pacman.Init(startingNode);
     }
@@ -107,7 +102,7 @@ public class GameLogic : MonoBehaviour
         score += value;
         scoreDisplay.text = score.ToString();
 
-        if (level.CheckGameComplete() && pacman.CurrentState != Pacman.State.dead)
+        if (currentLevel.CheckGameComplete() && pacman.CurrentState != Pacman.State.dead)
         {
             for (int i = 0; i < ghosts.Count; i++)
                 ghosts[i].gameObject.SetActive(false);
@@ -157,7 +152,7 @@ public class GameLogic : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
 
-        level.EnablePellets(false);
+        currentLevel.EnablePellets(false);
 
         // despawn pacman and the ghosts
         Destroy(pacman.gameObject);
@@ -168,7 +163,7 @@ public class GameLogic : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
 
-        level.EnablePellets(true);
+        currentLevel.EnablePellets(true);
 
         // respawn pacman and the ghosts
         SpawnPacman();
