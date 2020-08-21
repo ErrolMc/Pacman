@@ -30,7 +30,7 @@ public class Level : MonoBehaviour
     public Node ClydeHomeNode { get { return clydeHomeNode; } }
     public Node InkyHomeNode { get { return inkyHomeNode; } }
 
-    public void SetupNodes()
+    public void Setup()
     {
         nodes = nodeParent.GetComponentsInChildren<Node>();
         for (int i = 0; i < nodes.Length; i++)

@@ -35,6 +35,7 @@ public class GameLogic : MonoBehaviour
     {
         // spawn the level
         Level level = Instantiate(Resources.Load<Level>("Levels/Level_" + levelNumber));
+        level.Setup();
         level.transform.position = Vector3.zero;
         currentLevel = level;
 
