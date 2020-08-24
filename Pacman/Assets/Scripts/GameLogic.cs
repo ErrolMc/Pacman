@@ -7,18 +7,12 @@ public class GameLogic : MonoBehaviour
 {
     public static GameLogic instance;
 
-    [Header("UI")]
-    [SerializeField] TextMeshProUGUI scoreDisplay;
-
     [Header("Prefabs")]
     [SerializeField] Pacman pacmanPrefab;
     [SerializeField] Ghost blinkyPrefab;
     [SerializeField] Ghost pinkyPrefab;
     [SerializeField] Ghost inkyPrefab;
     [SerializeField] Ghost clydePrefab;
-
-    [Header("Timings")]
-    [SerializeField] GhostStateTiming[] ghostTimings;
 
     int score;
     List<Ghost> ghosts;
@@ -63,22 +57,22 @@ public class GameLogic : MonoBehaviour
         {
             case Ghost.Type.blinky:
                 Ghost blinky = Instantiate(blinkyPrefab);
-                blinky.Init(ghostHouseLeft, currentLevel.BlinkyHomeNode, ghostTimings);
+                blinky.Init(ghostHouseLeft, currentLevel.BlinkyHomeNode, currentLevel.GhostTimings);
                 ghosts.Add(blinky);
                 break;
             case Ghost.Type.pinky:
                 Ghost pinky = Instantiate(pinkyPrefab);
-                pinky.Init(ghostHouseRight, currentLevel.PinkyHomeNode, ghostTimings);
+                pinky.Init(ghostHouseRight, currentLevel.PinkyHomeNode, currentLevel.GhostTimings);
                 ghosts.Add(pinky);
                 break;
             case Ghost.Type.inky:
                 Ghost inky = Instantiate(inkyPrefab);
-                inky.Init(ghostHouseRight, currentLevel.InkyHomeNode, ghostTimings);
+                inky.Init(ghostHouseRight, currentLevel.InkyHomeNode, currentLevel.GhostTimings);
                 ghosts.Add(inky);
                 break;
             case Ghost.Type.clyde:
                 Ghost clyde = Instantiate(clydePrefab);
-                clyde.Init(ghostHouseLeft, currentLevel.ClydeHomeNode, ghostTimings);
+                clyde.Init(ghostHouseLeft, currentLevel.ClydeHomeNode, currentLevel.GhostTimings);
                 ghosts.Add(clyde);
                 break;
         }
@@ -101,7 +95,7 @@ public class GameLogic : MonoBehaviour
     public void AddScore(int value)
     {
         score += value;
-        scoreDisplay.text = score.ToString();
+        GameScreen.instance.SetScoreText(score);
 
         if (currentLevel.CheckGameComplete() && pacman.CurrentState != Pacman.State.dead)
         {
@@ -176,6 +170,6 @@ public class GameLogic : MonoBehaviour
         SpawnGhost(Ghost.Type.clyde);
 
         score = 0;
-        scoreDisplay.text = score.ToString();
+        GameScreen.instance.SetScoreText(score);
     }
 }

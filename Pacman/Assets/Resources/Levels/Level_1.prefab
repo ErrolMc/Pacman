@@ -41671,6 +41671,23 @@ MonoBehaviour:
   inkyHomeNode: {fileID: 7948656805517024437}
   pelletParent: {fileID: 7948656805403649958}
   nodeParent: {fileID: 7948656804868354913}
+  ghostTimings:
+  - state: 2
+    seconds: 7
+  - state: 1
+    seconds: 20
+  - state: 2
+    seconds: 7
+  - state: 1
+    seconds: 20
+  - state: 2
+    seconds: 5
+  - state: 1
+    seconds: 20
+  - state: 2
+    seconds: 5
+  - state: 1
+    seconds: -1
 --- !u!1 &7948656804901875291
 GameObject:
   m_ObjectHideFlags: 0

@@ -285,18 +285,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 6512208090279450923}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &955164038 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7451518775471525975, guid: 48d21d2ae6512ce4a8b02cd6f4e33ae9,
-    type: 3}
-  m_PrefabInstance: {fileID: 7451518774811620817}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1302830922
 GameObject:
   m_ObjectHideFlags: 0
@@ -874,90 +862,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Logic
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: scoreDisplay
-      value: 
-      objectReference: {fileID: 955164038}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: startingNode
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: ghostHouse
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: blinkyHomeNode
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: clydeHomeNode
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: pinkyHomeNode
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: inkyHomeNode
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: pelletParent
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: nodeParent
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: ghostHouseLeft
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: ghostHouseRight
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: blinkyPrefab
-      value: 
-      objectReference: {fileID: 8268908313659367578, guid: 95248cefa2856e54bb270f3d0ba9995e,
-        type: 3}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: inkyPrefab
-      value: 
-      objectReference: {fileID: 5495179537753112296, guid: 4d567d4fef096c74e87670d787cc622a,
-        type: 3}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: pinkyPrefab
-      value: 
-      objectReference: {fileID: 8099268453350303897, guid: c48035332bd37674cac62db2810dda6f,
-        type: 3}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: clydePrefab
-      value: 
-      objectReference: {fileID: -8369994348324957916, guid: cb9474f4da9d662499f69a24a0d96c7c,
-        type: 3}
-    - target: {fileID: 8471738574790805910, guid: 0265475c0ef0bba43b3e6365b907c5e3,
-        type: 3}
-      propertyPath: level
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8471738574790805911, guid: 0265475c0ef0bba43b3e6365b907c5e3,
         type: 3}

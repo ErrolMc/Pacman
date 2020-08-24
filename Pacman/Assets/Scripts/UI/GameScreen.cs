@@ -25,8 +25,8 @@ public class GameScreen : Panel
 
     }
 
-    public void SetScoreText()
+    public void SetScoreText(int score)
     {
-
+        scoreText.text = score.ToString();
     }
 }

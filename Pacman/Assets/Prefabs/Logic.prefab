@@ -43,34 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51eafa0a1ac8795418dc7579e0eba322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreDisplay: {fileID: 0}
   pacmanPrefab: {fileID: 9002930222478637912, guid: 8570c32377e357847a659b624edfd31b,
     type: 3}
-  ghostPrefab: {fileID: 8268908313659367578, guid: 95248cefa2856e54bb270f3d0ba9995e,
+  blinkyPrefab: {fileID: 8268908313659367578, guid: 95248cefa2856e54bb270f3d0ba9995e,
     type: 3}
-  startingNode: {fileID: 0}
-  ghostHouse: {fileID: 0}
-  blinkyHomeNode: {fileID: 0}
-  clydeHomeNode: {fileID: 0}
-  pinkyHomeNode: {fileID: 0}
-  inkyHomeNode: {fileID: 0}
-  pelletParent: {fileID: 0}
-  nodeParent: {fileID: 0}
-  ghostTimings:
-  - state: 2
-    seconds: 7
-  - state: 1
-    seconds: 20
-  - state: 2
-    seconds: 7
-  - state: 1
-    seconds: 20
-  - state: 2
-    seconds: 5
-  - state: 1
-    seconds: 20
-  - state: 2
-    seconds: 5
-  - state: 1
-    seconds: -1
+  pinkyPrefab: {fileID: 8099268453350303897, guid: c48035332bd37674cac62db2810dda6f,
+    type: 3}
+  inkyPrefab: {fileID: 5495179537753112296, guid: 4d567d4fef096c74e87670d787cc622a,
+    type: 3}
+  clydePrefab: {fileID: -8369994348324957916, guid: cb9474f4da9d662499f69a24a0d96c7c,
+    type: 3}
   pacman: {fileID: 0}

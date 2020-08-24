@@ -19,6 +19,9 @@ public class Level : MonoBehaviour
     [SerializeField] GameObject pelletParent;
     [SerializeField] GameObject nodeParent;
 
+    [Header("Timings")]
+    [SerializeField] GhostStateTiming[] ghostTimings;
+
     Node[] nodes;
     List<SpriteRenderer> pellets;
 
@@ -29,6 +32,7 @@ public class Level : MonoBehaviour
     public Node PinkyHomeNode { get { return pinkyHomeNode; } }
     public Node ClydeHomeNode { get { return clydeHomeNode; } }
     public Node InkyHomeNode { get { return inkyHomeNode; } }
+    public GhostStateTiming[] GhostTimings { get { return ghostTimings; } }
 
     public void Setup()
     {
