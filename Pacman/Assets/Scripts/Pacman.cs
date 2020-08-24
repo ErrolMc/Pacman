@@ -262,7 +262,7 @@ public class Pacman : MonoBehaviour
     {
         for (int i = 0; i < currentNode.neighbours.Length; i++)
         {
-            if (currentNode.directions[i] == direction)
+            if (currentNode.neighbours[i].nodeType != Node.NodeType.ghostHouse && currentNode.directions[i] == direction)
                 return currentNode.neighbours[i];
         }
         return null;
