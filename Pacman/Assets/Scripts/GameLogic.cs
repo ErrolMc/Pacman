@@ -14,7 +14,7 @@ public class GameLogic : MonoBehaviour
     [SerializeField] Ghost inkyPrefab;
     [SerializeField] Ghost clydePrefab;
 
-    int score;
+    [HideInInspector] public int score;
     List<Ghost> ghosts;
     Level currentLevel;
 
@@ -42,6 +42,9 @@ public class GameLogic : MonoBehaviour
         SpawnGhost(Ghost.Type.pinky);
         SpawnGhost(Ghost.Type.inky);
         SpawnGhost(Ghost.Type.clyde);
+
+        score = 0;
+        GameScreen.instance.SetScoreText(score);
     }
 
     /// <summary>
@@ -102,7 +105,7 @@ public class GameLogic : MonoBehaviour
             for (int i = 0; i < ghosts.Count; i++)
                 ghosts[i].gameObject.SetActive(false);
 
-            ResetGame(3);
+            EndGame(3);
         }
     }
 
@@ -131,45 +134,43 @@ public class GameLogic : MonoBehaviour
     }
 
     /// <summary>
+    /// Clears the current level
+    /// </summary>
+    public void ClearLevel()
+    {
+        // the level
+        Destroy(currentLevel.gameObject);
+        currentLevel = null;
+
+        // pacman
+        Destroy(pacman.gameObject);
+        pacman = null;
+
+        // ghosts
+        foreach (Ghost ghost in ghosts)
+            Destroy(ghost.gameObject);
+        ghosts = null;
+    }
+
+    /// <summary>
     /// Resets the game
     /// </summary>
     /// <param name="delay">A delay before resetting the board</param>
-    public void ResetGame(float delay = 0)
+    public void EndGame(float delay = 0)
     {
-        StartCoroutine(ResetGameSequence(delay));
+        StartCoroutine(EndGameSequence(delay));
     }
 
     /// <summary>
     /// The timing sequence for resetting the game
     /// </summary>
     /// <param name="delay">The delay before resetting the board</param>
-    IEnumerator ResetGameSequence(float delay = 0)
+    IEnumerator EndGameSequence(float delay = 0)
     {
         yield return new WaitForSeconds(delay);
 
-        currentLevel.EnablePellets(false);
+        ClearLevel();
 
-        // despawn pacman and the ghosts
-        Destroy(pacman.gameObject);
-        foreach (Ghost ghost in ghosts)
-            Destroy(ghost.gameObject);
-        pacman = null;
-        ghosts = null;
-
-        yield return new WaitForSeconds(0.5f);
-
-        currentLevel.EnablePellets(true);
-
-        // respawn pacman and the ghosts
-        SpawnPacman();
-
-        ghosts = new List<Ghost>();
-        SpawnGhost(Ghost.Type.blinky);
-        SpawnGhost(Ghost.Type.pinky);
-        SpawnGhost(Ghost.Type.inky);
-        SpawnGhost(Ghost.Type.clyde);
-
-        score = 0;
-        GameScreen.instance.SetScoreText(score);
+        PanelManager.instance.ShowPanel(PanelID.GameOver);
     }
 }

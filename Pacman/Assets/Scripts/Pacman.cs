@@ -222,7 +222,7 @@ public class Pacman : MonoBehaviour
                 trans.rotation = Quaternion.identity;
                 anim.StopPlayback();
                 anim.Play("Pacman_Death");
-                GameLogic.instance.ResetGame(3);
+                GameLogic.instance.EndGame(3);
                 break;
         }
 
@@ -297,11 +297,10 @@ public class Pacman : MonoBehaviour
             case "Ghost":
                 if (currentState != State.dead)
                 {
-                    GameLogic.instance.AddScore(25);
-
                     Ghost ghost = collision.gameObject.GetComponent<Ghost>();
                     if (ghost.CurrentState == Ghost.State.frightened)
                     {
+                        GameLogic.instance.AddScore(25);
                         ghost.ChangeState(Ghost.State.consumed);
                     }
                     else if (ghost.CurrentState != Ghost.State.consumed)
