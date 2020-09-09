@@ -21,6 +21,6 @@ public class GameOver : Panel
     public void OnClick_Retry()
     {
         PanelManager.instance.ShowPanel(PanelID.GameScreen);
-        GameLogic.instance.StartLevel(1);
+        GameLogic.instance.StartLevel(1, GameLogic.instance.Players);
     }
 }

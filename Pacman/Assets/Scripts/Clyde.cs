@@ -18,7 +18,7 @@ public class Clyde : Ghost
     {
         if (currentState == State.chase)
         {
-            Vector2 pacmanPos = GameLogic.instance.pacman.CurrentPosition;
+            Vector2 pacmanPos = GameLogic.instance.Pacman.CurrentPosition;
 
             float distance = Vector2.Distance(CurrentPosition, pacmanPos);
 

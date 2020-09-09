@@ -17,15 +17,35 @@ public class GameLogic : MonoBehaviour
     [HideInInspector] public int score;
     List<Ghost> ghosts;
     Level currentLevel;
+    int players;
 
-    [HideInInspector] public Pacman pacman;
+    Pacman pacman;
+    Pacman pacman2;
+
+    public Pacman Pacman
+    {
+        get
+        {
+            if (players == 1)
+                return pacman;
+            else
+            {
+                // if player 1 is dead and player 2 isnt, return player 2
+                if (pacman.CurrentState == Pacman.State.dead && pacman2.CurrentState != Pacman.State.dead)
+                    return pacman2;
+                return pacman; // else return player 1
+            }
+        }
+    }
+
+    public int Players { get { return players; } }
 
     void Awake()
     {
         instance = this;
     }
 
-    public void StartLevel(int levelNumber)
+    public void StartLevel(int levelNumber, int players)
     {
         // spawn the level
         Level level = Instantiate(Resources.Load<Level>("Levels/Level_" + levelNumber));
@@ -34,7 +54,10 @@ public class GameLogic : MonoBehaviour
         currentLevel = level;
 
         // spawn pacman
-        SpawnPacman();
+        this.players = players;
+        if (players == 2)
+            pacman2 = SpawnPacman(currentLevel.StartingNode_2, 2);
+        pacman = SpawnPacman(currentLevel.StartingNode, 1);
 
         // spawn the ghosts
         ghosts = new List<Ghost>();
@@ -84,11 +107,11 @@ public class GameLogic : MonoBehaviour
     /// <summary>
     /// Spawns pacman
     /// </summary>
-    void SpawnPacman()
+    Pacman SpawnPacman(Node startingNode, int player)
     {
-        Node startingNode = currentLevel.StartingNode;
-        pacman = Instantiate(pacmanPrefab, startingNode.pos, Quaternion.identity);
-        pacman.Init(startingNode);
+        Pacman newPacman = Instantiate(pacmanPrefab, startingNode.pos, Quaternion.identity);
+        newPacman.Init(startingNode, player);
+        return newPacman;
     }
 
     /// <summary>

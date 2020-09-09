@@ -185,7 +185,7 @@ public class Ghost : MonoBehaviour
         if (currentState == State.scatter)
             return homeNode.pos;
 
-        return GameLogic.instance.pacman.CurrentPosition;
+        return GameLogic.instance.Pacman.CurrentPosition;
     }
 
     /// <summary>

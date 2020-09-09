@@ -8,6 +8,14 @@ using UnityEngine;
 /// </summary>
 public class Pacman : MonoBehaviour
 {
+    enum InputDirection
+    {
+        up,
+        down,
+        left,
+        right
+    }
+
     public enum State
     {
         idle,
@@ -35,8 +43,10 @@ public class Pacman : MonoBehaviour
     // state
     State currentState;
     Vector2 currentPos;
+    int player;
 
     // public getters
+    public int Player { get { return player; } }
     public State CurrentState {  get { return currentState; } }
     public Vector2 CurrentDirection { get { return currentDirection; } }
     public Vector2 CurrentPosition { get { return new Vector2(Mathf.RoundToInt(currentPos.x), Mathf.RoundToInt(currentPos.y)); } }
@@ -45,12 +55,13 @@ public class Pacman : MonoBehaviour
     /// Sets up pacman
     /// </summary>
     /// <param name="startingNode">The node to start at</param>
-    public void Init(Node startingNode)
+    public void Init(Node startingNode, int player)
     {
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
 
+        this.player = player;
         currentNode = startingNode;
         currentPos = currentNode.pos;
 
@@ -182,22 +193,22 @@ public class Pacman : MonoBehaviour
     /// </summary>
     void HandleInput()
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        if (HasInput(InputDirection.up))
         {
             nextDirection = Vector2.up;
             MoveInput();
         }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        else if (HasInput(InputDirection.down))
         {
             nextDirection = Vector2.down;
             MoveInput();
         }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        else if (HasInput(InputDirection.left))
         {
             nextDirection = Vector2.left;
             MoveInput();
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (HasInput(InputDirection.right))
         {
             nextDirection = Vector2.right;
             MoveInput();
@@ -210,6 +221,8 @@ public class Pacman : MonoBehaviour
     /// <param name="newState">Pacmans new state</param>
     void ChangeState(State newState)
     {
+        currentState = newState;
+
         switch (newState)
         {
             case State.idle:
@@ -222,11 +235,12 @@ public class Pacman : MonoBehaviour
                 trans.rotation = Quaternion.identity;
                 anim.StopPlayback();
                 anim.Play("Pacman_Death");
-                GameLogic.instance.EndGame(3);
+
+                // check if all players are dead
+                if (GameLogic.instance.Pacman.CurrentState == State.dead)
+                    GameLogic.instance.EndGame(3);
                 break;
         }
-
-        currentState = newState;
     }
 
     /// <summary>
@@ -266,6 +280,40 @@ public class Pacman : MonoBehaviour
                 return currentNode.neighbours[i];
         }
         return null;
+    }
+
+    /// <summary>
+    /// Checks if there is input in a given direction, this function takes into account the player
+    /// </summary>
+    /// <param name="inputDirection">The input direction to test for</param>
+    /// <returns>If there is input in the specified direction</returns>
+    bool HasInput(InputDirection inputDirection)
+    {
+        switch (inputDirection)
+        {
+            case InputDirection.up:
+                if (player == 1)
+                    return Input.GetKeyDown(KeyCode.UpArrow);
+                else
+                    return Input.GetKeyDown(KeyCode.W);
+            case InputDirection.down:
+                if (player == 1)
+                    return Input.GetKeyDown(KeyCode.DownArrow);
+                else
+                    return Input.GetKeyDown(KeyCode.S);
+            case InputDirection.left:
+                if (player == 1)
+                    return Input.GetKeyDown(KeyCode.LeftArrow);
+                else
+                    return Input.GetKeyDown(KeyCode.A);
+            case InputDirection.right:
+                if (player == 1)
+                    return Input.GetKeyDown(KeyCode.RightArrow);
+                else
+                    return Input.GetKeyDown(KeyCode.D);
+        }
+
+        return false;
     }
 
     void OnCollisionEnter2D(Collision2D collision)

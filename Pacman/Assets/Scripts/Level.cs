@@ -6,6 +6,7 @@ public class Level : MonoBehaviour
 {
     [Header("Starting Nodes")]
     [SerializeField] Node startingNode;
+    [SerializeField] Node startingNode_2;
     [SerializeField] Node ghostHouseLeft;
     [SerializeField] Node ghostHouseRight;
 
@@ -28,6 +29,7 @@ public class Level : MonoBehaviour
     public Node GhostHouseLeft { get { return ghostHouseLeft; } }
     public Node GhostHouseRight { get { return ghostHouseRight; } }
     public Node StartingNode { get { return startingNode; } }
+    public Node StartingNode_2 { get { return startingNode_2; } }
     public Node BlinkyHomeNode { get { return blinkyHomeNode; } }
     public Node PinkyHomeNode { get { return pinkyHomeNode; } }
     public Node ClydeHomeNode { get { return clydeHomeNode; } }
