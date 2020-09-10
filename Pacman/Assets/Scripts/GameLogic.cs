@@ -13,27 +13,31 @@ public class GameLogic : MonoBehaviour
     [SerializeField] Ghost pinkyPrefab;
     [SerializeField] Ghost inkyPrefab;
     [SerializeField] Ghost clydePrefab;
+    [SerializeField] ScoreText popupTextPrefab;
 
+    // state caches
+    int players;
     [HideInInspector] public int score;
+
+    // component caches
     List<Ghost> ghosts;
     Level currentLevel;
-    int players;
-
-    Pacman pacman;
+    Pacman pacman1;
     Pacman pacman2;
 
+    // getters
     public Pacman Pacman
     {
         get
         {
             if (players == 1)
-                return pacman;
+                return pacman1;
             else
             {
                 // if player 1 is dead and player 2 isnt, return player 2
-                if (pacman.CurrentState == Pacman.State.dead && pacman2.CurrentState != Pacman.State.dead)
+                if (pacman1.CurrentState == Pacman.State.dead && pacman2.CurrentState != Pacman.State.dead)
                     return pacman2;
-                return pacman; // else return player 1
+                return pacman1; // else return player 1
             }
         }
     }
@@ -45,6 +49,11 @@ public class GameLogic : MonoBehaviour
         instance = this;
     }
 
+    /// <summary>
+    /// Starts a level with x amount of players
+    /// </summary>
+    /// <param name="levelNumber">The level to start</param>
+    /// <param name="players">The amount of players</param>
     public void StartLevel(int levelNumber, int players)
     {
         // spawn the level
@@ -57,7 +66,7 @@ public class GameLogic : MonoBehaviour
         this.players = players;
         if (players == 2)
             pacman2 = SpawnPacman(currentLevel.StartingNode_2, 2);
-        pacman = SpawnPacman(currentLevel.StartingNode, 1);
+        pacman1 = SpawnPacman(currentLevel.StartingNode, 1);
 
         // spawn the ghosts
         ghosts = new List<Ghost>();
@@ -123,7 +132,7 @@ public class GameLogic : MonoBehaviour
         score += value;
         GameScreen.instance.SetScoreText(score);
 
-        if (currentLevel.CheckGameComplete() && pacman.CurrentState != Pacman.State.dead)
+        if (currentLevel.CheckGameComplete() && Pacman.CurrentState != Pacman.State.dead)
         {
             for (int i = 0; i < ghosts.Count; i++)
                 ghosts[i].gameObject.SetActive(false);
@@ -166,8 +175,13 @@ public class GameLogic : MonoBehaviour
         currentLevel = null;
 
         // pacman
-        Destroy(pacman.gameObject);
-        pacman = null;
+        Destroy(pacman1.gameObject);
+        pacman1 = null;
+        if (players == 2)
+        {
+            Destroy(pacman2.gameObject);
+            pacman2 = null;
+        }
 
         // ghosts
         foreach (Ghost ghost in ghosts)
@@ -195,5 +209,44 @@ public class GameLogic : MonoBehaviour
         ClearLevel();
 
         PanelManager.instance.ShowPanel(PanelID.GameOver);
+    }
+
+    /// <summary>
+    /// Spawns the text for when pacman eats a ghost and waits a given duration
+    /// </summary>
+    /// <param name="pacman">The pacman responsible for where the text is going to be spawned</param>
+    /// <param name="ghost">The ghost pacman ate</param>
+    /// <param name="duration">The duration the game will pause for</param>
+    /// <param name="score">The score on the text</param>
+    public void SpawnGhostEatText(Pacman pacman, Ghost ghost, float duration, int score)
+    {
+        StartCoroutine(SpawnGhostEatText_Async(pacman, ghost, duration, score));
+    }
+
+    /// <summary>
+    /// Coroutine for the spawn ghost eat text method
+    /// </summary>
+    /// <param name="pacman">The pacman responsible for where the text is going to be spawned</param>
+    /// <param name="ghost">The ghost pacman ate</param>
+    /// <param name="duration">The duration the game will pause for</param>
+    /// <param name="score">The score on the text</param>
+    IEnumerator SpawnGhostEatText_Async(Pacman pacman, Ghost ghost, float duration, int score)
+    {
+        yield return null; // wait a frame
+
+        pacman.gameObject.SetActive(false);
+        ghost.gameObject.SetActive(false);
+
+        ScoreText popupText = Instantiate(popupTextPrefab);
+        popupText.Spawn(pacman.CurrentPosition, score);
+
+        Time.timeScale = 0;
+        yield return new WaitForSecondsRealtime(duration);
+        Time.timeScale = 1;
+
+        pacman.gameObject.SetActive(true);
+        ghost.gameObject.SetActive(true);
+
+        Destroy(popupText.gameObject);
     }
 }

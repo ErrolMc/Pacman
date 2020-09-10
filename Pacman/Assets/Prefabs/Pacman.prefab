@@ -99,10 +99,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
-  currentNode: {fileID: 0}
-  targetNode: {fileID: 0}
-  currentState: 0
-  currentPos: {x: 0, y: 0}
 --- !u!61 &2475756914856105533
 BoxCollider2D:
   m_ObjectHideFlags: 0

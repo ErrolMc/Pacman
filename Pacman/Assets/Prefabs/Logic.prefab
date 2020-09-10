@@ -53,4 +53,6 @@ MonoBehaviour:
     type: 3}
   clydePrefab: {fileID: -8369994348324957916, guid: cb9474f4da9d662499f69a24a0d96c7c,
     type: 3}
-  pacman: {fileID: 0}
+  popupTextPrefab: {fileID: 2729512733316467852, guid: 398f932485916f541b42ab1c45d85d5a,
+    type: 3}
+  score: 0

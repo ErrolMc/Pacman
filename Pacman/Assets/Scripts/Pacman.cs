@@ -124,8 +124,6 @@ public class Pacman : MonoBehaviour
     /// <param name="startingDist">An optional paramater to specify pacmans starting distance from a to b</param>
     void StartMove(Node a, Node b, Vector2 direction, float startingDist = 0)
     {
-        // TODO: animation triggers
-
         ChangeState(State.moving);
 
         currentDirection = direction;
@@ -348,8 +346,12 @@ public class Pacman : MonoBehaviour
                     Ghost ghost = collision.gameObject.GetComponent<Ghost>();
                     if (ghost.CurrentState == Ghost.State.frightened)
                     {
-                        GameLogic.instance.AddScore(25);
+                        const int scoreToAdd = 25;
+
+                        GameLogic.instance.AddScore(scoreToAdd);
                         ghost.ChangeState(Ghost.State.consumed);
+
+                        GameLogic.instance.SpawnGhostEatText(this, ghost, 1, scoreToAdd);
                     }
                     else if (ghost.CurrentState != Ghost.State.consumed)
                     {
