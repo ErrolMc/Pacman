@@ -23,12 +23,7 @@ public class MainMenu : Panel
 
     public void StartGame(int players)
     {
-        if (players == 1)
-        {
-            PanelManager.instance.ShowPanel(PanelID.GameScreen);
-            GameLogic.instance.StartLevel(1);
-        }
-        else
-            Debug.Log("Multiplayer not supported yet");
+        PanelManager.instance.ShowPanel(PanelID.GameScreen);
+        GameLogic.instance.StartLevel(1, players);
     }
 }
