@@ -10,12 +10,20 @@ public class GameOver : Panel
 
     public override void OnShow()
     {
+        HighScoreContainer highScoreContainer = HighScoreContainer.Load();
+        List<HighScore> highScores = highScoreContainer.GetSortedScores();
+
+        if (highScores.Count > 0)
+        {
+            HighScore highScore = highScores[0];
+            highScoreText.text = "High Score (" + highScore.name + "): " + highScore.score.ToString();
+            highScoreText.gameObject.SetActive(true);
+        }
+        else
+            highScoreText.gameObject.SetActive(false);
+
         int score = GameLogic.instance.score;
         scoreText.text = "Score: " + score;
-
-        if (score > Global.HighScore)
-            Global.HighScore = score;
-        highScoreText.text = "High Score: " + Global.HighScore.ToString();
     }
 
     public void OnClick_Retry()

@@ -6,7 +6,9 @@ public enum PanelID
 {
     MainMenu,
     GameScreen,
-    GameOver
+    GameOver,
+    HighScores,
+    NewHighScore
 }
 
 public class Panel : MonoBehaviour

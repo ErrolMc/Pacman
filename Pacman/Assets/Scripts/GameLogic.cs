@@ -208,7 +208,11 @@ public class GameLogic : MonoBehaviour
 
         ClearLevel();
 
-        PanelManager.instance.ShowPanel(PanelID.GameOver);
+        HighScoreContainer highScores = HighScoreContainer.Load();
+        if (highScores.CanAddScore(score))
+            PanelManager.instance.ShowPanel(PanelID.NewHighScore);
+        else
+            PanelManager.instance.ShowPanel(PanelID.GameOver);
     }
 
     /// <summary>
