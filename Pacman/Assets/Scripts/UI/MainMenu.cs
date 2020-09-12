@@ -4,21 +4,11 @@ using UnityEngine;
 
 public class MainMenu : Panel
 {
-    public static MainMenu instance;
-
-    void Awake()
-    {
-        instance = this;
-    }
+    [SerializeField] GameObject highScoreButton;
 
     public override void OnShow()
     {
-
-    }
-
-    public override void OnHide()
-    {
-       
+        highScoreButton.SetActive(HighScoreContainer.Load().GetSortedScores().Count > 0);
     }
 
     public void StartGame(int players)

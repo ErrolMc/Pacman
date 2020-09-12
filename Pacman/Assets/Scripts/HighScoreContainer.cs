@@ -6,7 +6,7 @@ using UnityEngine;
 public class HighScoreContainer
 {
     const string PREFS_KEY = "HighScores";
-    const int MAX_HIGH_SCORES = 10;
+    const int MAX_HIGH_SCORES = 5;
 
     public List<HighScore> highscores;
 

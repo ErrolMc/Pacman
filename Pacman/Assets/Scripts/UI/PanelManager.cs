@@ -31,8 +31,11 @@ public class PanelManager : MonoBehaviour
             else if (panelList[i].isActive || force)
             {
                 panelList[i].gameObject.SetActive(false);
-                panelList[i].isActive = false;
-                panelList[i].OnHide();
+                if (panelList[i].isActive)
+                {
+                    panelList[i].isActive = false;
+                    panelList[i].OnHide();
+                }
             }
         }
 
