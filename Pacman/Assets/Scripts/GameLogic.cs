@@ -168,7 +168,7 @@ public class GameLogic : MonoBehaviour
     /// <summary>
     /// Clears the current level
     /// </summary>
-    public void ClearLevel()
+    void ClearLevel()
     {
         // the level
         Destroy(currentLevel.gameObject);

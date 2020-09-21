@@ -63,16 +63,16 @@ public class Ghost : MonoBehaviour
     protected float currentMoveSpeed;
 
     // mode change timings
-    GhostStateTiming[] timings;
-    float stateChangeTimer;
-    float frightenedTimer;
-    float releaseTimer;
-    int stateChangeIndex;
-    bool stateChangeSequenceComplete;
+    protected GhostStateTiming[] timings;
+    protected float stateChangeTimer;
+    protected float frightenedTimer;
+    protected float releaseTimer;
+    protected int stateChangeIndex;
+    protected bool stateChangeSequenceComplete;
 
     // values to keep track of the movement from the current to the target node
-    float distanceFromCurrent = 0;
-    float distanceToTarget = 0;
+    protected float distanceFromCurrent = 0;
+    protected float distanceToTarget = 0;
 
     // public getters
     public Type GhostType { get { return ghostType; } }
