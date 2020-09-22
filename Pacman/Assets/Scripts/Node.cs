@@ -8,7 +8,8 @@ public class Node : MonoBehaviour
     {
         regular,
         ghostHouse,
-        portal
+        portal,
+        home
     }
 
     public Node[] neighbours;
@@ -34,4 +35,23 @@ public class Node : MonoBehaviour
 
         pos = new Vector2(transform.position.x, transform.position.y);
     }
+
+    #region AStar
+
+    AStarNode aStarNode;
+    public AStarNode SetupAStar()
+    {
+        aStarNode = new AStarNode(pos);
+        return aStarNode;
+    }
+
+    public void PopulateAStarNeighbours()
+    {
+        foreach (Node node in neighbours)
+        {
+            if (node.nodeType == NodeType.regular)
+                aStarNode.neigbours.Add(node.aStarNode);
+        }
+    }
+    #endregion
 }

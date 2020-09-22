@@ -62,6 +62,8 @@ public class GameLogic : MonoBehaviour
         level.transform.position = Vector3.zero;
         currentLevel = level;
 
+        AStar.instance.GetGraph(level);
+
         // spawn pacman
         this.players = players;
         if (players == 2)

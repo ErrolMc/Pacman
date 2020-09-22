@@ -37715,7 +37715,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours: []
-  nodeType: 0
+  nodeType: 3
   directions: []
   pos: {x: 0, y: 0}
 --- !u!1 &7948656805517024439
@@ -37762,7 +37762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours: []
-  nodeType: 0
+  nodeType: 3
   directions: []
   pos: {x: 0, y: 0}
 --- !u!1 &7948656805586871894
@@ -37858,7 +37858,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours: []
-  nodeType: 0
+  nodeType: 3
   directions: []
   pos: {x: 0, y: 0}
 --- !u!1 &7948656806120172480
@@ -37956,7 +37956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours: []
-  nodeType: 0
+  nodeType: 3
   directions: []
   pos: {x: 0, y: 0}
 --- !u!1 &7948656806333399407

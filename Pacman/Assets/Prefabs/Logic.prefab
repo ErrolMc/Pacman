@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8471738574790805911}
   - component: {fileID: 8471738574790805910}
+  - component: {fileID: 8471738574123224230}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -56,3 +57,15 @@ MonoBehaviour:
   popupTextPrefab: {fileID: 2729512733316467852, guid: 398f932485916f541b42ab1c45d85d5a,
     type: 3}
   score: 0
+--- !u!114 &8471738574123224230
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8471738574790805909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5a01cab09e82584fae7e4fa8a1ef7d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

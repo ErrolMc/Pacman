@@ -35,6 +35,7 @@ public class Level : MonoBehaviour
     public Node ClydeHomeNode { get { return clydeHomeNode; } }
     public Node InkyHomeNode { get { return inkyHomeNode; } }
     public GhostStateTiming[] GhostTimings { get { return ghostTimings; } }
+    public Node[] Nodes { get { return nodes; } }
 
     public void Setup()
     {
