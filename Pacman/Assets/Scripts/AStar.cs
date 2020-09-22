@@ -51,14 +51,14 @@ public class AStar : MonoBehaviour
         // first pass, get all the nodes first
         for (int i = 0; i < levelNodes.Length; i++)
         {
-            if (levelNodes[i].nodeType != Node.NodeType.ghostHouse && levelNodes[i].nodeType != Node.NodeType.portal && levelNodes[i].nodeType != Node.NodeType.home)
+            if (levelNodes[i].nodeType != Node.NodeType.ghostHouse && levelNodes[i].nodeType != Node.NodeType.home)
                 nodes.Add(levelNodes[i].SetupAStar());
         }
 
         // second pass, get all the neighbours
         for (int i = 0; i < levelNodes.Length; i++)
         {
-            if (levelNodes[i].nodeType != Node.NodeType.ghostHouse && levelNodes[i].nodeType != Node.NodeType.portal && levelNodes[i].nodeType != Node.NodeType.home)
+            if (levelNodes[i].nodeType != Node.NodeType.ghostHouse && levelNodes[i].nodeType != Node.NodeType.home)
                 levelNodes[i].PopulateAStarNeighbours();
         }
     }

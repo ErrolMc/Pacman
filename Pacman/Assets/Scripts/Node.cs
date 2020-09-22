@@ -49,7 +49,13 @@ public class Node : MonoBehaviour
     {
         foreach (Node node in neighbours)
         {
-            if (node.nodeType == NodeType.regular)
+            if (nodeType == NodeType.portal)
+            {
+                // if we are a portal, only add regular nodes
+                if (node.nodeType == NodeType.regular)
+                    aStarNode.neigbours.Add(node.aStarNode);
+            }
+            else if (node.nodeType == NodeType.regular || node.nodeType == NodeType.portal) // if we arent a portal, add regular or portal nodes
                 aStarNode.neigbours.Add(node.aStarNode);
         }
     }
