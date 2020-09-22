@@ -18,7 +18,7 @@ public class AStarNode
         this.position = position;
 
         hCost = 0;
-        gCost = 0;
+        gCost = float.MaxValue;
     }
 }
 
@@ -55,7 +55,7 @@ public class AStar : MonoBehaviour
 
         foreach (AStarNode node in nodes)
         {
-            Debug.Log(node.position + " - " + node.neigbours.Count);
+            //Debug.Log(node.position + " - " + node.neigbours.Count);
         }
     }
 
@@ -63,7 +63,7 @@ public class AStar : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Vector2 start = new Vector2(6, 10);
+            Vector2 start = new Vector2(1, 1);
             Vector2 end = new Vector2(21, 29);
 
             path = FindPath(start, end);
@@ -83,15 +83,16 @@ public class AStar : MonoBehaviour
 
     public List<AStarNode> FindPath(Vector2 startPos, Vector2 endPos)
     {
-        AStarNode start = GetNodeAtPos(startPos);
         AStarNode end = GetNodeAtPos(endPos);
+        AStarNode start = GetNodeAtPos(startPos);
+        start.hCost = Vector2.Distance(start.position, end.position);
+        start.gCost = 0;
 
         List<AStarNode> openList = new List<AStarNode>();
-        List<AStarNode> closedList = new List<AStarNode>();
 
         AStarNode current = start;
-
         openList.Add(current);
+
         while (openList.Count != 0)
         {
             // get the node with the lowest f cost
@@ -108,56 +109,35 @@ public class AStar : MonoBehaviour
             }
             current = openList[lowestInd];
 
-            // remove current from the open list
-            openList.Remove(current);
-
             // if current is goal, end
             if (current == end)
             {
-                int i = 0;
-
-                List<AStarNode> output = new List<AStarNode>();
-                while (current.parent != null && i < 10)
+                List<AStarNode> output = new List<AStarNode>() { current };
+                while (current.parent != null)
                 {
                     output.Add(current.parent);
                     current = current.parent;
-
-                    Debug.Log(current.position);
-                    i++;
                 }
-
-                Debug.LogError(i);
 
                 return output;
             }
 
-            Debug.Log(current.neigbours.Count);
+            // remove current from the open list
+            openList.Remove(current);
 
             // go through the current neighbours
             foreach (AStarNode neighbour in current.neigbours)
             {
                 float tentative_gCost = current.gCost + Vector2.Distance(neighbour.position, current.position);
 
-                if (openList.Contains(neighbour))
+                if (tentative_gCost < neighbour.gCost)
                 {
-                    if (neighbour.gCost <= tentative_gCost)
-                        continue;
-                }
-                else if (closedList.Contains(neighbour))
-                {
-                    if (neighbour.gCost <= tentative_gCost)
-                        continue;
-                    closedList.Remove(neighbour);
-                    openList.Add(neighbour);
-                }
-                else
-                {
-                    openList.Add(neighbour);
+                    neighbour.parent = current;
+                    neighbour.gCost = tentative_gCost;
                     neighbour.hCost = Vector2.Distance(neighbour.position, end.position);
+                    if (!openList.Contains(neighbour))
+                        openList.Add(neighbour);
                 }
-
-                neighbour.gCost = tentative_gCost;
-                neighbour.parent = current;
             }
         }
 
