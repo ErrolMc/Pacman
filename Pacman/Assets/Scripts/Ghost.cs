@@ -79,6 +79,8 @@ public class Ghost : MonoBehaviour
     public State CurrentState { get { return currentState; } }
     public Vector2 CurrentDirection { get { return currentDirection; } }
     public Vector2 CurrentPosition { get { return new Vector2(Mathf.RoundToInt(currentPos.x), Mathf.RoundToInt(currentPos.y)); } }
+    public Node CurrentNode { get { return currentNode; } }
+    public Node TargetNode { get { return targetNode; } }
 
     /// <summary>
     /// Sets up the ghost at the node specified
@@ -104,6 +106,11 @@ public class Ghost : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (ghostType == Type.blinky)
+                AStar.instance.DoAstar(this);
+        }
         StateUpdate();
     }
 

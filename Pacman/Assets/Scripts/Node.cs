@@ -51,12 +51,12 @@ public class Node : MonoBehaviour
         {
             if (nodeType == NodeType.portal)
             {
-                // if we are a portal, only add regular nodes
-                if (node.nodeType == NodeType.regular)
+                // if we are a portal, dont add portals
+                if (node.nodeType != NodeType.portal)
                     aStarNode.neigbours.Add(node.aStarNode);
             }
-            else if (node.nodeType == NodeType.regular || node.nodeType == NodeType.portal) // if we arent a portal, add regular or portal nodes
-                aStarNode.neigbours.Add(node.aStarNode);
+            else
+                aStarNode.neigbours.Add(node.aStarNode); // if we arent a portal, add all nodes
         }
     }
     #endregion
