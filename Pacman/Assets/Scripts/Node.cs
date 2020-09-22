@@ -38,7 +38,8 @@ public class Node : MonoBehaviour
 
     #region AStar
 
-    AStarNode aStarNode;
+    [HideInInspector] public AStarNode aStarNode;
+
     public AStarNode SetupAStar()
     {
         aStarNode = new AStarNode(pos);

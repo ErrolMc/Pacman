@@ -106,9 +106,8 @@ public class AStar : MonoBehaviour
         return null;
     }
 
-    AStarNode GetPacmanNode()
+    AStarNode GetPacmanNode(Pacman pacman)
     {
-        Pacman pacman = GameLogic.instance.Pacman;
         if (pacman.CurrentState == Pacman.State.idle)
             return GetNodeAtPos(pacman.CurrentPosition);
 
@@ -135,13 +134,27 @@ public class AStar : MonoBehaviour
         return middle;
     }
 
-    public List<AStarNode> FindPath(Ghost ghost)
+    public List<AStarNode> FindPath(Ghost ghost, Node node)
+    {
+        AStarNode start = GetGhostNode(ghost);
+        AStarNode end = node.aStarNode;
+
+        return FindPath(start, end);
+    }
+
+    public List<AStarNode> FindPath(Ghost ghost, Pacman pacman)
+    {
+        AStarNode start = GetGhostNode(ghost);
+        AStarNode end = GetPacmanNode(pacman);
+
+        return FindPath(start, end);
+    }
+
+    public List<AStarNode> FindPath(AStarNode start, AStarNode end)
     {
         for (int i = 0; i < nodes.Count; i++)
             nodes[i].Reset();
 
-        AStarNode end = GetPacmanNode();
-        AStarNode start = GetGhostNode(ghost);
         start.hCost = Vector2.Distance(start.position, end.position);
         start.gCost = 0;
 

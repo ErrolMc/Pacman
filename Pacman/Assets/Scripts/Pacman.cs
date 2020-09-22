@@ -346,7 +346,7 @@ public class Pacman : MonoBehaviour
                 collision.gameObject.SetActive(false);
                 break;
             case "Ghost":
-                if (currentState != State.dead && !invulerable)
+                if (currentState != State.dead)
                 {
                     Ghost ghost = collision.gameObject.GetComponent<Ghost>();
                     if (ghost.CurrentState == Ghost.State.frightened)
@@ -358,7 +358,7 @@ public class Pacman : MonoBehaviour
 
                         GameLogic.instance.SpawnGhostEatText(this, ghost, 1, scoreToAdd);
                     }
-                    else if (ghost.CurrentState != Ghost.State.consumed)
+                    else if (ghost.CurrentState != Ghost.State.consumed && !invulerable)
                     {
                         ChangeState(State.dead);
                     }

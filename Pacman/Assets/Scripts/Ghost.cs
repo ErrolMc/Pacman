@@ -55,12 +55,14 @@ public class Ghost : MonoBehaviour
     protected Node targetNode;
     protected Node homeNode;
     protected Node ghostHouse;
+    protected List<AStarNode> currentAStarPath;
 
     // state
     protected State currentState;
     protected Vector2 currentPos;
     protected Vector2 currentDirection;
     protected float currentMoveSpeed;
+    protected bool aStarPathing;
 
     // mode change timings
     protected GhostStateTiming[] timings;
@@ -85,8 +87,11 @@ public class Ghost : MonoBehaviour
     /// <summary>
     /// Sets up the ghost at the node specified
     /// </summary>
-    /// <param name="startingnode">The node to start at</param>
-    public void Init(Node ghostHouse, Node homeNode, GhostStateTiming[] timings)
+    /// <param name="ghostHouse">The ghost house for this ghost</param>
+    /// <param name="homeNode">The home node for this ghost</param>
+    /// <param name="timings">The state timings</param>
+    /// <param name="aStarPathing">If this ghost is using astar or not for pathing</param>
+    public void Init(Node ghostHouse, Node homeNode, GhostStateTiming[] timings, bool aStarPathing = false)
     {
         trans = transform;
         rb = GetComponent<Rigidbody2D>();
@@ -95,6 +100,7 @@ public class Ghost : MonoBehaviour
 
         this.homeNode = homeNode;
         this.ghostHouse = ghostHouse;
+        this.aStarPathing = aStarPathing;
         currentNode = ghostHouse;
         targetNode = ghostHouse;
 
@@ -108,11 +114,6 @@ public class Ghost : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    if (ghostType == Type.blinky)
-        //        AStar.instance.DoAstar(this);
-        //}
         StateUpdate();
     }
 
@@ -151,46 +152,16 @@ public class Ghost : MonoBehaviour
         }
     }
 
-    Node ChooseNextNodeAStar(ref Vector2 nextDir)
-    {
-        currentPath = AStar.instance.FindPath(this);
-
-        int len = currentPath.Count;
-        AStarNode cur = currentPath[len - 1];
-        AStarNode next = currentPath[len - 2];
-
-        Vector2 dir = (next.position - cur.position).normalized;
-
-        for (int i = 0; i < currentNode.neighbours.Length; i++)
-        {
-            if (currentNode.directions[i] == dir)
-            {
-                nextDir = dir;
-                return currentNode.neighbours[i];
-            }
-        }
-
-        return ChooseNextNode(ref nextDir);
-    }
-
     /// <summary>
     /// Picks and then instructs the ghost to move to a new node
     /// </summary>
     void MoveToNextNode(bool ignoreOppositeCheck = false)
     {
         Vector2 nextDirection = Vector2.zero;
-
-        Node next = new Node();
-        if (ghostType == Type.blinky && (currentState == State.chase || currentState == State.scatter))
-        {
-            next = ChooseNextNodeAStar(ref nextDirection);
-        }
+        if (aStarPathing)
+            targetNode = ChooseNextNodeAStar(ref nextDirection, ignoreOppositeCheck);
         else
-        {
-            next = ChooseNextNode(ref nextDirection, ignoreOppositeCheck);
-        }
-
-        targetNode = next;
+            targetNode = ChooseNextNode(ref nextDirection, ignoreOppositeCheck);
         currentDirection = nextDirection;
 
         if (currentState != State.frightened)
@@ -282,6 +253,44 @@ public class Ghost : MonoBehaviour
 
         nextDir = nextDirection;    // "return" the next direction
         return nextNode;            // return the next node
+    }
+
+    /// <summary>
+    /// Picks the next node for the ghost to move based on the astar algorithim
+    /// This is called only on init and when the ghost has just reached a node
+    /// </summary>
+    /// <param name="nextDir">A reference to the next direction that the ghost going to move</param>
+    /// <returns>The next node that the ghost is moving to</returns>
+    Node ChooseNextNodeAStar(ref Vector2 nextDir, bool ignoreOppositeCheck)
+    {
+        // if frightened or scatter, we can use the default node selection
+        if (currentState == State.frightened || currentState == State.scatter)
+            return ChooseNextNode(ref nextDir, ignoreOppositeCheck);
+
+        // if consumed path to the ghost house
+        if (currentState == State.consumed)
+            currentAStarPath = AStar.instance.FindPath(this, ghostHouse);
+        else
+            currentAStarPath = AStar.instance.FindPath(this, GameLogic.instance.Pacman); // if chase path to pacman
+
+        // get the direction we are going in
+        int len = currentAStarPath.Count;
+        AStarNode cur = currentAStarPath[len - 1];
+        AStarNode next = currentAStarPath[len - 2];
+        Vector2 dir = (next.position - cur.position).normalized;
+
+        // find the node thats in the direction
+        for (int i = 0; i < currentNode.neighbours.Length; i++)
+        {
+            if (currentNode.directions[i] == dir)
+            {
+                nextDir = dir;
+                return currentNode.neighbours[i];
+            }
+        }
+
+        // if we havent found the node for the direction, do the default behaivour
+        return ChooseNextNode(ref nextDir, ignoreOppositeCheck);
     }
 
     #region state stuff
@@ -435,36 +444,21 @@ public class Ghost : MonoBehaviour
     }
     #endregion
 
-    List<AStarNode> currentPath;
-    Vector2 currentPathNode;
-    Vector2 actualPathNode;
     void OnDrawGizmos()
     {
-        if (ghostType == Type.blinky)
+        if (aStarPathing && (currentState == State.frightened || currentState == State.chase))
         {
-            if (currentPath != null && currentPath.Count > 1)
+            if (currentAStarPath != null && currentAStarPath.Count > 1)
             {
                 Gizmos.color = Color.white;
-                AStarNode prev = currentPath[0];
-                for (int i = 1; i < currentPath.Count; i++)
+                AStarNode prev = currentAStarPath[0];
+                for (int i = 1; i < currentAStarPath.Count; i++)
                 {
-                    AStarNode cur = currentPath[i];
+                    AStarNode cur = currentAStarPath[i];
                     Gizmos.DrawLine(prev.position, cur.position);
 
                     prev = cur;
                 }
-            }
-
-            if (currentPathNode != null)
-            {
-                Gizmos.color = Color.red;
-                Gizmos.DrawSphere(currentPathNode, 0.5f);
-            }
-
-            if (actualPathNode != null)
-            {
-                Gizmos.color = Color.blue;
-                Gizmos.DrawSphere(actualPathNode, 0.5f);
             }
         }
     }

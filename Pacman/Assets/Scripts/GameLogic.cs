@@ -72,7 +72,7 @@ public class GameLogic : MonoBehaviour
 
         // spawn the ghosts
         ghosts = new List<Ghost>();
-        SpawnGhost(Ghost.Type.blinky);
+        SpawnGhost(Ghost.Type.blinky, true);
         SpawnGhost(Ghost.Type.pinky);
         SpawnGhost(Ghost.Type.inky);
         SpawnGhost(Ghost.Type.clyde);
@@ -85,7 +85,7 @@ public class GameLogic : MonoBehaviour
     /// Spawns a ghost given the type
     /// </summary>
     /// <param name="type">The type of ghost to spawn</param>
-    void SpawnGhost(Ghost.Type type)
+    void SpawnGhost(Ghost.Type type, bool aStar = false)
     {
         Node ghostHouseLeft = currentLevel.GhostHouseLeft;
         Node ghostHouseRight = currentLevel.GhostHouseRight;
@@ -94,22 +94,22 @@ public class GameLogic : MonoBehaviour
         {
             case Ghost.Type.blinky:
                 Ghost blinky = Instantiate(blinkyPrefab);
-                blinky.Init(ghostHouseLeft, currentLevel.BlinkyHomeNode, currentLevel.GhostTimings);
+                blinky.Init(ghostHouseLeft, currentLevel.BlinkyHomeNode, currentLevel.GhostTimings, aStar);
                 ghosts.Add(blinky);
                 break;
             case Ghost.Type.pinky:
                 Ghost pinky = Instantiate(pinkyPrefab);
-                pinky.Init(ghostHouseRight, currentLevel.PinkyHomeNode, currentLevel.GhostTimings);
+                pinky.Init(ghostHouseRight, currentLevel.PinkyHomeNode, currentLevel.GhostTimings, aStar);
                 ghosts.Add(pinky);
                 break;
             case Ghost.Type.inky:
                 Ghost inky = Instantiate(inkyPrefab);
-                inky.Init(ghostHouseRight, currentLevel.InkyHomeNode, currentLevel.GhostTimings);
+                inky.Init(ghostHouseRight, currentLevel.InkyHomeNode, currentLevel.GhostTimings, aStar);
                 ghosts.Add(inky);
                 break;
             case Ghost.Type.clyde:
                 Ghost clyde = Instantiate(clydePrefab);
-                clyde.Init(ghostHouseLeft, currentLevel.ClydeHomeNode, currentLevel.GhostTimings);
+                clyde.Init(ghostHouseLeft, currentLevel.ClydeHomeNode, currentLevel.GhostTimings, aStar);
                 ghosts.Add(clyde);
                 break;
         }
