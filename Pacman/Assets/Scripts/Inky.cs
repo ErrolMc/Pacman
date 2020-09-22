@@ -19,7 +19,7 @@ public class Inky : Ghost
     {
         if (currentState == State.chase)
         {
-            Vector2 pacmanPos = GameLogic.instance.Pacman.CurrentPosition;
+            Vector2 pacmanPos = GameLogic.instance.Pacman.CurrentPositionRounded;
             Vector2 pacmanDirection = GameLogic.instance.Pacman.CurrentDirection;
 
             Vector2 targetTile = pacmanPos + (2 * pacmanDirection);

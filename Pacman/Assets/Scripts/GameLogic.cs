@@ -244,7 +244,7 @@ public class GameLogic : MonoBehaviour
         ghost.gameObject.SetActive(false);
 
         ScoreText popupText = Instantiate(popupTextPrefab);
-        popupText.Spawn(pacman.CurrentPosition, score);
+        popupText.Spawn(pacman.CurrentPositionRounded, score);
 
         Time.timeScale = 0;
         yield return new WaitForSecondsRealtime(duration);

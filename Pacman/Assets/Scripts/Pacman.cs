@@ -49,7 +49,10 @@ public class Pacman : MonoBehaviour
     public int Player { get { return player; } }
     public State CurrentState {  get { return currentState; } }
     public Vector2 CurrentDirection { get { return currentDirection; } }
-    public Vector2 CurrentPosition { get { return new Vector2(Mathf.RoundToInt(currentPos.x), Mathf.RoundToInt(currentPos.y)); } }
+    public Vector2 CurrentPositionRounded { get { return new Vector2(Mathf.RoundToInt(currentPos.x), Mathf.RoundToInt(currentPos.y)); } }
+    public Vector2 CurrentPosition { get { return currentPos; } }
+    public Node CurrentNode { get { return currentNode; } }
+    public Node TargetNode { get { return targetNode; } }
 
     /// <summary>
     /// Sets up pacman
