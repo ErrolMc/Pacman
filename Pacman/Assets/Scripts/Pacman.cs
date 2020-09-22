@@ -24,6 +24,7 @@ public class Pacman : MonoBehaviour
     }
 
     [SerializeField] float moveSpeed = 5;
+    [SerializeField] bool invulerable = false;
 
     // caches
     Transform trans;
@@ -66,6 +67,7 @@ public class Pacman : MonoBehaviour
 
         this.player = player;
         currentNode = startingNode;
+        targetNode = currentNode;
         currentPos = currentNode.pos;
 
         rb.MovePosition(currentPos);
@@ -344,7 +346,7 @@ public class Pacman : MonoBehaviour
                 collision.gameObject.SetActive(false);
                 break;
             case "Ghost":
-                if (currentState != State.dead)
+                if (currentState != State.dead && !invulerable)
                 {
                     Ghost ghost = collision.gameObject.GetComponent<Ghost>();
                     if (ghost.CurrentState == Ghost.State.frightened)

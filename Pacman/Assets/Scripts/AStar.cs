@@ -96,11 +96,6 @@ public class AStar : MonoBehaviour
         }
     }
 
-    public void DoAstar(Ghost ghost)
-    {
-        path = FindPath(ghost);
-    }
-
     AStarNode GetNodeAtPos(Vector2 pos)
     {
         foreach (AStarNode node in nodes)
@@ -180,6 +175,7 @@ public class AStar : MonoBehaviour
                     output.Add(current.parent);
                     current = current.parent;
                 }
+                output.RemoveAt(output.Count - 1);
 
                 if (nodeLinks.Count > 0)
                 {
@@ -211,22 +207,5 @@ public class AStar : MonoBehaviour
         }
 
         return null;
-    }
-
-    List<AStarNode> path;
-
-    void OnDrawGizmos()
-    {
-        if (path != null && path.Count > 1)
-        {
-            AStarNode prev = path[0];
-            for (int i = 1; i < path.Count; i++)
-            {
-                AStarNode cur = path[i];
-                Debug.DrawLine(prev.position, cur.position, Color.white);
-
-                prev = cur;
-            }
-        }
     }
 }

@@ -96,6 +96,8 @@ public class Ghost : MonoBehaviour
         this.homeNode = homeNode;
         this.ghostHouse = ghostHouse;
         currentNode = ghostHouse;
+        targetNode = ghostHouse;
+
         currentPos = currentNode.pos;
         currentDirection = Vector2.zero;
 
@@ -106,11 +108,11 @@ public class Ghost : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (ghostType == Type.blinky)
-                AStar.instance.DoAstar(this);
-        }
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if (ghostType == Type.blinky)
+        //        AStar.instance.DoAstar(this);
+        //}
         StateUpdate();
     }
 
@@ -149,13 +151,44 @@ public class Ghost : MonoBehaviour
         }
     }
 
+    Node ChooseNextNodeAStar(ref Vector2 nextDir)
+    {
+        currentPath = AStar.instance.FindPath(this);
+
+        int len = currentPath.Count;
+        AStarNode cur = currentPath[len - 1];
+        AStarNode next = currentPath[len - 2];
+
+        Vector2 dir = (next.position - cur.position).normalized;
+
+        for (int i = 0; i < currentNode.neighbours.Length; i++)
+        {
+            if (currentNode.directions[i] == dir)
+            {
+                nextDir = dir;
+                return currentNode.neighbours[i];
+            }
+        }
+
+        return ChooseNextNode(ref nextDir);
+    }
+
     /// <summary>
     /// Picks and then instructs the ghost to move to a new node
     /// </summary>
     void MoveToNextNode(bool ignoreOppositeCheck = false)
     {
         Vector2 nextDirection = Vector2.zero;
-        Node next = ChooseNextNode(ref nextDirection, ignoreOppositeCheck);
+
+        Node next = new Node();
+        if (ghostType == Type.blinky && (currentState == State.chase || currentState == State.scatter))
+        {
+            next = ChooseNextNodeAStar(ref nextDirection);
+        }
+        else
+        {
+            next = ChooseNextNode(ref nextDirection, ignoreOppositeCheck);
+        }
 
         targetNode = next;
         currentDirection = nextDirection;
@@ -401,4 +434,38 @@ public class Ghost : MonoBehaviour
         }
     }
     #endregion
+
+    List<AStarNode> currentPath;
+    Vector2 currentPathNode;
+    Vector2 actualPathNode;
+    void OnDrawGizmos()
+    {
+        if (ghostType == Type.blinky)
+        {
+            if (currentPath != null && currentPath.Count > 1)
+            {
+                Gizmos.color = Color.white;
+                AStarNode prev = currentPath[0];
+                for (int i = 1; i < currentPath.Count; i++)
+                {
+                    AStarNode cur = currentPath[i];
+                    Gizmos.DrawLine(prev.position, cur.position);
+
+                    prev = cur;
+                }
+            }
+
+            if (currentPathNode != null)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawSphere(currentPathNode, 0.5f);
+            }
+
+            if (actualPathNode != null)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawSphere(actualPathNode, 0.5f);
+            }
+        }
+    }
 }
