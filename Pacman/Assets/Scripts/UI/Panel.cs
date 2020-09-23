@@ -8,7 +8,8 @@ public enum PanelID
     GameScreen,
     GameOver,
     HighScores,
-    NewHighScore
+    NewHighScore,
+    Customisation,
 }
 
 public class Panel : MonoBehaviour
