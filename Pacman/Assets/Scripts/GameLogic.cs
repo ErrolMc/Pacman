@@ -15,6 +15,9 @@ public class GameLogic : MonoBehaviour
     [SerializeField] Ghost clydePrefab;
     [SerializeField] ScoreText popupTextPrefab;
 
+    [Header("Assets")]
+    public Sprite[] fruitSprites;
+
     // state caches
     int players;
     [HideInInspector] public int score;
@@ -215,6 +218,21 @@ public class GameLogic : MonoBehaviour
             PanelManager.instance.ShowPanel(PanelID.NewHighScore);
         else
             PanelManager.instance.ShowPanel(PanelID.GameOver);
+    }
+
+    public void SpawnScoreText(Vector2 position, float duration, int score)
+    {
+        StartCoroutine(SpawnScoreText_Async(position, duration, score));
+    }
+
+    IEnumerator SpawnScoreText_Async(Vector2 position, float duration, int score)
+    {
+        ScoreText popupText = Instantiate(popupTextPrefab);
+        popupText.Spawn(position, score);
+
+        yield return new WaitForSeconds(duration);
+
+        Destroy(popupText.gameObject);
     }
 
     /// <summary>

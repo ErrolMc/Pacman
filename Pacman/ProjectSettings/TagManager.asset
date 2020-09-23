@@ -8,6 +8,7 @@ TagManager:
   - Pacman
   - SuperPellet
   - Ghost
+  - Fruit
   layers:
   - Default
   - TransparentFX

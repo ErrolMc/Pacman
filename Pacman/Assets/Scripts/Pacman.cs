@@ -345,6 +345,12 @@ public class Pacman : MonoBehaviour
 
                 collision.gameObject.SetActive(false);
                 break;
+            case "Fruit":
+                collision.gameObject.SetActive(false);
+                GameLogic.instance.AddScore(10);
+
+                GameLogic.instance.SpawnScoreText(currentPos, 1, 10);
+                break;
             case "Ghost":
                 if (currentState != State.dead)
                 {

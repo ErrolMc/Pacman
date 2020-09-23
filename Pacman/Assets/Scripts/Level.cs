@@ -25,6 +25,8 @@ public class Level : MonoBehaviour
 
     Node[] nodes;
     List<SpriteRenderer> pellets;
+    List<SpriteRenderer> superPellets;
+    List<SpriteRenderer> fruits;
 
     public Node GhostHouseLeft { get { return ghostHouseLeft; } }
     public Node GhostHouseRight { get { return ghostHouseRight; } }
@@ -37,37 +39,88 @@ public class Level : MonoBehaviour
     public GhostStateTiming[] GhostTimings { get { return ghostTimings; } }
     public Node[] Nodes { get { return nodes; } }
 
-    public void Setup()
+    public void Setup(int fruit = 0)
     {
         nodes = nodeParent.GetComponentsInChildren<Node>();
         for (int i = 0; i < nodes.Length; i++)
             nodes[i].Setup();
 
-        SpriteRenderer[] pellets1 = pelletParent.GetComponentsInChildren<SpriteRenderer>();
-        SpriteRenderer[] pellets2 = pelletParent.GetComponentsInChildren<SpriteRenderer>();
         pellets = new List<SpriteRenderer>();
-        for (int i = 0; i < pellets1.Length; i++)
-            pellets.Add(pellets1[i]);
-        for (int i = 0; i < pellets2.Length; i++)
-            pellets.Add(pellets2[i]);
+        superPellets = new List<SpriteRenderer>();
+        fruits = new List<SpriteRenderer>();
+        ProcessSprites(pelletParent.GetComponentsInChildren<SpriteRenderer>());
+        ProcessSprites(nodeParent.GetComponentsInChildren<SpriteRenderer>());
+
+        if (fruit > 0)
+            AddFruits(fruit);
+    }
+
+    void AddFruits(int amount)
+    {
+        Sprite[] fruitSprites = GameLogic.instance.fruitSprites;
+
+        for (int i = 0; i < amount; i++)
+        {
+            int ind = Random.Range(0, pellets.Count - 1);
+            SpriteRenderer pellet = pellets[ind];
+            pellets.RemoveAt(ind);
+
+            pellet.sprite = fruitSprites[Random.Range(0, fruitSprites.Length - 1)];
+            pellet.gameObject.tag = "Fruit";
+            pellet.transform.localScale = Vector3.one * 2.5f;
+            fruits.Add(pellet);
+        }
+    }
+
+    void ProcessSprites(SpriteRenderer[] sprites)
+    {
+        foreach (SpriteRenderer sprite in sprites)
+        {
+            string tag = sprite.gameObject.tag;
+
+            switch (tag)
+            {
+                case "Fruit":
+                    fruits.Add(sprite);
+                    break;
+                case "SuperPellet":
+                    superPellets.Add(sprite);
+                    break;
+                case "Pellet":
+                    pellets.Add(sprite);
+                    break;
+            }
+        }
     }
 
     public bool CheckGameComplete()
     {
-        for (int i = 0; i < pellets.Count; i++)
-        {
-            if (pellets[i].gameObject.activeInHierarchy)
-                return false;
-        }
+        if (AnySpritesEnabled(pellets))
+            return false;
+        if (AnySpritesEnabled(superPellets))
+            return false;
+        if (AnySpritesEnabled(fruits))
+            return false;
         return true;
     }
 
-    public void EnablePellets(bool state)
+    bool AnySpritesEnabled(List<SpriteRenderer> sprites)
     {
-        for (int i = 0; i < pellets.Count; i++)
-            pellets[i].gameObject.SetActive(state);
+        foreach (SpriteRenderer sprite in sprites)
+        {
+            if (sprite.gameObject.activeInHierarchy)
+                return true;
+        }
+        return false;
+    }
 
-        for (int i = 0; i < nodes.Length; i++)
-            nodes[i].gameObject.SetActive(state);
+    public void EnableSprites(bool state)
+    {
+        foreach (SpriteRenderer pellet in pellets)
+            pellet.gameObject.SetActive(state);
+        foreach (SpriteRenderer fruit in fruits)
+            fruit.gameObject.SetActive(state);
+        foreach (SpriteRenderer superPellet in superPellets)
+            superPellet.gameObject.SetActive(state);
     }
 }
