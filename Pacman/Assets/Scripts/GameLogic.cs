@@ -18,8 +18,12 @@ public class GameLogic : MonoBehaviour
     [Header("Assets")]
     public Sprite[] fruitSprites;
 
+    [Header("Other")]
+    [SerializeField] int numLevels;
+
     // state caches
     int players;
+    int currentLevelNumber;
     [HideInInspector] public int score;
 
     // component caches
@@ -57,13 +61,14 @@ public class GameLogic : MonoBehaviour
     /// </summary>
     /// <param name="levelNumber">The level to start</param>
     /// <param name="players">The amount of players</param>
-    public void StartLevel(int levelNumber, int players)
+    public void StartLevel(int levelNumber, int players, int startingScore = 0)
     {
         // spawn the level
         Level level = Instantiate(Resources.Load<Level>("Levels/Level_" + levelNumber));
         level.Setup();
         level.transform.position = Vector3.zero;
         currentLevel = level;
+        currentLevelNumber = levelNumber;
 
         AStar.instance.GetGraph(level);
 
@@ -80,7 +85,7 @@ public class GameLogic : MonoBehaviour
         SpawnGhost(Ghost.Type.inky);
         SpawnGhost(Ghost.Type.clyde);
 
-        score = 0;
+        score = startingScore;
         GameScreen.instance.SetScoreText(score);
     }
 
@@ -142,7 +147,7 @@ public class GameLogic : MonoBehaviour
             for (int i = 0; i < ghosts.Count; i++)
                 ghosts[i].gameObject.SetActive(false);
 
-            EndGame(3);
+            EndGame(3, true);
         }
     }
 
@@ -198,26 +203,35 @@ public class GameLogic : MonoBehaviour
     /// Resets the game
     /// </summary>
     /// <param name="delay">A delay before resetting the board</param>
-    public void EndGame(float delay = 0)
+    public void EndGame(float delay, bool won)
     {
-        StartCoroutine(EndGameSequence(delay));
+        StartCoroutine(EndGameSequence(delay, won));
     }
 
     /// <summary>
     /// The timing sequence for resetting the game
     /// </summary>
     /// <param name="delay">The delay before resetting the board</param>
-    IEnumerator EndGameSequence(float delay = 0)
+    IEnumerator EndGameSequence(float delay, bool won)
     {
         yield return new WaitForSeconds(delay);
 
         ClearLevel();
 
-        HighScoreContainer highScores = HighScoreContainer.Load();
-        if (highScores.CanAddScore(score))
-            PanelManager.instance.ShowPanel(PanelID.NewHighScore);
+        // if we have won and there are more levels, go to the next level
+        if (won && currentLevelNumber < numLevels)
+        {
+            yield return new WaitForSeconds(0.5f);
+            StartLevel(currentLevelNumber + 1, players, score);
+        }
         else
-            PanelManager.instance.ShowPanel(PanelID.GameOver);
+        {
+            HighScoreContainer highScores = HighScoreContainer.Load();
+            if (highScores.CanAddScore(score))
+                PanelManager.instance.ShowPanel(PanelID.NewHighScore);
+            else
+                PanelManager.instance.ShowPanel(PanelID.GameOver);
+        }
     }
 
     public void SpawnScoreText(Vector2 position, float duration, int score)

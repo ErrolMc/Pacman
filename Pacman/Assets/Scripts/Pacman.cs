@@ -241,7 +241,7 @@ public class Pacman : MonoBehaviour
 
                 // check if all players are dead
                 if (GameLogic.instance.Pacman.CurrentState == State.dead)
-                    GameLogic.instance.EndGame(3);
+                    GameLogic.instance.EndGame(3, false);
                 break;
         }
     }

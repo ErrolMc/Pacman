@@ -62,6 +62,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c4071e68f33794842920d332dfadeef9, type: 3}
   - {fileID: 21300000, guid: fa7f036e8d770b14299de4281822b1a2, type: 3}
   - {fileID: 21300000, guid: 09b754c5fe940e64b912dbbf9d09e2a0, type: 3}
+  numLevels: 2
   score: 0
 --- !u!114 &8471738574123224230
 MonoBehaviour:
