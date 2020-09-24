@@ -32,7 +32,6 @@ public class Ghost : MonoBehaviour
     [SerializeField] float moveSpeed = 3;
     [SerializeField] float frightenedMoveSpeed = 1.5f;
     [SerializeField] float consumedMoveSpeed = 5;
-    [SerializeField] float frightenedModeDuration = 20;
 
     [Header("Animation Names")]
     [SerializeField] string upAnim;
@@ -56,6 +55,7 @@ public class Ghost : MonoBehaviour
     protected Node homeNode;
     protected Node ghostHouse;
     protected List<AStarNode> currentAStarPath;
+    protected float frightenedModeDuration;
 
     // state
     protected State currentState;
@@ -106,6 +106,8 @@ public class Ghost : MonoBehaviour
 
         currentPos = currentNode.pos;
         currentDirection = Vector2.zero;
+
+        frightenedModeDuration = GameSettings.instance.GhostFrightenedDuration;
 
         rb.MovePosition(currentPos);
 
@@ -275,17 +277,20 @@ public class Ghost : MonoBehaviour
 
         // get the direction we are going in
         int len = currentAStarPath.Count;
-        AStarNode cur = currentAStarPath[len - 1];
-        AStarNode next = currentAStarPath[len - 2];
-        Vector2 dir = (next.position - cur.position).normalized;
-
-        // find the node thats in the direction
-        for (int i = 0; i < currentNode.neighbours.Length; i++)
+        if (len >= 2)
         {
-            if (currentNode.directions[i] == dir)
+            AStarNode cur = currentAStarPath[len - 1];
+            AStarNode next = currentAStarPath[len - 2];
+            Vector2 dir = (next.position - cur.position).normalized;
+
+            // find the node thats in the direction
+            for (int i = 0; i < currentNode.neighbours.Length; i++)
             {
-                nextDir = dir;
-                return currentNode.neighbours[i];
+                if (currentNode.directions[i] == dir)
+                {
+                    nextDir = dir;
+                    return currentNode.neighbours[i];
+                }
             }
         }
 
@@ -373,11 +378,11 @@ public class Ghost : MonoBehaviour
             case State.scatter:
                 if (currentState == State.frightened)
                     Rotate(currentDirection);
-                currentMoveSpeed = moveSpeed;
+                currentMoveSpeed = moveSpeed * GameSettings.instance.GhostSpeedMultiplier;
                 break;
             case State.frightened:
                 frightenedTimer = 0;
-                currentMoveSpeed = frightenedMoveSpeed;
+                currentMoveSpeed = frightenedMoveSpeed * GameSettings.instance.GhostFrightenedSpeedMultiplier;
                 anim.Play("Ghost_Blue");
                 break;
             case State.inHouse:
@@ -387,7 +392,7 @@ public class Ghost : MonoBehaviour
                 break;
             case State.consumed:
                 anim.enabled = false;
-                currentMoveSpeed = consumedMoveSpeed;
+                currentMoveSpeed = consumedMoveSpeed * GameSettings.instance.GhostConsumedSpeedMultiplier;
 
                 currentState = State.consumed; // hack
                 Rotate(currentDirection);

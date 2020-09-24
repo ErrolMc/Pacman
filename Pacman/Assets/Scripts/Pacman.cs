@@ -32,6 +32,7 @@ public class Pacman : MonoBehaviour
     Animator anim;
     Node currentNode;
     Node targetNode;
+    float currentMoveSpeed;
 
     // directions
     Vector2 currentDirection;
@@ -69,6 +70,7 @@ public class Pacman : MonoBehaviour
         currentNode = startingNode;
         targetNode = currentNode;
         currentPos = currentNode.pos;
+        currentMoveSpeed = moveSpeed * GameSettings.instance.PacmanSpeedMultiplier;
 
         rb.MovePosition(currentPos);
 
@@ -95,7 +97,7 @@ public class Pacman : MonoBehaviour
         // if we are moving, do the move stuff
         if (currentState == State.moving)
         {
-            distanceFromCurrent += moveSpeed * Time.deltaTime;                                  // move based on the movespeed
+            distanceFromCurrent += currentMoveSpeed * Time.deltaTime;                                  // move based on the movespeed
             float progress01 = Mathf.InverseLerp(0, distanceToTarget, distanceFromCurrent);     // calculate the normalised progress to the next node
             currentPos = Vector2.Lerp(currentNode.pos, targetNode.pos, progress01);             // get the current position
 
@@ -328,11 +330,11 @@ public class Pacman : MonoBehaviour
             case "Pellet":
                 // TODO: play sound
                 collision.gameObject.SetActive(false);
-                GameLogic.instance.AddScore(1);
+                GameLogic.instance.AddScore(GameSettings.instance.PelletScore);
                 break;
             case "SuperPellet":
                 // TODO: play sound
-                GameLogic.instance.AddScore(5);
+                GameLogic.instance.AddScore(GameSettings.instance.SuperPelletScore);
 
                 // Set all the ghosts to frightened
                 List<Ghost> ghosts = GameLogic.instance.GetAllGhosts();
@@ -347,9 +349,10 @@ public class Pacman : MonoBehaviour
                 break;
             case "Fruit":
                 collision.gameObject.SetActive(false);
-                GameLogic.instance.AddScore(10);
+                int score = GameSettings.instance.FruitScore;
+                GameLogic.instance.AddScore(score);
 
-                GameLogic.instance.SpawnScoreText(currentPos, 1, 10);
+                GameLogic.instance.SpawnScoreText(currentPos, 1, score);
                 break;
             case "Ghost":
                 if (currentState != State.dead)
@@ -357,7 +360,7 @@ public class Pacman : MonoBehaviour
                     Ghost ghost = collision.gameObject.GetComponent<Ghost>();
                     if (ghost.CurrentState == Ghost.State.frightened)
                     {
-                        const int scoreToAdd = 25;
+                        int scoreToAdd = GameSettings.instance.GhostEatScore;
 
                         GameLogic.instance.AddScore(scoreToAdd);
                         ghost.ChangeState(Ghost.State.consumed);

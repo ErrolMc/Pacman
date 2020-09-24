@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8471738574790805911}
   - component: {fileID: 8471738574790805910}
+  - component: {fileID: 4483208917285884935}
   - component: {fileID: 8471738574123224230}
   m_Layer: 0
   m_Name: Logic
@@ -64,6 +65,28 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 09b754c5fe940e64b912dbbf9d09e2a0, type: 3}
   numLevels: 2
   score: 0
+--- !u!114 &4483208917285884935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8471738574790805909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86064730b4d8f3446bc7f6cab3c78f8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultPacmanSpeedMultiplier: 1
+  defaultGhostSpeedMultiplier: 1
+  defaultFruitAmountMultiplier: 1
+  defaultGhostFrightenedDuration: 10
+  defaultGhostFrightenedSpeedMultiplier: 1
+  defaultGhostConsumedSpeedMultiplier: 1
+  defaultPelletScore: 1
+  defaultFruitScore: 10
+  defaultGhostEatScore: 20
+  defaultSuperPelletScore: 5
 --- !u!114 &8471738574123224230
 MonoBehaviour:
   m_ObjectHideFlags: 0

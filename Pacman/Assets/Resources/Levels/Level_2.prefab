@@ -37105,6 +37105,7 @@ MonoBehaviour:
     seconds: 10
   - state: 1
     seconds: -1
+  fruitAmount: 3
 --- !u!1 &7948656804901875291
 GameObject:
   m_ObjectHideFlags: 0

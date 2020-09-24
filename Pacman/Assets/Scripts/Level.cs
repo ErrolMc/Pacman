@@ -20,8 +20,9 @@ public class Level : MonoBehaviour
     [SerializeField] GameObject pelletParent;
     [SerializeField] GameObject nodeParent;
 
-    [Header("Timings")]
+    [Header("Other")]
     [SerializeField] GhostStateTiming[] ghostTimings;
+    [SerializeField] float fruitAmount = 0;
 
     Node[] nodes;
     List<SpriteRenderer> pellets;
@@ -39,7 +40,7 @@ public class Level : MonoBehaviour
     public GhostStateTiming[] GhostTimings { get { return ghostTimings; } }
     public Node[] Nodes { get { return nodes; } }
 
-    public void Setup(int fruit = 0)
+    public void Setup()
     {
         nodes = nodeParent.GetComponentsInChildren<Node>();
         for (int i = 0; i < nodes.Length; i++)
@@ -51,6 +52,7 @@ public class Level : MonoBehaviour
         ProcessSprites(pelletParent.GetComponentsInChildren<SpriteRenderer>());
         ProcessSprites(nodeParent.GetComponentsInChildren<SpriteRenderer>());
 
+        int fruit = (int)(fruitAmount * GameSettings.instance.FruitAmountMultiplier);
         if (fruit > 0)
             AddFruits(fruit);
     }
