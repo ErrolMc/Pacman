@@ -48,6 +48,8 @@ public class GameLogic : MonoBehaviour
             }
         }
     }
+    
+    public Level CurrentLevel { get { return currentLevel; } }
 
     public int Players { get { return players; } }
 
@@ -69,8 +71,6 @@ public class GameLogic : MonoBehaviour
         level.transform.position = Vector3.zero;
         currentLevel = level;
         currentLevelNumber = levelNumber;
-
-        AStar.instance.GetGraph(level);
 
         // spawn pacman
         this.players = players;

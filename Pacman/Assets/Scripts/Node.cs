@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Node : MonoBehaviour
 {
+    public int id;
+
     public enum NodeType
     {
         regular,
@@ -18,8 +20,9 @@ public class Node : MonoBehaviour
     [HideInInspector] public Vector2[] directions;
     [HideInInspector] public Vector2 pos;
 
-    public void Setup()
+    public void Setup(int id)
     {
+        this.id = id;
         directions = new Vector2[neighbours.Length];
         for (int i = 0; i < neighbours.Length; i++)
         {
@@ -35,30 +38,4 @@ public class Node : MonoBehaviour
 
         pos = new Vector2(transform.position.x, transform.position.y);
     }
-
-    #region AStar
-
-    [HideInInspector] public AStarNode aStarNode;
-
-    public AStarNode SetupAStar()
-    {
-        aStarNode = new AStarNode(pos);
-        return aStarNode;
-    }
-
-    public void PopulateAStarNeighbours()
-    {
-        foreach (Node node in neighbours)
-        {
-            if (nodeType == NodeType.portal)
-            {
-                // if we are a portal, dont add portals
-                if (node.nodeType != NodeType.portal)
-                    aStarNode.neigbours.Add(node.aStarNode);
-            }
-            else
-                aStarNode.neigbours.Add(node.aStarNode); // if we arent a portal, add all nodes
-        }
-    }
-    #endregion
 }

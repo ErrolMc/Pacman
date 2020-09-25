@@ -45,6 +45,9 @@ public class Ghost : MonoBehaviour
     [SerializeField] Sprite eyesLeft;
     [SerializeField] Sprite eyesRight;
 
+    [Header("Misc")]
+    [SerializeField] Color aStarGizmoColor = Color.white;
+
     // caches
     protected Transform trans;
     protected Rigidbody2D rb;
@@ -55,6 +58,7 @@ public class Ghost : MonoBehaviour
     protected Node homeNode;
     protected Node ghostHouse;
     protected List<AStarNode> currentAStarPath;
+    protected AStarGraph aStarGraph;
     protected float frightenedModeDuration;
 
     // state
@@ -111,6 +115,8 @@ public class Ghost : MonoBehaviour
 
         rb.MovePosition(currentPos);
 
+        if (aStarPathing)
+            aStarGraph = new AStarGraph(GameLogic.instance.CurrentLevel);
         StateInit(timings);
     }
 
@@ -265,15 +271,17 @@ public class Ghost : MonoBehaviour
     /// <returns>The next node that the ghost is moving to</returns>
     Node ChooseNextNodeAStar(ref Vector2 nextDir, bool ignoreOppositeCheck)
     {
+        Pacman pacman = GameLogic.instance.Pacman;
+
         // if frightened or scatter, we can use the default node selection
-        if (currentState == State.frightened || currentState == State.scatter)
+        if (currentState == State.frightened || currentState == State.scatter || pacman.CurrentState == Pacman.State.dead)
             return ChooseNextNode(ref nextDir, ignoreOppositeCheck);
 
         // if consumed path to the ghost house
         if (currentState == State.consumed)
-            currentAStarPath = AStar.instance.FindPath(this, ghostHouse);
+            currentAStarPath = aStarGraph.FindPath(this, ghostHouse);
         else
-            currentAStarPath = AStar.instance.FindPath(this, GameLogic.instance.Pacman); // if chase path to pacman
+            currentAStarPath = aStarGraph.FindPath(this, pacman); // if chase path to pacman
 
         // get the direction we are going in
         int len = currentAStarPath.Count;
@@ -451,11 +459,11 @@ public class Ghost : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        if (aStarPathing && (currentState == State.frightened || currentState == State.chase))
+        if (aStarPathing && (currentState == State.consumed || currentState == State.chase) && GameLogic.instance.Pacman.CurrentState != Pacman.State.dead)
         {
             if (currentAStarPath != null && currentAStarPath.Count > 1)
             {
-                Gizmos.color = Color.white;
+                Gizmos.color = aStarGizmoColor;
                 AStarNode prev = currentAStarPath[0];
                 for (int i = 1; i < currentAStarPath.Count; i++)
                 {

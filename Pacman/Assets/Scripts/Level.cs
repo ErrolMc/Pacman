@@ -22,7 +22,7 @@ public class Level : MonoBehaviour
 
     [Header("Other")]
     [SerializeField] GhostStateTiming[] ghostTimings;
-    [SerializeField] float fruitAmount = 0;
+    [SerializeField] float randomFruitAmount = 0;
 
     Node[] nodes;
     List<SpriteRenderer> pellets;
@@ -40,11 +40,14 @@ public class Level : MonoBehaviour
     public GhostStateTiming[] GhostTimings { get { return ghostTimings; } }
     public Node[] Nodes { get { return nodes; } }
 
+    /// <summary>
+    /// Sets up the level, the nodes/pellets/fruit
+    /// </summary>
     public void Setup()
     {
         nodes = nodeParent.GetComponentsInChildren<Node>();
         for (int i = 0; i < nodes.Length; i++)
-            nodes[i].Setup();
+            nodes[i].Setup(i);
 
         pellets = new List<SpriteRenderer>();
         superPellets = new List<SpriteRenderer>();
@@ -52,11 +55,15 @@ public class Level : MonoBehaviour
         ProcessSprites(pelletParent.GetComponentsInChildren<SpriteRenderer>());
         ProcessSprites(nodeParent.GetComponentsInChildren<SpriteRenderer>());
 
-        int fruit = (int)(fruitAmount * GameSettings.instance.FruitAmountMultiplier);
+        int fruit = (int)(randomFruitAmount * GameSettings.instance.FruitAmountMultiplier);
         if (fruit > 0)
             AddFruits(fruit);
     }
 
+    /// <summary>
+    /// Adds fruit randomly throughout the level in place of pellets
+    /// </summary>
+    /// <param name="amount">The amount of random fruit to add</param>
     void AddFruits(int amount)
     {
         Sprite[] fruitSprites = GameLogic.instance.fruitSprites;
@@ -74,6 +81,10 @@ public class Level : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Adds sprites into their respective fruit/pellet/superpellet lists
+    /// </summary>
+    /// <param name="sprites">Sprites to process</param>
     void ProcessSprites(SpriteRenderer[] sprites)
     {
         foreach (SpriteRenderer sprite in sprites)
@@ -95,6 +106,10 @@ public class Level : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Checks if the game should be ended
+    /// </summary>
+    /// <returns>If there are any active collectables still active</returns>
     public bool CheckGameComplete()
     {
         if (AnySpritesEnabled(pellets))
@@ -106,6 +121,11 @@ public class Level : MonoBehaviour
         return true;
     }
 
+    /// <summary>
+    /// Checks if any of a list of sprites is enabled
+    /// </summary>
+    /// <param name="sprites">Sprites to check</param>
+    /// <returns>If any of the sprites inputted are enabled</returns>
     bool AnySpritesEnabled(List<SpriteRenderer> sprites)
     {
         foreach (SpriteRenderer sprite in sprites)
@@ -116,6 +136,10 @@ public class Level : MonoBehaviour
         return false;
     }
 
+    /// <summary>
+    /// Enables/disables all the collectables
+    /// </summary>
+    /// <param name="state">The enabled state to set the collectables to</param>
     public void EnableSprites(bool state)
     {
         foreach (SpriteRenderer pellet in pellets)
