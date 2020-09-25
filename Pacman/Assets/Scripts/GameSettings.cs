@@ -23,6 +23,9 @@ public class GameSettings : MonoBehaviour
         instance = this;
     }
 
+    /// <summary>
+    /// Resets all the custom settings to defaults listed on the prefab
+    /// </summary>
     public void ResetToDefaults()
     {
         PacmanSpeedMultiplier = defaultPacmanSpeedMultiplier;

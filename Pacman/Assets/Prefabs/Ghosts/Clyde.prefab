@@ -104,7 +104,6 @@ MonoBehaviour:
   moveSpeed: 3
   frightenedMoveSpeed: 1.5
   consumedMoveSpeed: 5
-  frightenedModeDuration: 20
   upAnim: Clyde_Up
   downAnim: Clyde_Down
   leftAnim: Clyde_Left
@@ -115,6 +114,7 @@ MonoBehaviour:
     type: 3}
   eyesRight: {fileID: -8286604542853739841, guid: a56ed00e7d467e34281d2e74f195d4aa,
     type: 3}
+  aStarGizmoColor: {r: 0.9803922, g: 0.54509807, b: 0.050980397, a: 1}
 --- !u!50 &6134952954227371669
 Rigidbody2D:
   serializedVersion: 4

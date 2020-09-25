@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class AStarNode
 {
+    public int id;
+    public List<int> neigbourIDs;
+
     public Vector2 position;
     public AStarNode parent;
     public List<AStarNode> neigbours;
@@ -12,10 +15,13 @@ public class AStarNode
     public float hCost; // heurestic cost from here to end (straight line)
     public float gCost; // cost from starting point to here
 
-    public AStarNode(Vector2 position)
+    public AStarNode(int id, Vector2 position, List<int> neigbourIDs)
     {
+        this.neigbourIDs = neigbourIDs;
         neigbours = new List<AStarNode>();
+
         this.position = position;
+        this.id = id;
 
         Reset();
     }
@@ -62,19 +68,16 @@ public class AStarNodeLink
     }
 }
 
-public class AStar : MonoBehaviour
+public class AStarGraph
 {
-    public static AStar instance;
-
     List<AStarNode> nodes;
     List<AStarNodeLink> nodeLinks;
 
-    void Awake()
-    {
-        instance = this;
-    }
-
-    public void GetGraph(Level level)
+    /// <summary>
+    /// Class that wholes
+    /// </summary>
+    /// <param name="level"></param>
+    public AStarGraph(Level level)
     {
         nodes = new List<AStarNode>();
         nodeLinks = new List<AStarNodeLink>();
@@ -82,26 +85,37 @@ public class AStar : MonoBehaviour
         Node[] levelNodes = level.Nodes;
 
         // first pass, get all the nodes first
-        for (int i = 0; i < levelNodes.Length; i++)
+        foreach (Node node in levelNodes)
         {
-            if (levelNodes[i].nodeType != Node.NodeType.home)
-                nodes.Add(levelNodes[i].SetupAStar());
+            if (node.nodeType != Node.NodeType.home)
+            {
+                // get the neighbour ids so we can do the second pass to get the references
+                List<int> neigbourIDs = new List<int>();
+                foreach (Node neighbour in node.neighbours)
+                    neigbourIDs.Add(neighbour.id);
+                
+                AStarNode aStarNode = new AStarNode(node.id, node.pos, neigbourIDs);
+                nodes.Add(aStarNode);
+            }
         }
 
-        // second pass, get all the neighbours
-        for (int i = 0; i < levelNodes.Length; i++)
+        // set all the neigbour references
+        foreach (AStarNode node in nodes)
         {
-            if (levelNodes[i].nodeType != Node.NodeType.home)
-                levelNodes[i].PopulateAStarNeighbours();
+            foreach (int neighbourID in node.neigbourIDs)
+            {
+                AStarNode neighbour = GetNodeFromID(neighbourID);
+                node.neigbours.Add(neighbour);
+            }
         }
     }
 
-    AStarNode GetNodeAtPos(Vector2 pos)
+    AStarNode GetNodeFromID(int id)
     {
-        foreach (AStarNode node in nodes)
+        for (int i = 0; i < nodes.Count; i++)
         {
-            if (Vector2.Distance(node.position, pos) < Mathf.Epsilon)
-                return node;
+            if (nodes[i].id == id)
+                return nodes[i];
         }
         return null;
     }
@@ -109,11 +123,11 @@ public class AStar : MonoBehaviour
     AStarNode GetPacmanNode(Pacman pacman)
     {
         if (pacman.CurrentState == Pacman.State.idle)
-            return GetNodeAtPos(pacman.CurrentPosition);
+            return GetNodeFromID(pacman.CurrentNode.id);
 
-        AStarNode front = GetNodeAtPos(pacman.TargetNode.pos);
-        AStarNode back = GetNodeAtPos(pacman.CurrentNode.pos);
-        AStarNode middle = new AStarNode(pacman.CurrentPosition);
+        AStarNode front = GetNodeFromID(pacman.TargetNode.id);
+        AStarNode back = GetNodeFromID(pacman.CurrentNode.id);
+        AStarNode middle = new AStarNode(-1, pacman.CurrentPosition, null);
 
         nodeLinks.Add(new AStarNodeLink(front, back, middle));
 
@@ -123,11 +137,11 @@ public class AStar : MonoBehaviour
     AStarNode GetGhostNode(Ghost ghost)
     {
         if (ghost.CurrentState == Ghost.State.inHouse)
-            return GetNodeAtPos(ghost.CurrentPosition);
+            return GetNodeFromID(ghost.CurrentNode.id);
 
-        AStarNode front = GetNodeAtPos(ghost.TargetNode.pos);
-        AStarNode back = GetNodeAtPos(ghost.CurrentNode.pos);
-        AStarNode middle = new AStarNode(ghost.CurrentPosition);
+        AStarNode front = GetNodeFromID(ghost.TargetNode.id);
+        AStarNode back = GetNodeFromID(ghost.CurrentNode.id);
+        AStarNode middle = new AStarNode(-1, ghost.CurrentPosition, null);
 
         nodeLinks.Add(new AStarNodeLink(front, back, middle));
 
@@ -137,7 +151,7 @@ public class AStar : MonoBehaviour
     public List<AStarNode> FindPath(Ghost ghost, Node node)
     {
         AStarNode start = GetGhostNode(ghost);
-        AStarNode end = node.aStarNode;
+        AStarNode end = GetNodeFromID(node.id);
 
         return FindPath(start, end);
     }
@@ -185,8 +199,8 @@ public class AStar : MonoBehaviour
                 List<AStarNode> output = new List<AStarNode>() { current };
                 while (current.parent != null)
                 {
-                    output.Add(current.parent);
                     current = current.parent;
+                    output.Add(current);
                 }
                 output.RemoveAt(output.Count - 1);
 
