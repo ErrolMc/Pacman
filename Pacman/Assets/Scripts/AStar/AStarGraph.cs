@@ -2,81 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AStarNode
-{
-    public int id;
-    public List<int> neigbourIDs;
-
-    public Vector2 position;
-    public AStarNode parent;
-    public List<AStarNode> neigbours;
-
-    public float fCost { get { return gCost + hCost; } } // gCost + hCost
-    public float hCost; // heurestic cost from here to end (straight line)
-    public float gCost; // cost from starting point to here
-
-    public AStarNode(int id, Vector2 position, List<int> neigbourIDs)
-    {
-        this.neigbourIDs = neigbourIDs;
-        neigbours = new List<AStarNode>();
-
-        this.position = position;
-        this.id = id;
-
-        Reset();
-    }
-
-    public void Reset()
-    {
-        parent = null;
-        hCost = 0;
-        gCost = float.MaxValue;
-    }
-}
-
-public class AStarNodeLink
-{
-    AStarNode front;
-    AStarNode back;
-    AStarNode middle;
-
-    public AStarNodeLink(AStarNode front, AStarNode back, AStarNode middle)
-    {
-        this.front = front;
-        this.back = back;
-        this.middle = middle;
-
-        front.neigbours.Remove(back);
-        front.neigbours.Add(middle);
-
-        back.neigbours.Remove(front);
-        back.neigbours.Add(middle);
-
-        middle.neigbours.Add(front);
-        middle.neigbours.Add(back);
-    }
-
-    public void Reset()
-    {
-        middle.neigbours.Clear();
-
-        front.neigbours.Remove(middle);
-        front.neigbours.Add(back);
-
-        back.neigbours.Remove(middle);
-        back.neigbours.Add(front);
-    }
-}
-
+/// <summary>
+/// A representation of the game world that the AStar algorithim understands to allow for pathfinding
+/// </summary>
 public class AStarGraph
 {
     List<AStarNode> nodes;
     List<AStarNodeLink> nodeLinks;
 
     /// <summary>
-    /// Class that wholes
+    /// Creates the graph for a level
     /// </summary>
-    /// <param name="level"></param>
+    /// <param name="level">The level to create the graph for</param>
     public AStarGraph(Level level)
     {
         nodes = new List<AStarNode>();
@@ -110,6 +47,11 @@ public class AStarGraph
         }
     }
 
+    /// <summary>
+    /// Gets a AStarNode based on its parents node id
+    /// </summary>
+    /// <param name="id">The node id of the node to get</param>
+    /// <returns>The AStarNode that corresponds to the node id</returns>
     AStarNode GetNodeFromID(int id)
     {
         for (int i = 0; i < nodes.Count; i++)
@@ -120,6 +62,12 @@ public class AStarGraph
         return null;
     }
 
+    /// <summary>
+    /// Returns an AStarNode representing where pacman is.
+    /// Will create new AStarNodes if pacman isnt still on a node.
+    /// </summary>
+    /// <param name="pacman">The pacman to get the node from</param>
+    /// <returns>The AStarNode that represents where pacman is on the board</returns>
     AStarNode GetPacmanNode(Pacman pacman)
     {
         if (pacman.CurrentState == Pacman.State.idle)
@@ -134,6 +82,12 @@ public class AStarGraph
         return middle;
     }
 
+    /// <summary>
+    /// Returns an AStarNode represenmting where a ghost is.
+    /// Will create new AStarNodes if the ghost isnt still on a node.
+    /// </summary>
+    /// <param name="ghost">The ghost to get the node from</param>
+    /// <returns>The AStarNode that represents where the ghost is on the board</returns>
     AStarNode GetGhostNode(Ghost ghost)
     {
         if (ghost.CurrentState == Ghost.State.inHouse)
@@ -148,6 +102,12 @@ public class AStarGraph
         return middle;
     }
 
+    /// <summary>
+    /// Finds a path from a ghost to a node
+    /// </summary>
+    /// <param name="ghost">The ghost to path from</param>
+    /// <param name="node">The node to path to</param>
+    /// <returns>A path from the ghost to the node</returns>
     public List<AStarNode> FindPath(Ghost ghost, Node node)
     {
         AStarNode start = GetGhostNode(ghost);
@@ -156,6 +116,12 @@ public class AStarGraph
         return FindPath(start, end);
     }
 
+    /// <summary>
+    /// Finds a path from a ghost to pacman
+    /// </summary>
+    /// <param name="ghost">The ghost to path from</param>
+    /// <param name="pacman">The pacman to path to</param>
+    /// <returns>A path from the ghost to pacman</returns>
     public List<AStarNode> FindPath(Ghost ghost, Pacman pacman)
     {
         AStarNode start = GetGhostNode(ghost);
@@ -164,6 +130,12 @@ public class AStarGraph
         return FindPath(start, end);
     }
 
+    /// <summary>
+    /// Finds a path from a start and end node
+    /// </summary>
+    /// <param name="start">The start node in the path</param>
+    /// <param name="end">The end node in the path</param>
+    /// <returns>The path from the start to the end node</returns>
     public List<AStarNode> FindPath(AStarNode start, AStarNode end)
     {
         for (int i = 0; i < nodes.Count; i++)

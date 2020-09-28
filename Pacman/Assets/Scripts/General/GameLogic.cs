@@ -81,9 +81,9 @@ public class GameLogic : MonoBehaviour
         // spawn the ghosts
         ghosts = new List<Ghost>();
         SpawnGhost(Ghost.Type.blinky, true);
-        SpawnGhost(Ghost.Type.pinky);
-        SpawnGhost(Ghost.Type.inky);
-        SpawnGhost(Ghost.Type.clyde);
+        SpawnGhost(Ghost.Type.pinky, true);
+        SpawnGhost(Ghost.Type.inky, true);
+        SpawnGhost(Ghost.Type.clyde, true);
 
         score = startingScore;
         GameScreen.instance.SetScoreText(score);
