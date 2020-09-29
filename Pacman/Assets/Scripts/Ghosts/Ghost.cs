@@ -57,7 +57,7 @@ public class Ghost : MonoBehaviour
     protected Node targetNode;
     protected Node homeNode;
     protected Node ghostHouse;
-    protected List<AStarNode> currentAStarPath;
+    protected List<Vector2> currentAStarPath;
     protected AStarGraph aStarGraph;
     protected float frightenedModeDuration;
 
@@ -287,9 +287,9 @@ public class Ghost : MonoBehaviour
         int len = currentAStarPath.Count;
         if (len >= 2)
         {
-            AStarNode cur = currentAStarPath[len - 1];
-            AStarNode next = currentAStarPath[len - 2];
-            Vector2 dir = (next.position - cur.position).normalized;
+            Vector2 cur = currentAStarPath[len - 1];
+            Vector2 next = currentAStarPath[len - 2];
+            Vector2 dir = (next - cur).normalized;
 
             // find the node thats in the direction
             for (int i = 0; i < currentNode.neighbours.Length; i++)
@@ -464,11 +464,11 @@ public class Ghost : MonoBehaviour
             if (currentAStarPath != null && currentAStarPath.Count > 1)
             {
                 Gizmos.color = aStarGizmoColor;
-                AStarNode prev = currentAStarPath[0];
+                Vector2 prev = currentAStarPath[0];
                 for (int i = 1; i < currentAStarPath.Count; i++)
                 {
-                    AStarNode cur = currentAStarPath[i];
-                    Gizmos.DrawLine(prev.position, cur.position);
+                    Vector2 cur = currentAStarPath[i];
+                    Gizmos.DrawLine(prev, cur);
 
                     prev = cur;
                 }

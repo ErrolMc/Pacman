@@ -108,7 +108,7 @@ public class AStarGraph
     /// <param name="ghost">The ghost to path from</param>
     /// <param name="node">The node to path to</param>
     /// <returns>A path from the ghost to the node</returns>
-    public List<AStarNode> FindPath(Ghost ghost, Node node)
+    public List<Vector2> FindPath(Ghost ghost, Node node)
     {
         AStarNode start = GetGhostNode(ghost);
         AStarNode end = GetNodeFromID(node.id);
@@ -122,7 +122,7 @@ public class AStarGraph
     /// <param name="ghost">The ghost to path from</param>
     /// <param name="pacman">The pacman to path to</param>
     /// <returns>A path from the ghost to pacman</returns>
-    public List<AStarNode> FindPath(Ghost ghost, Pacman pacman)
+    public List<Vector2> FindPath(Ghost ghost, Pacman pacman)
     {
         AStarNode start = GetGhostNode(ghost);
         AStarNode end = GetPacmanNode(pacman);
@@ -136,7 +136,7 @@ public class AStarGraph
     /// <param name="start">The start node in the path</param>
     /// <param name="end">The end node in the path</param>
     /// <returns>The path from the start to the end node</returns>
-    public List<AStarNode> FindPath(AStarNode start, AStarNode end)
+    public List<Vector2> FindPath(AStarNode start, AStarNode end)
     {
         for (int i = 0; i < nodes.Count; i++)
             nodes[i].Reset();
@@ -168,11 +168,11 @@ public class AStarGraph
             // if current is goal, end
             if (current == end)
             {
-                List<AStarNode> output = new List<AStarNode>() { current };
+                List<Vector2> output = new List<Vector2>() { current.position };
                 while (current.parent != null)
                 {
                     current = current.parent;
-                    output.Add(current);
+                    output.Add(current.position);
                 }
                 output.RemoveAt(output.Count - 1);
 
