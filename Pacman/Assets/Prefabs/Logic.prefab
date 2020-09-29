@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8471738574790805911}
   - component: {fileID: 8471738574790805910}
   - component: {fileID: 4483208917285884935}
+  - component: {fileID: 444882580}
   m_Layer: 0
   m_Name: Logic
   m_TagString: Untagged
@@ -86,3 +87,16 @@ MonoBehaviour:
   defaultFruitScore: 10
   defaultGhostEatScore: 20
   defaultSuperPelletScore: 5
+--- !u!114 &444882580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8471738574790805909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 636c961b9ee231b4aabfd30c33c98c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHighScores: 5

@@ -29,10 +29,7 @@ public class NewHighScore : Panel
 
     public void OnClick_Continue()
     {
-        HighScoreContainer highScores = HighScoreContainer.Load();
-        highScores.AddHighScore(new HighScore(inputName, score));
-        highScores.Save();
-
+        HighScoreManager.instance.AddHighScore(inputName, score);
         PanelManager.instance.ShowPanel(PanelID.GameOver);
     }
 }

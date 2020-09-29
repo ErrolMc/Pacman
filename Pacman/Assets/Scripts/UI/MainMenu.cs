@@ -8,7 +8,7 @@ public class MainMenu : Panel
 
     public override void OnShow()
     {
-        highScoreButton.SetActive(HighScoreContainer.Load().GetSortedScores().Count > 0);
+        highScoreButton.SetActive(HighScoreManager.instance.GetSortedScores().Count > 0);
     }
 
     public void StartGame(int players)

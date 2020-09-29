@@ -10,8 +10,7 @@ public class GameOver : Panel
 
     public override void OnShow()
     {
-        HighScoreContainer highScoreContainer = HighScoreContainer.Load();
-        List<HighScore> highScores = highScoreContainer.GetSortedScores();
+        List<HighScore> highScores = HighScoreManager.instance.GetSortedScores();
 
         if (highScores.Count > 0)
         {

@@ -14,8 +14,7 @@ public class HighScorePanel : Panel
         scoreObjects = new List<TextMeshProUGUI>();
         scoreTemplate.gameObject.SetActive(false);
 
-        HighScoreContainer highScoreContainer = HighScoreContainer.Load();
-        List<HighScore> highScores = highScoreContainer.GetSortedScores();
+        List<HighScore> highScores = HighScoreManager.instance.GetSortedScores();
 
         Transform templateTrans = scoreTemplate.transform;
         for (int i = 0; i < highScores.Count; i++)

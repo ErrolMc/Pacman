@@ -226,8 +226,7 @@ public class GameLogic : MonoBehaviour
         }
         else
         {
-            HighScoreContainer highScores = HighScoreContainer.Load();
-            if (highScores.CanAddScore(score))
+            if (HighScoreManager.instance.CanAddScore(score))
                 PanelManager.instance.ShowPanel(PanelID.NewHighScore);
             else
                 PanelManager.instance.ShowPanel(PanelID.GameOver);
