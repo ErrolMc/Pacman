@@ -31,17 +31,41 @@ public class Customisation : Panel
         InitInputField(superPelletScore_IF, GameSettings.instance.SuperPelletScore, GameSettings.instance.defaultSuperPelletScore);
     }
 
-    public override void OnHide()
+    public void OnEndEditField(string field)
     {
-        GameSettings.instance.PacmanSpeedMultiplier = GetInputFieldValue(pacmanSpeedMultiplier_IF);
-        GameSettings.instance.GhostSpeedMultiplier = GetInputFieldValue(ghostSpeedMultiplier_IF);
-        GameSettings.instance.FruitAmountMultiplier = GetInputFieldValue(fruitAmountMultiplier_IF);
-        GameSettings.instance.GhostFrightenedDuration = (int)GetInputFieldValue(ghostFrightenedDuration_IF);
-        GameSettings.instance.GhostFrightenedSpeedMultiplier = GetInputFieldValue(ghostFrightenedSpeedMultiplier_IF);
-        GameSettings.instance.PelletScore = (int)GetInputFieldValue(pelletScore_IF);
-        GameSettings.instance.FruitScore = (int)GetInputFieldValue(fruitScore_IF);
-        GameSettings.instance.GhostEatScore = (int)GetInputFieldValue(ghostEatScore_IF);
-        GameSettings.instance.SuperPelletScore = (int)GetInputFieldValue(superPelletScore_IF);
+        switch (field)
+        {
+            case "PacmanSpeedMultiplier":
+                GameSettings.instance.PacmanSpeedMultiplier = GetInputFieldValue(pacmanSpeedMultiplier_IF);
+                break;
+            case "GhostSpeedMultiplier":
+                GameSettings.instance.GhostSpeedMultiplier = GetInputFieldValue(ghostSpeedMultiplier_IF);
+                break;
+            case "FruitAmountMultiplier":
+                GameSettings.instance.FruitAmountMultiplier = GetInputFieldValue(fruitAmountMultiplier_IF);
+                break;
+            case "GhostFrightenedSpeedMultiplier":
+                GameSettings.instance.GhostFrightenedSpeedMultiplier = GetInputFieldValue(ghostFrightenedSpeedMultiplier_IF);
+                break;
+            case "GhostConsumedSpeedMultiplier":
+                GameSettings.instance.GhostConsumedSpeedMultiplier = GetInputFieldValue(ghostConsumedSpeedMultiplier_IF);
+                break;
+            case "GhostFrightenedDuration":
+                GameSettings.instance.GhostFrightenedDuration = (int)GetInputFieldValue(ghostFrightenedDuration_IF);
+                break;
+            case "PelletScore":
+                GameSettings.instance.PelletScore = (int)GetInputFieldValue(pelletScore_IF);
+                break;
+            case "FruitScore":
+                GameSettings.instance.FruitScore = (int)GetInputFieldValue(fruitScore_IF);
+                break;
+            case "GhostEatScore":
+                GameSettings.instance.GhostEatScore = (int)GetInputFieldValue(ghostEatScore_IF);
+                break;
+            case "SuperPelletScore":
+                GameSettings.instance.SuperPelletScore = (int)GetInputFieldValue(superPelletScore_IF);
+                break;
+        }
     }
 
     void InitInputField(InputField field, float value, float defaultValiue)
