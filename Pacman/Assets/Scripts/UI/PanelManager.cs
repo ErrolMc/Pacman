@@ -20,7 +20,7 @@ public class PanelManager : MonoBehaviour
     /// <summary>
     /// Called when the game first opens, gets the panel list from the child objects
     /// </summary>
-    void Awake()
+    void Start()
     {
         instance = this;
 

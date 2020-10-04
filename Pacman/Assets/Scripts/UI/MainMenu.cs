@@ -14,7 +14,8 @@ public class MainMenu : Panel
     /// </summary>
     public override void OnShow()
     {
-        highScoreButton.SetActive(HighScoreManager.instance.GetSortedScores().Count > 0);
+        bool hasScores = HighScoreManager.instance.GetSortedScores().Count > 0;
+        highScoreButton.SetActive(hasScores);
     }
 
     /// <summary>
