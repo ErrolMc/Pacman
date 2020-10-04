@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that represents a node on the level that pacman/ghosts can navigate between
+/// </summary>
 public class Node : MonoBehaviour
 {
     public int id;
@@ -20,6 +23,10 @@ public class Node : MonoBehaviour
     [HideInInspector] public Vector2[] directions;
     [HideInInspector] public Vector2 pos;
 
+    /// <summary>
+    /// Sets up this node and all its neigbours
+    /// </summary>
+    /// <param name="id">The id of the node</param>
     public void Setup(int id)
     {
         this.id = id;

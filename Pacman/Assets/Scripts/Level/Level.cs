@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that represents a level with all its components
+/// </summary>
 public class Level : MonoBehaviour
 {
     [Header("Starting Nodes")]

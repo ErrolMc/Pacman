@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Class that manages the logic for the HighScore panel
+/// </summary>
 public class HighScorePanel : Panel
 {
     [SerializeField] TextMeshProUGUI scoreTemplate;
 
     List<TextMeshProUGUI> scoreObjects;
 
+    /// <summary>
+    /// Called when the panel first opens
+    /// Spawns all the highscores to the screen
+    /// </summary>
     public override void OnShow()
     {
         scoreObjects = new List<TextMeshProUGUI>();
@@ -34,6 +41,10 @@ public class HighScorePanel : Panel
         }
     }
 
+    /// <summary>
+    /// Called when the panel closes
+    /// Despawns the highscore objects that are currently on the screen
+    /// </summary>
     public override void OnHide()
     {
         for (int i = 0; i < scoreObjects.Count; i++)

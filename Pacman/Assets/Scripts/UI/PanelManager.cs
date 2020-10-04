@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that manages all the panels and the navigation between them
+/// </summary>
 public class PanelManager : MonoBehaviour
 {
     public static PanelManager instance;
@@ -14,6 +17,9 @@ public class PanelManager : MonoBehaviour
 
     public PanelID CurrentPanel { get { return currentPanel.panelID; } }
 
+    /// <summary>
+    /// Called when the game first opens, gets the panel list from the child objects
+    /// </summary>
     void Awake()
     {
         instance = this;

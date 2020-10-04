@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Class that manages all the customisable Game Settings
+/// </summary>
 public class GameSettings : MonoBehaviour
 {
     public static GameSettings instance;
@@ -18,6 +21,9 @@ public class GameSettings : MonoBehaviour
     public int defaultGhostEatScore = 20;
     public int defaultSuperPelletScore = 5;
 
+    /// <summary>
+    /// Initialises this class instance
+    /// </summary>
     void Awake()
     {
         instance = this;
@@ -159,5 +165,4 @@ public class GameSettings : MonoBehaviour
             PlayerPrefs.SetInt("SuperPelletScore", value);
         }
     }
-
 }

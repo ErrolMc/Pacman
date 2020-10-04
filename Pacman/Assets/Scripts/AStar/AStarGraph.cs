@@ -136,7 +136,7 @@ public class AStarGraph
     /// <param name="start">The start node in the path</param>
     /// <param name="end">The end node in the path</param>
     /// <returns>The path from the start to the end node</returns>
-    public List<Vector2> FindPath(AStarNode start, AStarNode end)
+    List<Vector2> FindPath(AStarNode start, AStarNode end)
     {
         for (int i = 0; i < nodes.Count; i++)
             nodes[i].Reset();

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Class that manages the logic for the customisation panel
+/// </summary>
 public class Customisation : Panel
 {
     [Header("Input fields")]
@@ -17,6 +20,10 @@ public class Customisation : Panel
     [SerializeField] InputField ghostEatScore_IF;
     [SerializeField] InputField superPelletScore_IF;
 
+    /// <summary>
+    /// Called when the panel first opens
+    /// Initialises the input fields with the numbers that are stored in GameSettings
+    /// </summary>
     public override void OnShow()
     {
         InitInputField(pacmanSpeedMultiplier_IF, GameSettings.instance.PacmanSpeedMultiplier, GameSettings.instance.defaultPacmanSpeedMultiplier);
@@ -31,6 +38,11 @@ public class Customisation : Panel
         InitInputField(superPelletScore_IF, GameSettings.instance.SuperPelletScore, GameSettings.instance.defaultSuperPelletScore);
     }
 
+    /// <summary>
+    /// Event callback for when the user has finished editing any of the input fields
+    /// Gets the input field identifier and updates the value in GameSettings
+    /// </summary>
+    /// <param name="field">The setting identifier</param>
     public void OnEndEditField(string field)
     {
         switch (field)
@@ -68,12 +80,23 @@ public class Customisation : Panel
         }
     }
 
+    /// <summary>
+    /// Initialises an input field by setting the current and default values
+    /// </summary>
+    /// <param name="field">The input field to initialise</param>
+    /// <param name="value">The current value of the input field to set</param>
+    /// <param name="defaultValiue">The default value of the input field to set</param>
     void InitInputField(InputField field, float value, float defaultValiue)
     {
         field.text = value.ToString();
         field.placeholder.GetComponent<Text>().text = defaultValiue.ToString();
     }
 
+    /// <summary>
+    /// Gets the value from an input field as a float
+    /// </summary>
+    /// <param name="field">The inputfield to get the value from</param>
+    /// <returns>The value assigned to that input field</returns>
     float GetInputFieldValue(InputField field)
     {
         if (string.IsNullOrEmpty(field.text))
@@ -81,6 +104,9 @@ public class Customisation : Panel
         return float.Parse(field.text);
     }
 
+    /// <summary>
+    /// Resets all the settings back to their defaults
+    /// </summary>
     public void OnClick_Reset()
     {
         GameSettings.instance.ResetToDefaults();
