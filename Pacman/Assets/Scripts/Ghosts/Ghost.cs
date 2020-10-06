@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The base ghost class which contains the logic for the red ghost
+/// </summary>
 public class Ghost : MonoBehaviour
 {
     public enum State

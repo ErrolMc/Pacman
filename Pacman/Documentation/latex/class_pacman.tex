@@ -23,10 +23,13 @@ enum {\bfseries State} \{ {\bfseries idle},
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_pacman_af5ecaec1c9181a6853c0e0ea1505fbeb}{Init}} (\mbox{\hyperlink{class_node}{Node}} starting\+Node)
+void \mbox{\hyperlink{class_pacman_a94ff797f5ffa8aaecd0a60388432a9c9}{Init}} (\mbox{\hyperlink{class_node}{Node}} starting\+Node, int player)
 \begin{DoxyCompactList}\small\item\em Sets up pacman \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Properties}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_pacman_a84f9246ca436de7e8541c23f44759792}\label{class_pacman_a84f9246ca436de7e8541c23f44759792}} 
+int {\bfseries Player}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \item 
 \mbox{\Hypertarget{class_pacman_afb78d6ae7d05b5d4e23c6d93c188b754}\label{class_pacman_afb78d6ae7d05b5d4e23c6d93c188b754}} 
 State {\bfseries Current\+State}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
@@ -34,8 +37,17 @@ State {\bfseries Current\+State}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \mbox{\Hypertarget{class_pacman_a0f0bf5729283cc58f7a8f523f9429ad0}\label{class_pacman_a0f0bf5729283cc58f7a8f523f9429ad0}} 
 Vector2 {\bfseries Current\+Direction}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \item 
+\mbox{\Hypertarget{class_pacman_ad80668c7b0c4669a71205d6de4b6526b}\label{class_pacman_ad80668c7b0c4669a71205d6de4b6526b}} 
+Vector2 {\bfseries Current\+Position\+Rounded}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
 \mbox{\Hypertarget{class_pacman_a32c7d8d0564cf44e7538226a80748841}\label{class_pacman_a32c7d8d0564cf44e7538226a80748841}} 
 Vector2 {\bfseries Current\+Position}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_pacman_a6a04e45b2d5613804c6f1190c576cade}\label{class_pacman_a6a04e45b2d5613804c6f1190c576cade}} 
+\mbox{\hyperlink{class_node}{Node}} {\bfseries Current\+Node}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_pacman_a273cf3ecda09093719f907be7182c5e0}\label{class_pacman_a273cf3ecda09093719f907be7182c5e0}} 
+\mbox{\hyperlink{class_node}{Node}} {\bfseries Target\+Node}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \end{DoxyCompactItemize}
 
 
@@ -45,11 +57,11 @@ A class that houses all the behaivour for pacman
 
 
 \doxysubsection{Member Function Documentation}
-\mbox{\Hypertarget{class_pacman_af5ecaec1c9181a6853c0e0ea1505fbeb}\label{class_pacman_af5ecaec1c9181a6853c0e0ea1505fbeb}} 
+\mbox{\Hypertarget{class_pacman_a94ff797f5ffa8aaecd0a60388432a9c9}\label{class_pacman_a94ff797f5ffa8aaecd0a60388432a9c9}} 
 \index{Pacman@{Pacman}!Init@{Init}}
 \index{Init@{Init}!Pacman@{Pacman}}
 \doxysubsubsection{\texorpdfstring{Init()}{Init()}}
-{\footnotesize\ttfamily void Pacman.\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{starting\+Node }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Pacman.\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{starting\+Node,  }\item[{int}]{player }\end{DoxyParamCaption})}
 
 
 
@@ -64,4 +76,4 @@ Sets up pacman
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/Pacman.\+cs\end{DoxyCompactItemize}
+F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/\+General/Pacman.\+cs\end{DoxyCompactItemize}

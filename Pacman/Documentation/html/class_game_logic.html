@@ -66,11 +66,15 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="#properties">Properties</a> &#124;
 <a href="class_game_logic-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">GameLogic Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Center point for the game, contains and manages references for the current level/ghosts/pacman  
+ <a href="class_game_logic.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for GameLogic:</div>
 <div class="dyncontent">
@@ -80,6 +84,9 @@ Inheritance diagram for GameLogic:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ae48030f1aa4d9f3472c56d52e2c9e179"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#ae48030f1aa4d9f3472c56d52e2c9e179">StartLevel</a> (int levelNumber, int players, int startingScore=0)</td></tr>
+<tr class="memdesc:ae48030f1aa4d9f3472c56d52e2c9e179"><td class="mdescLeft">&#160;</td><td class="mdescRight">Starts a level with x amount of players  <a href="class_game_logic.html#ae48030f1aa4d9f3472c56d52e2c9e179">More...</a><br /></td></tr>
+<tr class="separator:ae48030f1aa4d9f3472c56d52e2c9e179"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fdc1e744ef0bbb17d426e54ec1c68fb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#a1fdc1e744ef0bbb17d426e54ec1c68fb">AddScore</a> (int value)</td></tr>
 <tr class="memdesc:a1fdc1e744ef0bbb17d426e54ec1c68fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds score to the score counter  <a href="class_game_logic.html#a1fdc1e744ef0bbb17d426e54ec1c68fb">More...</a><br /></td></tr>
 <tr class="separator:a1fdc1e744ef0bbb17d426e54ec1c68fb"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -89,23 +96,46 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af2a2a4ef6d2fd4077ad3ef1dd62cc7ff"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="class_ghost.html">Ghost</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#af2a2a4ef6d2fd4077ad3ef1dd62cc7ff">GetAllGhosts</a> ()</td></tr>
 <tr class="memdesc:af2a2a4ef6d2fd4077ad3ef1dd62cc7ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Public getter for ghost list  <a href="class_game_logic.html#af2a2a4ef6d2fd4077ad3ef1dd62cc7ff">More...</a><br /></td></tr>
 <tr class="separator:af2a2a4ef6d2fd4077ad3ef1dd62cc7ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad4a9122dad9d0bec94a397e243db7024"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#ad4a9122dad9d0bec94a397e243db7024">ResetGame</a> (float delay=0)</td></tr>
-<tr class="memdesc:ad4a9122dad9d0bec94a397e243db7024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the game  <a href="class_game_logic.html#ad4a9122dad9d0bec94a397e243db7024">More...</a><br /></td></tr>
-<tr class="separator:ad4a9122dad9d0bec94a397e243db7024"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58dfd47f90247c553f7f9b51aea36d16"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#a58dfd47f90247c553f7f9b51aea36d16">EndGame</a> (float delay, bool won)</td></tr>
+<tr class="memdesc:a58dfd47f90247c553f7f9b51aea36d16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the game  <a href="class_game_logic.html#a58dfd47f90247c553f7f9b51aea36d16">More...</a><br /></td></tr>
+<tr class="separator:a58dfd47f90247c553f7f9b51aea36d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3d48bc20523e8c284c1dc14b097f630"><td class="memItemLeft" align="right" valign="top"><a id="ac3d48bc20523e8c284c1dc14b097f630"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>SpawnScoreText</b> (Vector2 position, float duration, int score)</td></tr>
+<tr class="separator:ac3d48bc20523e8c284c1dc14b097f630"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9ccdfefa5186e6d3ef31775853883631"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_game_logic.html#a9ccdfefa5186e6d3ef31775853883631">SpawnGhostEatText</a> (<a class="el" href="class_pacman.html">Pacman</a> pacman, <a class="el" href="class_ghost.html">Ghost</a> ghost, float duration, int score)</td></tr>
+<tr class="memdesc:a9ccdfefa5186e6d3ef31775853883631"><td class="mdescLeft">&#160;</td><td class="mdescRight">Spawns the text for when pacman eats a ghost and waits a given duration  <a href="class_game_logic.html#a9ccdfefa5186e6d3ef31775853883631">More...</a><br /></td></tr>
+<tr class="separator:a9ccdfefa5186e6d3ef31775853883631"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a1c93d810c077a32dbd3b6738528933af"><td class="memItemLeft" align="right" valign="top"><a id="a1c93d810c077a32dbd3b6738528933af"></a>
-<a class="el" href="class_pacman.html">Pacman</a>&#160;</td><td class="memItemRight" valign="bottom"><b>pacman</b></td></tr>
-<tr class="separator:a1c93d810c077a32dbd3b6738528933af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cf4eaf26c6ac74d6df8b4d45bda22fa"><td class="memItemLeft" align="right" valign="top"><a id="a3cf4eaf26c6ac74d6df8b4d45bda22fa"></a>
+Sprite[]&#160;</td><td class="memItemRight" valign="bottom"><b>fruitSprites</b></td></tr>
+<tr class="separator:a3cf4eaf26c6ac74d6df8b4d45bda22fa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8c1ed8ba4c4d43f7fbcda6fee0f40c6"><td class="memItemLeft" align="right" valign="top"><a id="aa8c1ed8ba4c4d43f7fbcda6fee0f40c6"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>score</b></td></tr>
+<tr class="separator:aa8c1ed8ba4c4d43f7fbcda6fee0f40c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
 <tr class="memitem:a96f4021dff11e0f67601a58893aafdff"><td class="memItemLeft" align="right" valign="top"><a id="a96f4021dff11e0f67601a58893aafdff"></a>
 static <a class="el" href="class_game_logic.html">GameLogic</a>&#160;</td><td class="memItemRight" valign="bottom"><b>instance</b></td></tr>
 <tr class="separator:a96f4021dff11e0f67601a58893aafdff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
+Properties</h2></td></tr>
+<tr class="memitem:ad7bdff493ea0d2fa65e8764471ce2e49"><td class="memItemLeft" align="right" valign="top"><a id="ad7bdff493ea0d2fa65e8764471ce2e49"></a>
+<a class="el" href="class_pacman.html">Pacman</a>&#160;</td><td class="memItemRight" valign="bottom"><b>Pacman</b><code> [get]</code></td></tr>
+<tr class="separator:ad7bdff493ea0d2fa65e8764471ce2e49"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a95f4c5021d0abf394dc3306f9eed04c7"><td class="memItemLeft" align="right" valign="top"><a id="a95f4c5021d0abf394dc3306f9eed04c7"></a>
+<a class="el" href="class_level.html">Level</a>&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentLevel</b><code> [get]</code></td></tr>
+<tr class="separator:a95f4c5021d0abf394dc3306f9eed04c7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2ea1b8e42930ca26fbddaf55fbdf0ed8"><td class="memItemLeft" align="right" valign="top"><a id="a2ea1b8e42930ca26fbddaf55fbdf0ed8"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Players</b><code> [get]</code></td></tr>
+<tr class="separator:a2ea1b8e42930ca26fbddaf55fbdf0ed8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Center point for the game, contains and manages references for the current level/ghosts/pacman </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a1fdc1e744ef0bbb17d426e54ec1c68fb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1fdc1e744ef0bbb17d426e54ec1c68fb">&#9670;&nbsp;</a></span>AddScore()</h2>
 
@@ -126,6 +156,42 @@ static <a class="el" href="class_game_logic.html">GameLogic</a>&#160;</td><td cl
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>The amount of score to add</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a58dfd47f90247c553f7f9b51aea36d16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a58dfd47f90247c553f7f9b51aea36d16">&#9670;&nbsp;</a></span>EndGame()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameLogic.EndGame </td>
+          <td>(</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>delay</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>won</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resets the game </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">delay</td><td>A delay before resetting the board</td></tr>
   </table>
   </dd>
 </dl>
@@ -179,26 +245,94 @@ static <a class="el" href="class_game_logic.html">GameLogic</a>&#160;</td><td cl
 
 </div>
 </div>
-<a id="ad4a9122dad9d0bec94a397e243db7024"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad4a9122dad9d0bec94a397e243db7024">&#9670;&nbsp;</a></span>ResetGame()</h2>
+<a id="a9ccdfefa5186e6d3ef31775853883631"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9ccdfefa5186e6d3ef31775853883631">&#9670;&nbsp;</a></span>SpawnGhostEatText()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void GameLogic.ResetGame </td>
+          <td class="memname">void GameLogic.SpawnGhostEatText </td>
           <td>(</td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>delay</em> = <code>0</code></td><td>)</td>
+          <td class="paramtype"><a class="el" href="class_pacman.html">Pacman</a>&#160;</td>
+          <td class="paramname"><em>pacman</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype"><a class="el" href="class_ghost.html">Ghost</a>&#160;</td>
+          <td class="paramname"><em>ghost</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>duration</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>score</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Resets the game </p>
+<p>Spawns the text for when pacman eats a ghost and waits a given duration </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">delay</td><td>A delay before resetting the board</td></tr>
+    <tr><td class="paramname">pacman</td><td>The pacman responsible for where the text is going to be spawned</td></tr>
+    <tr><td class="paramname">ghost</td><td>The ghost pacman ate</td></tr>
+    <tr><td class="paramname">duration</td><td>The duration the game will pause for</td></tr>
+    <tr><td class="paramname">score</td><td>The score on the text</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ae48030f1aa4d9f3472c56d52e2c9e179"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae48030f1aa4d9f3472c56d52e2c9e179">&#9670;&nbsp;</a></span>StartLevel()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GameLogic.StartLevel </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>levelNumber</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>players</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>startingScore</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Starts a level with x amount of players </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">levelNumber</td><td>The level to start</td></tr>
+    <tr><td class="paramname">players</td><td>The amount of players</td></tr>
   </table>
   </dd>
 </dl>
@@ -206,7 +340,7 @@ static <a class="el" href="class_game_logic.html">GameLogic</a>&#160;</td><td cl
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>F:/UnityProjects/Not work/Pacman/Pacman/Assets/Scripts/GameLogic.cs</li>
+<li>F:/UnityProjects/Not work/Pacman/Pacman/Assets/Scripts/General/GameLogic.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

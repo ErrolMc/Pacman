@@ -1,5 +1,10 @@
 \hypertarget{class_node}{}\doxysection{Node Class Reference}
 \label{class_node}\index{Node@{Node}}
+
+
+Class that represents a node on the level that pacman/ghosts can navigate between  
+
+
 Inheritance diagram for Node\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -12,17 +17,20 @@ Inheritance diagram for Node\+:\begin{figure}[H]
 \mbox{\Hypertarget{class_node_aa54866b6c55527f3db0384692db1a467}\label{class_node_aa54866b6c55527f3db0384692db1a467}} 
 enum {\bfseries Node\+Type} \{ {\bfseries regular}, 
 {\bfseries ghost\+House}, 
-{\bfseries portal}
+{\bfseries portal}, 
+{\bfseries home}
  \}
 \end{DoxyCompactItemize}
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_node_a2caee67b990fdecae480b9f20c3b7316}\label{class_node_a2caee67b990fdecae480b9f20c3b7316}} 
-void {\bfseries Setup} ()
-\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_node_a7909e223e87936ea17044a7d99d2044d}{Setup}} (int id)
+\begin{DoxyCompactList}\small\item\em Sets up this node and all its neigbours \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_node_af04ff8e3e8ef1f31fb1ae280233b8ae5}\label{class_node_af04ff8e3e8ef1f31fb1ae280233b8ae5}} 
+int {\bfseries id}
 \item 
 \mbox{\Hypertarget{class_node_a7f9f08aa2c16744271091b095d4a38c1}\label{class_node_a7f9f08aa2c16744271091b095d4a38c1}} 
 \mbox{\hyperlink{class_node}{Node}}\mbox{[}$\,$\mbox{]} {\bfseries neighbours}
@@ -38,6 +46,29 @@ Vector2 {\bfseries pos}
 \end{DoxyCompactItemize}
 
 
+\doxysubsection{Detailed Description}
+Class that represents a node on the level that pacman/ghosts can navigate between 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_node_a7909e223e87936ea17044a7d99d2044d}\label{class_node_a7909e223e87936ea17044a7d99d2044d}} 
+\index{Node@{Node}!Setup@{Setup}}
+\index{Setup@{Setup}!Node@{Node}}
+\doxysubsubsection{\texorpdfstring{Setup()}{Setup()}}
+{\footnotesize\ttfamily void Node.\+Setup (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+Sets up this node and all its neigbours 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id of the node\\
+\hline
+\end{DoxyParams}
+
+
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/Node.\+cs\end{DoxyCompactItemize}
+F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/\+Level/Node.\+cs\end{DoxyCompactItemize}

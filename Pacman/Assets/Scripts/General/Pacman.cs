@@ -77,12 +77,14 @@ public class Pacman : MonoBehaviour
         currentDirection = Vector2.zero;
     }
 
+    // Ran every frame (refresh rate of monitor)
     void Update()
     {
         if (currentState != State.dead)
             HandleInput();
     }
 
+    // Ran 60 times a second (fixed)
     void FixedUpdate()
     {
         HandleMovement();

@@ -1,0 +1,75 @@
+\hypertarget{class_customisation}{}\doxysection{Customisation Class Reference}
+\label{class_customisation}\index{Customisation@{Customisation}}
+
+
+Class that manages the logic for the customisation panel  
+
+
+Inheritance diagram for Customisation\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_customisation}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+override void \mbox{\hyperlink{class_customisation_a1f43634e37b068b35ea726eb7ea260d9}{On\+Show}} ()
+\begin{DoxyCompactList}\small\item\em Called when the panel first opens Initialises the input fields with the numbers that are stored in \mbox{\hyperlink{class_game_settings}{Game\+Settings}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_customisation_a594228f9d7d5f2bdb20e0347e10eb365}{On\+End\+Edit\+Field}} (string field)
+\begin{DoxyCompactList}\small\item\em Event callback for when the user has finished editing any of the input fields Gets the input field identifier and updates the value in \mbox{\hyperlink{class_game_settings}{Game\+Settings}} \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_customisation_a66a6f3b11f437e64b44453a4eaa381aa}{On\+Click\+\_\+\+Reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets all the settings back to their defaults \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+
+
+\doxysubsection{Detailed Description}
+Class that manages the logic for the customisation panel 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_customisation_a66a6f3b11f437e64b44453a4eaa381aa}\label{class_customisation_a66a6f3b11f437e64b44453a4eaa381aa}} 
+\index{Customisation@{Customisation}!OnClick\_Reset@{OnClick\_Reset}}
+\index{OnClick\_Reset@{OnClick\_Reset}!Customisation@{Customisation}}
+\doxysubsubsection{\texorpdfstring{OnClick\_Reset()}{OnClick\_Reset()}}
+{\footnotesize\ttfamily void Customisation.\+On\+Click\+\_\+\+Reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Resets all the settings back to their defaults 
+
+\mbox{\Hypertarget{class_customisation_a594228f9d7d5f2bdb20e0347e10eb365}\label{class_customisation_a594228f9d7d5f2bdb20e0347e10eb365}} 
+\index{Customisation@{Customisation}!OnEndEditField@{OnEndEditField}}
+\index{OnEndEditField@{OnEndEditField}!Customisation@{Customisation}}
+\doxysubsubsection{\texorpdfstring{OnEndEditField()}{OnEndEditField()}}
+{\footnotesize\ttfamily void Customisation.\+On\+End\+Edit\+Field (\begin{DoxyParamCaption}\item[{string}]{field }\end{DoxyParamCaption})}
+
+
+
+Event callback for when the user has finished editing any of the input fields Gets the input field identifier and updates the value in \mbox{\hyperlink{class_game_settings}{Game\+Settings}} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & The setting identifier\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_customisation_a1f43634e37b068b35ea726eb7ea260d9}\label{class_customisation_a1f43634e37b068b35ea726eb7ea260d9}} 
+\index{Customisation@{Customisation}!OnShow@{OnShow}}
+\index{OnShow@{OnShow}!Customisation@{Customisation}}
+\doxysubsubsection{\texorpdfstring{OnShow()}{OnShow()}}
+{\footnotesize\ttfamily override void Customisation.\+On\+Show (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called when the panel first opens Initialises the input fields with the numbers that are stored in \mbox{\hyperlink{class_game_settings}{Game\+Settings}} 
+
+
+
+Reimplemented from \mbox{\hyperlink{class_panel_a9e9afe8cf63fa136174d2e9eaf6f6592}{Panel}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/\+U\+I/Customisation.\+cs\end{DoxyCompactItemize}

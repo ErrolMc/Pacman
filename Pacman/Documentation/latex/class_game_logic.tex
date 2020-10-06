@@ -1,5 +1,10 @@
 \hypertarget{class_game_logic}{}\doxysection{Game\+Logic Class Reference}
 \label{class_game_logic}\index{GameLogic@{GameLogic}}
+
+
+Center point for the game, contains and manages references for the current level/ghosts/pacman  
+
+
 Inheritance diagram for Game\+Logic\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -9,19 +14,29 @@ Inheritance diagram for Game\+Logic\+:\begin{figure}[H]
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
+void \mbox{\hyperlink{class_game_logic_ae48030f1aa4d9f3472c56d52e2c9e179}{Start\+Level}} (int level\+Number, int players, int starting\+Score=0)
+\begin{DoxyCompactList}\small\item\em Starts a level with x amount of players \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_game_logic_a1fdc1e744ef0bbb17d426e54ec1c68fb}{Add\+Score}} (int value)
 \begin{DoxyCompactList}\small\item\em Adds score to the score counter \end{DoxyCompactList}\item 
 \mbox{\hyperlink{class_ghost}{Ghost}} \mbox{\hyperlink{class_game_logic_a64f95a8308d353c6a02fd1bcfc2353f3}{Get\+Ghost}} (Ghost.\+Type type)
 \begin{DoxyCompactList}\small\item\em Gets a ghost given the type \end{DoxyCompactList}\item 
 List$<$ \mbox{\hyperlink{class_ghost}{Ghost}} $>$ \mbox{\hyperlink{class_game_logic_af2a2a4ef6d2fd4077ad3ef1dd62cc7ff}{Get\+All\+Ghosts}} ()
 \begin{DoxyCompactList}\small\item\em Public getter for ghost list \end{DoxyCompactList}\item 
-void \mbox{\hyperlink{class_game_logic_ad4a9122dad9d0bec94a397e243db7024}{Reset\+Game}} (float delay=0)
-\begin{DoxyCompactList}\small\item\em Resets the game \end{DoxyCompactList}\end{DoxyCompactItemize}
+void \mbox{\hyperlink{class_game_logic_a58dfd47f90247c553f7f9b51aea36d16}{End\+Game}} (float delay, bool won)
+\begin{DoxyCompactList}\small\item\em Resets the game \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_game_logic_ac3d48bc20523e8c284c1dc14b097f630}\label{class_game_logic_ac3d48bc20523e8c284c1dc14b097f630}} 
+void {\bfseries Spawn\+Score\+Text} (Vector2 position, float duration, int score)
+\item 
+void \mbox{\hyperlink{class_game_logic_a9ccdfefa5186e6d3ef31775853883631}{Spawn\+Ghost\+Eat\+Text}} (\mbox{\hyperlink{class_pacman}{Pacman}} pacman, \mbox{\hyperlink{class_ghost}{Ghost}} ghost, float duration, int score)
+\begin{DoxyCompactList}\small\item\em Spawns the text for when pacman eats a ghost and waits a given duration \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{class_game_logic_a1c93d810c077a32dbd3b6738528933af}\label{class_game_logic_a1c93d810c077a32dbd3b6738528933af}} 
-\mbox{\hyperlink{class_pacman}{Pacman}} {\bfseries pacman}
+\mbox{\Hypertarget{class_game_logic_a3cf4eaf26c6ac74d6df8b4d45bda22fa}\label{class_game_logic_a3cf4eaf26c6ac74d6df8b4d45bda22fa}} 
+Sprite\mbox{[}$\,$\mbox{]} {\bfseries fruit\+Sprites}
+\item 
+\mbox{\Hypertarget{class_game_logic_aa8c1ed8ba4c4d43f7fbcda6fee0f40c6}\label{class_game_logic_aa8c1ed8ba4c4d43f7fbcda6fee0f40c6}} 
+int {\bfseries score}
 \end{DoxyCompactItemize}
 \doxysubsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
@@ -29,6 +44,23 @@ void \mbox{\hyperlink{class_game_logic_ad4a9122dad9d0bec94a397e243db7024}{Reset\
 \mbox{\Hypertarget{class_game_logic_a96f4021dff11e0f67601a58893aafdff}\label{class_game_logic_a96f4021dff11e0f67601a58893aafdff}} 
 static \mbox{\hyperlink{class_game_logic}{Game\+Logic}} {\bfseries instance}
 \end{DoxyCompactItemize}
+\doxysubsection*{Properties}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_game_logic_ad7bdff493ea0d2fa65e8764471ce2e49}\label{class_game_logic_ad7bdff493ea0d2fa65e8764471ce2e49}} 
+\mbox{\hyperlink{class_pacman}{Pacman}} {\bfseries Pacman}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_game_logic_a95f4c5021d0abf394dc3306f9eed04c7}\label{class_game_logic_a95f4c5021d0abf394dc3306f9eed04c7}} 
+\mbox{\hyperlink{class_level}{Level}} {\bfseries Current\+Level}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_game_logic_a2ea1b8e42930ca26fbddaf55fbdf0ed8}\label{class_game_logic_a2ea1b8e42930ca26fbddaf55fbdf0ed8}} 
+int {\bfseries Players}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Center point for the game, contains and manages references for the current level/ghosts/pacman 
+
 
 
 \doxysubsection{Member Function Documentation}
@@ -45,6 +77,21 @@ Adds score to the score counter
 
 \begin{DoxyParams}{Parameters}
 {\em value} & The amount of score to add\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_logic_a58dfd47f90247c553f7f9b51aea36d16}\label{class_game_logic_a58dfd47f90247c553f7f9b51aea36d16}} 
+\index{GameLogic@{GameLogic}!EndGame@{EndGame}}
+\index{EndGame@{EndGame}!GameLogic@{GameLogic}}
+\doxysubsubsection{\texorpdfstring{EndGame()}{EndGame()}}
+{\footnotesize\ttfamily void Game\+Logic.\+End\+Game (\begin{DoxyParamCaption}\item[{float}]{delay,  }\item[{bool}]{won }\end{DoxyParamCaption})}
+
+
+
+Resets the game 
+
+
+\begin{DoxyParams}{Parameters}
+{\em delay} & A delay before resetting the board\\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{class_game_logic_af2a2a4ef6d2fd4077ad3ef1dd62cc7ff}\label{class_game_logic_af2a2a4ef6d2fd4077ad3ef1dd62cc7ff}} 
@@ -78,23 +125,46 @@ Gets a ghost given the type
 \begin{DoxyReturn}{Returns}
 The ghost of the given type (or null if it doesnt exist)
 \end{DoxyReturn}
-\mbox{\Hypertarget{class_game_logic_ad4a9122dad9d0bec94a397e243db7024}\label{class_game_logic_ad4a9122dad9d0bec94a397e243db7024}} 
-\index{GameLogic@{GameLogic}!ResetGame@{ResetGame}}
-\index{ResetGame@{ResetGame}!GameLogic@{GameLogic}}
-\doxysubsubsection{\texorpdfstring{ResetGame()}{ResetGame()}}
-{\footnotesize\ttfamily void Game\+Logic.\+Reset\+Game (\begin{DoxyParamCaption}\item[{float}]{delay = {\ttfamily 0} }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{class_game_logic_a9ccdfefa5186e6d3ef31775853883631}\label{class_game_logic_a9ccdfefa5186e6d3ef31775853883631}} 
+\index{GameLogic@{GameLogic}!SpawnGhostEatText@{SpawnGhostEatText}}
+\index{SpawnGhostEatText@{SpawnGhostEatText}!GameLogic@{GameLogic}}
+\doxysubsubsection{\texorpdfstring{SpawnGhostEatText()}{SpawnGhostEatText()}}
+{\footnotesize\ttfamily void Game\+Logic.\+Spawn\+Ghost\+Eat\+Text (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pacman}{Pacman}}}]{pacman,  }\item[{\mbox{\hyperlink{class_ghost}{Ghost}}}]{ghost,  }\item[{float}]{duration,  }\item[{int}]{score }\end{DoxyParamCaption})}
 
 
 
-Resets the game 
+Spawns the text for when pacman eats a ghost and waits a given duration 
 
 
 \begin{DoxyParams}{Parameters}
-{\em delay} & A delay before resetting the board\\
+{\em pacman} & The pacman responsible for where the text is going to be spawned\\
+\hline
+{\em ghost} & The ghost pacman ate\\
+\hline
+{\em duration} & The duration the game will pause for\\
+\hline
+{\em score} & The score on the text\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_game_logic_ae48030f1aa4d9f3472c56d52e2c9e179}\label{class_game_logic_ae48030f1aa4d9f3472c56d52e2c9e179}} 
+\index{GameLogic@{GameLogic}!StartLevel@{StartLevel}}
+\index{StartLevel@{StartLevel}!GameLogic@{GameLogic}}
+\doxysubsubsection{\texorpdfstring{StartLevel()}{StartLevel()}}
+{\footnotesize\ttfamily void Game\+Logic.\+Start\+Level (\begin{DoxyParamCaption}\item[{int}]{level\+Number,  }\item[{int}]{players,  }\item[{int}]{starting\+Score = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+Starts a level with x amount of players 
+
+
+\begin{DoxyParams}{Parameters}
+{\em level\+Number} & The level to start\\
+\hline
+{\em players} & The amount of players\\
 \hline
 \end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/Game\+Logic.\+cs\end{DoxyCompactItemize}
+F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/\+General/Game\+Logic.\+cs\end{DoxyCompactItemize}

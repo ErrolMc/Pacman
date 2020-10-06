@@ -71,6 +71,9 @@ $(function() {
 <div class="title">Node Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>Class that represents a node on the level that pacman/ghosts can navigate between  
+ <a href="class_node.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Node:</div>
 <div class="dyncontent">
@@ -82,18 +85,22 @@ Inheritance diagram for Node:</div>
 Public Types</h2></td></tr>
 <tr class="memitem:aa54866b6c55527f3db0384692db1a467"><td class="memItemLeft" align="right" valign="top"><a id="aa54866b6c55527f3db0384692db1a467"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>NodeType</b> { <b>regular</b>, 
 <b>ghostHouse</b>, 
-<b>portal</b>
+<b>portal</b>, 
+<b>home</b>
  }</td></tr>
 <tr class="separator:aa54866b6c55527f3db0384692db1a467"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2caee67b990fdecae480b9f20c3b7316"><td class="memItemLeft" align="right" valign="top"><a id="a2caee67b990fdecae480b9f20c3b7316"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>Setup</b> ()</td></tr>
-<tr class="separator:a2caee67b990fdecae480b9f20c3b7316"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7909e223e87936ea17044a7d99d2044d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_node.html#a7909e223e87936ea17044a7d99d2044d">Setup</a> (int id)</td></tr>
+<tr class="memdesc:a7909e223e87936ea17044a7d99d2044d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up this node and all its neigbours  <a href="class_node.html#a7909e223e87936ea17044a7d99d2044d">More...</a><br /></td></tr>
+<tr class="separator:a7909e223e87936ea17044a7d99d2044d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
+<tr class="memitem:af04ff8e3e8ef1f31fb1ae280233b8ae5"><td class="memItemLeft" align="right" valign="top"><a id="af04ff8e3e8ef1f31fb1ae280233b8ae5"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>id</b></td></tr>
+<tr class="separator:af04ff8e3e8ef1f31fb1ae280233b8ae5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7f9f08aa2c16744271091b095d4a38c1"><td class="memItemLeft" align="right" valign="top"><a id="a7f9f08aa2c16744271091b095d4a38c1"></a>
 <a class="el" href="class_node.html">Node</a>[]&#160;</td><td class="memItemRight" valign="bottom"><b>neighbours</b></td></tr>
 <tr class="separator:a7f9f08aa2c16744271091b095d4a38c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,8 +114,37 @@ Vector2[]&#160;</td><td class="memItemRight" valign="bottom"><b>directions</b></
 Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>pos</b></td></tr>
 <tr class="separator:afa9fbd28604de46869e6369368b24337"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Class that represents a node on the level that pacman/ghosts can navigate between </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a7909e223e87936ea17044a7d99d2044d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7909e223e87936ea17044a7d99d2044d">&#9670;&nbsp;</a></span>Setup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Node.Setup </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sets up this node and all its neigbours </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">id</td><td>The id of the node</td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>F:/UnityProjects/Not work/Pacman/Pacman/Assets/Scripts/Node.cs</li>
+<li>F:/UnityProjects/Not work/Pacman/Pacman/Assets/Scripts/Level/Node.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

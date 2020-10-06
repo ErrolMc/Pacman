@@ -73,6 +73,9 @@ $(function() {
 <div class="title">Ghost Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>The base ghost class which contains the logic for the red ghost  
+ <a href="class_ghost.html#details">More...</a></p>
 <div class="dynheader">
 Inheritance diagram for Ghost:</div>
 <div class="dyncontent">
@@ -106,9 +109,9 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac70375e828f830a7db2a621d55aa1f54"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ghost.html#ac70375e828f830a7db2a621d55aa1f54">Init</a> (<a class="el" href="class_node.html">Node</a> ghostHouse, <a class="el" href="class_node.html">Node</a> homeNode, <a class="el" href="class_ghost_state_timing.html">GhostStateTiming</a>[] timings)</td></tr>
-<tr class="memdesc:ac70375e828f830a7db2a621d55aa1f54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the ghost at the node specified  <a href="class_ghost.html#ac70375e828f830a7db2a621d55aa1f54">More...</a><br /></td></tr>
-<tr class="separator:ac70375e828f830a7db2a621d55aa1f54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a74523829be11776fd5ad3d803e9baefc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ghost.html#a74523829be11776fd5ad3d803e9baefc">Init</a> (<a class="el" href="class_node.html">Node</a> ghostHouse, <a class="el" href="class_node.html">Node</a> homeNode, <a class="el" href="class_ghost_state_timing.html">GhostStateTiming</a>[] timings, bool aStarPathing=false)</td></tr>
+<tr class="memdesc:a74523829be11776fd5ad3d803e9baefc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up the ghost at the node specified  <a href="class_ghost.html#a74523829be11776fd5ad3d803e9baefc">More...</a><br /></td></tr>
+<tr class="separator:a74523829be11776fd5ad3d803e9baefc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5fb2a18ccb718866ce155ffc9df4eefe"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_ghost.html#a5fb2a18ccb718866ce155ffc9df4eefe">ChangeState</a> (State newState)</td></tr>
 <tr class="memdesc:a5fb2a18ccb718866ce155ffc9df4eefe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the state of the ghost, executing any state transition logic  <a href="class_ghost.html#a5fb2a18ccb718866ce155ffc9df4eefe">More...</a><br /></td></tr>
 <tr class="separator:a5fb2a18ccb718866ce155ffc9df4eefe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -145,6 +148,15 @@ SpriteRenderer&#160;</td><td class="memItemRight" valign="bottom"><b>spriteRende
 <tr class="memitem:a4f7765ff3e56b527ac45d86a7ae5a615"><td class="memItemLeft" align="right" valign="top"><a id="a4f7765ff3e56b527ac45d86a7ae5a615"></a>
 <a class="el" href="class_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>ghostHouse</b></td></tr>
 <tr class="separator:a4f7765ff3e56b527ac45d86a7ae5a615"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3baee5ad908c7098b38fd968ae0c5e55"><td class="memItemLeft" align="right" valign="top"><a id="a3baee5ad908c7098b38fd968ae0c5e55"></a>
+List&lt; Vector2 &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>currentAStarPath</b></td></tr>
+<tr class="separator:a3baee5ad908c7098b38fd968ae0c5e55"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76cee64ca482ccf171e4cb97178d4e7d"><td class="memItemLeft" align="right" valign="top"><a id="a76cee64ca482ccf171e4cb97178d4e7d"></a>
+<a class="el" href="class_a_star_graph.html">AStarGraph</a>&#160;</td><td class="memItemRight" valign="bottom"><b>aStarGraph</b></td></tr>
+<tr class="separator:a76cee64ca482ccf171e4cb97178d4e7d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae2468fe8a42ec0f6870b177f94508fde"><td class="memItemLeft" align="right" valign="top"><a id="ae2468fe8a42ec0f6870b177f94508fde"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>frightenedModeDuration</b></td></tr>
+<tr class="separator:ae2468fe8a42ec0f6870b177f94508fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3f793324735fe37e6c9d7a4c1a2d3526"><td class="memItemLeft" align="right" valign="top"><a id="a3f793324735fe37e6c9d7a4c1a2d3526"></a>
 State&#160;</td><td class="memItemRight" valign="bottom"><b>currentState</b></td></tr>
 <tr class="separator:a3f793324735fe37e6c9d7a4c1a2d3526"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -157,6 +169,33 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>currentDirection</
 <tr class="memitem:abcbca7ca1f6d2742532271764b0c915b"><td class="memItemLeft" align="right" valign="top"><a id="abcbca7ca1f6d2742532271764b0c915b"></a>
 float&#160;</td><td class="memItemRight" valign="bottom"><b>currentMoveSpeed</b></td></tr>
 <tr class="separator:abcbca7ca1f6d2742532271764b0c915b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33bf7a9ea9ec1189126e9acaa82076e5"><td class="memItemLeft" align="right" valign="top"><a id="a33bf7a9ea9ec1189126e9acaa82076e5"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>aStarPathing</b></td></tr>
+<tr class="separator:a33bf7a9ea9ec1189126e9acaa82076e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a309139dbba6539aae357229d1fcceaad"><td class="memItemLeft" align="right" valign="top"><a id="a309139dbba6539aae357229d1fcceaad"></a>
+<a class="el" href="class_ghost_state_timing.html">GhostStateTiming</a>[]&#160;</td><td class="memItemRight" valign="bottom"><b>timings</b></td></tr>
+<tr class="separator:a309139dbba6539aae357229d1fcceaad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a65b0e3af414b202ba19848036fb90787"><td class="memItemLeft" align="right" valign="top"><a id="a65b0e3af414b202ba19848036fb90787"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>stateChangeTimer</b></td></tr>
+<tr class="separator:a65b0e3af414b202ba19848036fb90787"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acc9ae0697df11d35c88b060ea1cd4869"><td class="memItemLeft" align="right" valign="top"><a id="acc9ae0697df11d35c88b060ea1cd4869"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>frightenedTimer</b></td></tr>
+<tr class="separator:acc9ae0697df11d35c88b060ea1cd4869"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a868e3072f3f66aca73ec2879ff0f36a5"><td class="memItemLeft" align="right" valign="top"><a id="a868e3072f3f66aca73ec2879ff0f36a5"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>releaseTimer</b></td></tr>
+<tr class="separator:a868e3072f3f66aca73ec2879ff0f36a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4079c3579ac4423d4896810aca619f0e"><td class="memItemLeft" align="right" valign="top"><a id="a4079c3579ac4423d4896810aca619f0e"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>stateChangeIndex</b></td></tr>
+<tr class="separator:a4079c3579ac4423d4896810aca619f0e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a58f932aa1a24842faddf1be2adecfe17"><td class="memItemLeft" align="right" valign="top"><a id="a58f932aa1a24842faddf1be2adecfe17"></a>
+bool&#160;</td><td class="memItemRight" valign="bottom"><b>stateChangeSequenceComplete</b></td></tr>
+<tr class="separator:a58f932aa1a24842faddf1be2adecfe17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a841903f84c7fa9281a9db98798dd65c8"><td class="memItemLeft" align="right" valign="top"><a id="a841903f84c7fa9281a9db98798dd65c8"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>distanceFromCurrent</b> = 0</td></tr>
+<tr class="separator:a841903f84c7fa9281a9db98798dd65c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4bd898e77d8466b95e5df86c0cf15eb"><td class="memItemLeft" align="right" valign="top"><a id="ae4bd898e77d8466b95e5df86c0cf15eb"></a>
+float&#160;</td><td class="memItemRight" valign="bottom"><b>distanceToTarget</b> = 0</td></tr>
+<tr class="separator:ae4bd898e77d8466b95e5df86c0cf15eb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
@@ -172,8 +211,16 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentDirection</
 <tr class="memitem:a7dd54cf59403486c88fbda55d177fdd0"><td class="memItemLeft" align="right" valign="top"><a id="a7dd54cf59403486c88fbda55d177fdd0"></a>
 Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPosition</b><code> [get]</code></td></tr>
 <tr class="separator:a7dd54cf59403486c88fbda55d177fdd0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a02ea7073abc5b81b70235f319ca0ca51"><td class="memItemLeft" align="right" valign="top"><a id="a02ea7073abc5b81b70235f319ca0ca51"></a>
+<a class="el" href="class_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentNode</b><code> [get]</code></td></tr>
+<tr class="separator:a02ea7073abc5b81b70235f319ca0ca51"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad63e17bc34cc0f2b92dab58b1fc33f0d"><td class="memItemLeft" align="right" valign="top"><a id="ad63e17bc34cc0f2b92dab58b1fc33f0d"></a>
+<a class="el" href="class_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>TargetNode</b><code> [get]</code></td></tr>
+<tr class="separator:ad63e17bc34cc0f2b92dab58b1fc33f0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>The base ghost class which contains the logic for the red ghost </p>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="a5fb2a18ccb718866ce155ffc9df4eefe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5fb2a18ccb718866ce155ffc9df4eefe">&#9670;&nbsp;</a></span>ChangeState()</h2>
 
@@ -230,8 +277,8 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPosition</b
 
 </div>
 </div>
-<a id="ac70375e828f830a7db2a621d55aa1f54"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac70375e828f830a7db2a621d55aa1f54">&#9670;&nbsp;</a></span>Init()</h2>
+<a id="a74523829be11776fd5ad3d803e9baefc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a74523829be11776fd5ad3d803e9baefc">&#9670;&nbsp;</a></span>Init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -252,7 +299,13 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPosition</b
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="class_ghost_state_timing.html">GhostStateTiming</a>[]&#160;</td>
-          <td class="paramname"><em>timings</em>&#160;</td>
+          <td class="paramname"><em>timings</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>aStarPathing</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -265,7 +318,10 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPosition</b
 <p>Sets up the ghost at the node specified </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">startingnode</td><td>The node to start at</td></tr>
+    <tr><td class="paramname">ghostHouse</td><td>The ghost house for this ghost</td></tr>
+    <tr><td class="paramname">homeNode</td><td>The home node for this ghost</td></tr>
+    <tr><td class="paramname">timings</td><td>The state timings</td></tr>
+    <tr><td class="paramname">aStarPathing</td><td>If this ghost is using astar or not for pathing</td></tr>
   </table>
   </dd>
 </dl>
@@ -273,7 +329,7 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPosition</b
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>F:/UnityProjects/Not work/Pacman/Pacman/Assets/Scripts/Ghost.cs</li>
+<li>F:/UnityProjects/Not work/Pacman/Pacman/Assets/Scripts/Ghosts/Ghost.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

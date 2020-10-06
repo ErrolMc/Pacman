@@ -91,27 +91,39 @@ Public Types</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:af5ecaec1c9181a6853c0e0ea1505fbeb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pacman.html#af5ecaec1c9181a6853c0e0ea1505fbeb">Init</a> (<a class="el" href="class_node.html">Node</a> startingNode)</td></tr>
-<tr class="memdesc:af5ecaec1c9181a6853c0e0ea1505fbeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up pacman  <a href="class_pacman.html#af5ecaec1c9181a6853c0e0ea1505fbeb">More...</a><br /></td></tr>
-<tr class="separator:af5ecaec1c9181a6853c0e0ea1505fbeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94ff797f5ffa8aaecd0a60388432a9c9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_pacman.html#a94ff797f5ffa8aaecd0a60388432a9c9">Init</a> (<a class="el" href="class_node.html">Node</a> startingNode, int player)</td></tr>
+<tr class="memdesc:a94ff797f5ffa8aaecd0a60388432a9c9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets up pacman  <a href="class_pacman.html#a94ff797f5ffa8aaecd0a60388432a9c9">More...</a><br /></td></tr>
+<tr class="separator:a94ff797f5ffa8aaecd0a60388432a9c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="properties"></a>
 Properties</h2></td></tr>
+<tr class="memitem:a84f9246ca436de7e8541c23f44759792"><td class="memItemLeft" align="right" valign="top"><a id="a84f9246ca436de7e8541c23f44759792"></a>
+int&#160;</td><td class="memItemRight" valign="bottom"><b>Player</b><code> [get]</code></td></tr>
+<tr class="separator:a84f9246ca436de7e8541c23f44759792"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afb78d6ae7d05b5d4e23c6d93c188b754"><td class="memItemLeft" align="right" valign="top"><a id="afb78d6ae7d05b5d4e23c6d93c188b754"></a>
 State&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentState</b><code> [get]</code></td></tr>
 <tr class="separator:afb78d6ae7d05b5d4e23c6d93c188b754"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f0bf5729283cc58f7a8f523f9429ad0"><td class="memItemLeft" align="right" valign="top"><a id="a0f0bf5729283cc58f7a8f523f9429ad0"></a>
 Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentDirection</b><code> [get]</code></td></tr>
 <tr class="separator:a0f0bf5729283cc58f7a8f523f9429ad0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad80668c7b0c4669a71205d6de4b6526b"><td class="memItemLeft" align="right" valign="top"><a id="ad80668c7b0c4669a71205d6de4b6526b"></a>
+Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPositionRounded</b><code> [get]</code></td></tr>
+<tr class="separator:ad80668c7b0c4669a71205d6de4b6526b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32c7d8d0564cf44e7538226a80748841"><td class="memItemLeft" align="right" valign="top"><a id="a32c7d8d0564cf44e7538226a80748841"></a>
 Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPosition</b><code> [get]</code></td></tr>
 <tr class="separator:a32c7d8d0564cf44e7538226a80748841"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6a04e45b2d5613804c6f1190c576cade"><td class="memItemLeft" align="right" valign="top"><a id="a6a04e45b2d5613804c6f1190c576cade"></a>
+<a class="el" href="class_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentNode</b><code> [get]</code></td></tr>
+<tr class="separator:a6a04e45b2d5613804c6f1190c576cade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a273cf3ecda09093719f907be7182c5e0"><td class="memItemLeft" align="right" valign="top"><a id="a273cf3ecda09093719f907be7182c5e0"></a>
+<a class="el" href="class_node.html">Node</a>&#160;</td><td class="memItemRight" valign="bottom"><b>TargetNode</b><code> [get]</code></td></tr>
+<tr class="separator:a273cf3ecda09093719f907be7182c5e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>A class that houses all the behaivour for pacman </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
-<a id="af5ecaec1c9181a6853c0e0ea1505fbeb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af5ecaec1c9181a6853c0e0ea1505fbeb">&#9670;&nbsp;</a></span>Init()</h2>
+<a id="a94ff797f5ffa8aaecd0a60388432a9c9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94ff797f5ffa8aaecd0a60388432a9c9">&#9670;&nbsp;</a></span>Init()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -120,8 +132,18 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPosition</b
           <td class="memname">void Pacman.Init </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="class_node.html">Node</a>&#160;</td>
-          <td class="paramname"><em>startingNode</em></td><td>)</td>
+          <td class="paramname"><em>startingNode</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>player</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -137,7 +159,7 @@ Vector2&#160;</td><td class="memItemRight" valign="bottom"><b>CurrentPosition</b
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>F:/UnityProjects/Not work/Pacman/Pacman/Assets/Scripts/Pacman.cs</li>
+<li>F:/UnityProjects/Not work/Pacman/Pacman/Assets/Scripts/General/Pacman.cs</li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

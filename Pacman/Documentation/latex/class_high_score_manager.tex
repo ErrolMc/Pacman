@@ -1,0 +1,89 @@
+\hypertarget{class_high_score_manager}{}\doxysection{High\+Score\+Manager Class Reference}
+\label{class_high_score_manager}\index{HighScoreManager@{HighScoreManager}}
+
+
+Class that acts as the database for the highscores  
+
+
+Inheritance diagram for High\+Score\+Manager\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_high_score_manager}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{class_high_score}{High\+Score}} $>$ \mbox{\hyperlink{class_high_score_manager_a2396f38d219ffc9292f8d53e59015cc9}{Get\+Sorted\+Scores}} ()
+\begin{DoxyCompactList}\small\item\em Returns a sorted list of the highscores \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_high_score_manager_a016be570c7a79acb941232beea47f44a}{Add\+High\+Score}} (string name, int score)
+\begin{DoxyCompactList}\small\item\em Adds a new highscore \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_high_score_manager_a36622979d1634f5c284ae78dbe0642f0}{Can\+Add\+Score}} (int score)
+\begin{DoxyCompactList}\small\item\em Checks if a score can be added into the current list of highscores \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_high_score_manager_ac4896a157a15fb01277be9fab42a205c}\label{class_high_score_manager_ac4896a157a15fb01277be9fab42a205c}} 
+static \mbox{\hyperlink{class_high_score_manager}{High\+Score\+Manager}} {\bfseries instance}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class that acts as the database for the highscores 
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_high_score_manager_a016be570c7a79acb941232beea47f44a}\label{class_high_score_manager_a016be570c7a79acb941232beea47f44a}} 
+\index{HighScoreManager@{HighScoreManager}!AddHighScore@{AddHighScore}}
+\index{AddHighScore@{AddHighScore}!HighScoreManager@{HighScoreManager}}
+\doxysubsubsection{\texorpdfstring{AddHighScore()}{AddHighScore()}}
+{\footnotesize\ttfamily void High\+Score\+Manager.\+Add\+High\+Score (\begin{DoxyParamCaption}\item[{string}]{name,  }\item[{int}]{score }\end{DoxyParamCaption})}
+
+
+
+Adds a new highscore 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name to go with the score\\
+\hline
+{\em score} & The score\\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_high_score_manager_a36622979d1634f5c284ae78dbe0642f0}\label{class_high_score_manager_a36622979d1634f5c284ae78dbe0642f0}} 
+\index{HighScoreManager@{HighScoreManager}!CanAddScore@{CanAddScore}}
+\index{CanAddScore@{CanAddScore}!HighScoreManager@{HighScoreManager}}
+\doxysubsubsection{\texorpdfstring{CanAddScore()}{CanAddScore()}}
+{\footnotesize\ttfamily bool High\+Score\+Manager.\+Can\+Add\+Score (\begin{DoxyParamCaption}\item[{int}]{score }\end{DoxyParamCaption})}
+
+
+
+Checks if a score can be added into the current list of highscores 
+
+
+\begin{DoxyParams}{Parameters}
+{\em score} & The score to query for\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+If the score can be added into the highscore list
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_high_score_manager_a2396f38d219ffc9292f8d53e59015cc9}\label{class_high_score_manager_a2396f38d219ffc9292f8d53e59015cc9}} 
+\index{HighScoreManager@{HighScoreManager}!GetSortedScores@{GetSortedScores}}
+\index{GetSortedScores@{GetSortedScores}!HighScoreManager@{HighScoreManager}}
+\doxysubsubsection{\texorpdfstring{GetSortedScores()}{GetSortedScores()}}
+{\footnotesize\ttfamily List$<$\mbox{\hyperlink{class_high_score}{High\+Score}}$>$ High\+Score\+Manager.\+Get\+Sorted\+Scores (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Returns a sorted list of the highscores 
+
+\begin{DoxyReturn}{Returns}
+A sorted list of the highscores
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/\+Highscores/High\+Score\+Manager.\+cs\end{DoxyCompactItemize}

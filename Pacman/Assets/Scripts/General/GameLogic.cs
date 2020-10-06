@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// Center point for the game, contains and manages references for the current level/ghosts/pacman
+/// </summary>
 public class GameLogic : MonoBehaviour
 {
     public static GameLogic instance;

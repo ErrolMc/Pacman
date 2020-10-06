@@ -1,5 +1,10 @@
 \hypertarget{class_ghost}{}\doxysection{Ghost Class Reference}
 \label{class_ghost}\index{Ghost@{Ghost}}
+
+
+The base ghost class which contains the logic for the red ghost  
+
+
 Inheritance diagram for Ghost\+:\begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -29,7 +34,7 @@ enum {\bfseries Type} \{ {\bfseries blinky},
 \doxysubsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void \mbox{\hyperlink{class_ghost_ac70375e828f830a7db2a621d55aa1f54}{Init}} (\mbox{\hyperlink{class_node}{Node}} ghost\+House, \mbox{\hyperlink{class_node}{Node}} home\+Node, \mbox{\hyperlink{class_ghost_state_timing}{Ghost\+State\+Timing}}\mbox{[}$\,$\mbox{]} timings)
+void \mbox{\hyperlink{class_ghost_a74523829be11776fd5ad3d803e9baefc}{Init}} (\mbox{\hyperlink{class_node}{Node}} ghost\+House, \mbox{\hyperlink{class_node}{Node}} home\+Node, \mbox{\hyperlink{class_ghost_state_timing}{Ghost\+State\+Timing}}\mbox{[}$\,$\mbox{]} timings, bool a\+Star\+Pathing=false)
 \begin{DoxyCompactList}\small\item\em Sets up the ghost at the node specified \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{class_ghost_a5fb2a18ccb718866ce155ffc9df4eefe}{Change\+State}} (State new\+State)
 \begin{DoxyCompactList}\small\item\em Changes the state of the ghost, executing any state transition logic \end{DoxyCompactList}\end{DoxyCompactItemize}
@@ -65,6 +70,15 @@ Sprite\+Renderer {\bfseries sprite\+Renderer}
 \mbox{\Hypertarget{class_ghost_a4f7765ff3e56b527ac45d86a7ae5a615}\label{class_ghost_a4f7765ff3e56b527ac45d86a7ae5a615}} 
 \mbox{\hyperlink{class_node}{Node}} {\bfseries ghost\+House}
 \item 
+\mbox{\Hypertarget{class_ghost_a3baee5ad908c7098b38fd968ae0c5e55}\label{class_ghost_a3baee5ad908c7098b38fd968ae0c5e55}} 
+List$<$ Vector2 $>$ {\bfseries current\+A\+Star\+Path}
+\item 
+\mbox{\Hypertarget{class_ghost_a76cee64ca482ccf171e4cb97178d4e7d}\label{class_ghost_a76cee64ca482ccf171e4cb97178d4e7d}} 
+\mbox{\hyperlink{class_a_star_graph}{A\+Star\+Graph}} {\bfseries a\+Star\+Graph}
+\item 
+\mbox{\Hypertarget{class_ghost_ae2468fe8a42ec0f6870b177f94508fde}\label{class_ghost_ae2468fe8a42ec0f6870b177f94508fde}} 
+float {\bfseries frightened\+Mode\+Duration}
+\item 
 \mbox{\Hypertarget{class_ghost_a3f793324735fe37e6c9d7a4c1a2d3526}\label{class_ghost_a3f793324735fe37e6c9d7a4c1a2d3526}} 
 State {\bfseries current\+State}
 \item 
@@ -76,6 +90,33 @@ Vector2 {\bfseries current\+Direction}
 \item 
 \mbox{\Hypertarget{class_ghost_abcbca7ca1f6d2742532271764b0c915b}\label{class_ghost_abcbca7ca1f6d2742532271764b0c915b}} 
 float {\bfseries current\+Move\+Speed}
+\item 
+\mbox{\Hypertarget{class_ghost_a33bf7a9ea9ec1189126e9acaa82076e5}\label{class_ghost_a33bf7a9ea9ec1189126e9acaa82076e5}} 
+bool {\bfseries a\+Star\+Pathing}
+\item 
+\mbox{\Hypertarget{class_ghost_a309139dbba6539aae357229d1fcceaad}\label{class_ghost_a309139dbba6539aae357229d1fcceaad}} 
+\mbox{\hyperlink{class_ghost_state_timing}{Ghost\+State\+Timing}}\mbox{[}$\,$\mbox{]} {\bfseries timings}
+\item 
+\mbox{\Hypertarget{class_ghost_a65b0e3af414b202ba19848036fb90787}\label{class_ghost_a65b0e3af414b202ba19848036fb90787}} 
+float {\bfseries state\+Change\+Timer}
+\item 
+\mbox{\Hypertarget{class_ghost_acc9ae0697df11d35c88b060ea1cd4869}\label{class_ghost_acc9ae0697df11d35c88b060ea1cd4869}} 
+float {\bfseries frightened\+Timer}
+\item 
+\mbox{\Hypertarget{class_ghost_a868e3072f3f66aca73ec2879ff0f36a5}\label{class_ghost_a868e3072f3f66aca73ec2879ff0f36a5}} 
+float {\bfseries release\+Timer}
+\item 
+\mbox{\Hypertarget{class_ghost_a4079c3579ac4423d4896810aca619f0e}\label{class_ghost_a4079c3579ac4423d4896810aca619f0e}} 
+int {\bfseries state\+Change\+Index}
+\item 
+\mbox{\Hypertarget{class_ghost_a58f932aa1a24842faddf1be2adecfe17}\label{class_ghost_a58f932aa1a24842faddf1be2adecfe17}} 
+bool {\bfseries state\+Change\+Sequence\+Complete}
+\item 
+\mbox{\Hypertarget{class_ghost_a841903f84c7fa9281a9db98798dd65c8}\label{class_ghost_a841903f84c7fa9281a9db98798dd65c8}} 
+float {\bfseries distance\+From\+Current} = 0
+\item 
+\mbox{\Hypertarget{class_ghost_ae4bd898e77d8466b95e5df86c0cf15eb}\label{class_ghost_ae4bd898e77d8466b95e5df86c0cf15eb}} 
+float {\bfseries distance\+To\+Target} = 0
 \end{DoxyCompactItemize}
 \doxysubsection*{Properties}
 \begin{DoxyCompactItemize}
@@ -91,7 +132,18 @@ Vector2 {\bfseries Current\+Direction}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox
 \item 
 \mbox{\Hypertarget{class_ghost_a7dd54cf59403486c88fbda55d177fdd0}\label{class_ghost_a7dd54cf59403486c88fbda55d177fdd0}} 
 Vector2 {\bfseries Current\+Position}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_ghost_a02ea7073abc5b81b70235f319ca0ca51}\label{class_ghost_a02ea7073abc5b81b70235f319ca0ca51}} 
+\mbox{\hyperlink{class_node}{Node}} {\bfseries Current\+Node}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
+\item 
+\mbox{\Hypertarget{class_ghost_ad63e17bc34cc0f2b92dab58b1fc33f0d}\label{class_ghost_ad63e17bc34cc0f2b92dab58b1fc33f0d}} 
+\mbox{\hyperlink{class_node}{Node}} {\bfseries Target\+Node}\hspace{0.3cm}{\ttfamily  \mbox{[}get\mbox{]}}
 \end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The base ghost class which contains the logic for the red ghost 
+
 
 
 \doxysubsection{Member Function Documentation}
@@ -127,11 +179,11 @@ The position to target
 
 Reimplemented in \mbox{\hyperlink{class_inky_a059f50f707fbc8e11fccaa1bbdd5083a}{Inky}}, \mbox{\hyperlink{class_clyde_a47f7df1ede7d33faa306ea8d9da75289}{Clyde}}, and \mbox{\hyperlink{class_pinky_a57acad4e3088357542a4e16b52bea190}{Pinky}}.
 
-\mbox{\Hypertarget{class_ghost_ac70375e828f830a7db2a621d55aa1f54}\label{class_ghost_ac70375e828f830a7db2a621d55aa1f54}} 
+\mbox{\Hypertarget{class_ghost_a74523829be11776fd5ad3d803e9baefc}\label{class_ghost_a74523829be11776fd5ad3d803e9baefc}} 
 \index{Ghost@{Ghost}!Init@{Init}}
 \index{Init@{Init}!Ghost@{Ghost}}
 \doxysubsubsection{\texorpdfstring{Init()}{Init()}}
-{\footnotesize\ttfamily void Ghost.\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{ghost\+House,  }\item[{\mbox{\hyperlink{class_node}{Node}}}]{home\+Node,  }\item[{\mbox{\hyperlink{class_ghost_state_timing}{Ghost\+State\+Timing}}\mbox{[}$\,$\mbox{]}}]{timings }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily void Ghost.\+Init (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_node}{Node}}}]{ghost\+House,  }\item[{\mbox{\hyperlink{class_node}{Node}}}]{home\+Node,  }\item[{\mbox{\hyperlink{class_ghost_state_timing}{Ghost\+State\+Timing}}\mbox{[}$\,$\mbox{]}}]{timings,  }\item[{bool}]{a\+Star\+Pathing = {\ttfamily false} }\end{DoxyParamCaption})}
 
 
 
@@ -139,11 +191,17 @@ Sets up the ghost at the node specified
 
 
 \begin{DoxyParams}{Parameters}
-{\em startingnode} & The node to start at\\
+{\em ghost\+House} & The ghost house for this ghost\\
+\hline
+{\em home\+Node} & The home node for this ghost\\
+\hline
+{\em timings} & The state timings\\
+\hline
+{\em a\+Star\+Pathing} & If this ghost is using astar or not for pathing\\
 \hline
 \end{DoxyParams}
 
 
 The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
 \item 
-F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/Ghost.\+cs\end{DoxyCompactItemize}
+F\+:/\+Unity\+Projects/\+Not work/\+Pacman/\+Pacman/\+Assets/\+Scripts/\+Ghosts/Ghost.\+cs\end{DoxyCompactItemize}
